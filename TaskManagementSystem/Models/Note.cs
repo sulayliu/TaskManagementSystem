@@ -13,7 +13,7 @@ namespace TaskManagementSystem.Models
 
         [ForeignKey("Task")]
         public int TaskId { get; set; }
-        public virtual Task Task { get; set; }
+        public virtual ProTask Task { get; set; }
         public string DeveloperId { get; set; }
         public virtual ApplicationUser Developer { get; set; }
     }
