@@ -6,7 +6,7 @@ using System.Web;
 
 namespace TaskManagementSystem.Models
 {
-    public class Task
+    public class ProTask
     {
         public int Id { get; set; }
         public int ProjectId { get; set; }
@@ -20,7 +20,7 @@ namespace TaskManagementSystem.Models
         public virtual ApplicationUser Developer { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
-        public Task()
+        public ProTask()
         {
             Time = System.DateTime.Now;
             Notes = new HashSet<Note>();

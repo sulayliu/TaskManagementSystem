@@ -29,7 +29,7 @@ namespace TaskManagementSystem.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<ProTask> ProTasks { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public ApplicationDbContext()
