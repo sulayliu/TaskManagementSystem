@@ -13,10 +13,10 @@ namespace TaskManagementSystem.Models
         public ApplicationUser()
         {
             Projects = new HashSet<Project>();
-            Tasks = new HashSet<Task>();
+            Tasks = new HashSet<ProTask>();
         }
         public virtual ICollection<Project> Projects { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<ProTask> Tasks { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
