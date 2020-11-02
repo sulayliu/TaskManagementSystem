@@ -15,12 +15,12 @@ namespace TaskManagementSystem.Models
         public bool IsCompleted { get; set; }
         public string ManagerId { get; set; }
         public virtual ApplicationUser ProjectManager { get; set; }
-        public virtual ICollection<Task> Tasks { get; set; }
+        public virtual ICollection<ProTask> ProTasks { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public Project()
         {
             Time = System.DateTime.Now;
-            Tasks = new HashSet<Task>();
+            ProTasks = new HashSet<ProTask>();
             Notifications = new HashSet<Notification>();
         }
     }

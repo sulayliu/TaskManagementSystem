@@ -13,8 +13,8 @@ namespace TaskManagementSystem.Models
         [ForeignKey("Project")]
         public int? ProjectId { get; set; }
         public virtual Project Project { get; set; }
-        [ForeignKey("Task")]
+        [ForeignKey("ProTask")]
         public int? TaskId { get; set; }
-        public virtual Task Task { get; set; }
+        public virtual ProTask Task { get; set; }
     }
 }
