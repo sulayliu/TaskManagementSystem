@@ -7,13 +7,13 @@ namespace TaskManagementSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class FixProTaskName : IMigrationMetadata
+    public sealed partial class InitialTheClsses : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(FixProTaskName));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialTheClsses));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011030130237_FixProTaskName"; }
+            get { return "202011030206418_InitialTheClsses"; }
         }
         
         string IMigrationMetadata.Source
