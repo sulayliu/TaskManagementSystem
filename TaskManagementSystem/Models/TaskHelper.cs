@@ -8,30 +8,58 @@ namespace TaskManagementSystem.Models
     public class TaskHelper
     {
         static ApplicationDbContext db = new ApplicationDbContext();
-        public void AddTask(string content)
+        public List<ProTask> GetTasks()
+        {
+            var tasks = db.ProTasks.ToList();
+            db.Dispose();
+            return tasks;
+        }
+
+        public ProTask GetTask(int Id)
+        {
+            ProTask proTask = db.ProTasks.Find(Id);
+            db.Dispose();
+            if (proTask == null)
+            {
+                return null;
+            }
+            return proTask;
+        }
+        public void Create(string content)
         {
             ProTask proTask = new ProTask();
             proTask.TaskContent = content;
             db.ProTasks.Add(proTask);
             db.SaveChanges();
+            db.Dispose();
         }
-        public void DeleteTask(int id)
+        public void Delete(int id)
         {
             var proTask = db.ProTasks.Find(id);
-            db.ProTasks.Remove(proTask);
-            db.SaveChanges();
+            if (proTask != null)
+            {
+                db.ProTasks.Remove(proTask);
+                db.SaveChanges();
+                db.Dispose();
+            }
         }
-        public void UpdateTask(int id, string content)
+
+        public void Edit(int id, string content)
         {
             var proTask = db.ProTasks.Find(id);
             proTask.TaskContent = content;
             db.SaveChanges();
+            db.Dispose();
         }
-        public void AssignTask(int id, string DeveloperId)
+        public void Assign(int id, string DeveloperId)
         {
-            var proTask = db.ProTasks.Find(id);
-            proTask.DeveloperId = DeveloperId;
-            db.SaveChanges();
+            ProTask proTask = GetTask(id);
+            if(proTask != null)
+            {
+                proTask.DeveloperId = DeveloperId;
+                db.SaveChanges();
+                db.Dispose();
+            }
         }
     }
 }
