@@ -11,9 +11,9 @@ namespace TaskManagementSystem.Models
         public int Id { get; set; }
         public string Comment{ get; set; }
 
-        [ForeignKey("Task")]
-        public int TaskId { get; set; }
-        public virtual ProTask Task { get; set; }
+        [ForeignKey("ProTask")]
+        public int ProTaskId { get; set; }
+        public virtual ProTask ProTask { get; set; }
         public string DeveloperId { get; set; }
         public virtual ApplicationUser Developer { get; set; }
     }
