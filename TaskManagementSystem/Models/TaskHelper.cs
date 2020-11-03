@@ -43,13 +43,15 @@ namespace TaskManagementSystem.Models
                 db.Dispose();
             }
         }
-
         public void Edit(int id, string content)
         {
-            var proTask = db.ProTasks.Find(id);
-            proTask.TaskContent = content;
-            db.SaveChanges();
-            db.Dispose();
+            var proTask = GetTask(id);
+            if(proTask != null)
+            {
+                proTask.TaskContent = content;
+                db.SaveChanges();
+                db.Dispose();
+            }
         }
         public void Assign(int id, string DeveloperId)
         {
