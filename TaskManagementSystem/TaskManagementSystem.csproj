@@ -193,6 +193,10 @@
     <Compile Include="Migrations\202011021950174_AddedUserManagerClass.Designer.cs">
       <DependentUpon>202011021950174_AddedUserManagerClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011030130237_FixProTaskName.cs" />
+    <Compile Include="Migrations\202011030130237_FixProTaskName.Designer.cs">
+      <DependentUpon>202011030130237_FixProTaskName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -294,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011021950174_AddedUserManagerClass.resx">
       <DependentUpon>202011021950174_AddedUserManagerClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011030130237_FixProTaskName.resx">
+      <DependentUpon>202011030130237_FixProTaskName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
