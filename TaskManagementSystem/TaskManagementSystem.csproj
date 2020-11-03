@@ -173,25 +173,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011020230518_initial.cs" />
-    <Compile Include="Migrations\202011020230518_initial.Designer.cs">
-      <DependentUpon>202011020230518_initial.cs</DependentUpon>
+    <Compile Include="Migrations\202011030206418_InitialTheClsses.cs" />
+    <Compile Include="Migrations\202011030206418_InitialTheClsses.Designer.cs">
+      <DependentUpon>202011030206418_InitialTheClsses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011020344169_AddProjectTaskClass.cs" />
-    <Compile Include="Migrations\202011020344169_AddProjectTaskClass.Designer.cs">
-      <DependentUpon>202011020344169_AddProjectTaskClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011020408331_AddNote.cs" />
-    <Compile Include="Migrations\202011020408331_AddNote.Designer.cs">
-      <DependentUpon>202011020408331_AddNote.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011020414024_AddNotification.cs" />
-    <Compile Include="Migrations\202011020414024_AddNotification.Designer.cs">
-      <DependentUpon>202011020414024_AddNotification.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011021950174_AddedUserManagerClass.cs" />
-    <Compile Include="Migrations\202011021950174_AddedUserManagerClass.Designer.cs">
-      <DependentUpon>202011021950174_AddedUserManagerClass.cs</DependentUpon>
+    <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.cs" />
+    <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
+      <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -262,6 +250,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,20 +273,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011020230518_initial.resx">
-      <DependentUpon>202011020230518_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011030206418_InitialTheClsses.resx">
+      <DependentUpon>202011030206418_InitialTheClsses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011020344169_AddProjectTaskClass.resx">
-      <DependentUpon>202011020344169_AddProjectTaskClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011020408331_AddNote.resx">
-      <DependentUpon>202011020408331_AddNote.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011020414024_AddNotification.resx">
-      <DependentUpon>202011020414024_AddNotification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011021950174_AddedUserManagerClass.resx">
-      <DependentUpon>202011021950174_AddedUserManagerClass.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
+      <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
