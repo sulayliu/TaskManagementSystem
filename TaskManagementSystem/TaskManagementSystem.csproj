@@ -177,9 +177,9 @@
     <Compile Include="Migrations\202011030206418_InitialTheClsses.Designer.cs">
       <DependentUpon>202011030206418_InitialTheClsses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011030157415_FixProTaskNameNote.cs" />
-    <Compile Include="Migrations\202011030157415_FixProTaskNameNote.Designer.cs">
-      <DependentUpon>202011030157415_FixProTaskNameNote.cs</DependentUpon>
+    <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.cs" />
+    <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
+      <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -271,8 +271,8 @@
     <EmbeddedResource Include="Migrations\202011030206418_InitialTheClsses.resx">
       <DependentUpon>202011030206418_InitialTheClsses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011030157415_FixProTaskNameNote.resx">
-      <DependentUpon>202011030157415_FixProTaskNameNote.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
+      <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

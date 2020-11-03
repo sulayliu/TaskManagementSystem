@@ -17,12 +17,17 @@ namespace TaskManagementSystem.Models
             roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         }
 
-        public bool isRoleExist(string roleName)
+        public bool IsRoleExist(string roleName)
         {
             return roleManager.RoleExists(roleName);
         }
 
-        public bool createRole(string roleName)
+        public bool UserInRole(string userId, string roleName)
+        {
+            return userManager.IsInRole(userId, roleName);
+        }
+
+        public bool CreateRole(string roleName)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -38,7 +43,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool deleteRole(string roleName)
+        public bool DeleteRole(string roleName)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -54,7 +59,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool addUserToRole(string roleName, string userId)
+        public bool AddUserToRole(string roleName, string userId)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -69,7 +74,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool deleteUserFromRole(string roleName, string userId)
+        public bool DeleteUserFromRole(string roleName, string userId)
         {
             roleName = roleName.ToLower();
             bool result = false;
