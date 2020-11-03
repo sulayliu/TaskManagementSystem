@@ -173,29 +173,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011020230518_initial.cs" />
-    <Compile Include="Migrations\202011020230518_initial.Designer.cs">
-      <DependentUpon>202011020230518_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011020344169_AddProjectTaskClass.cs" />
-    <Compile Include="Migrations\202011020344169_AddProjectTaskClass.Designer.cs">
-      <DependentUpon>202011020344169_AddProjectTaskClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011020408331_AddNote.cs" />
-    <Compile Include="Migrations\202011020408331_AddNote.Designer.cs">
-      <DependentUpon>202011020408331_AddNote.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011020414024_AddNotification.cs" />
-    <Compile Include="Migrations\202011020414024_AddNotification.Designer.cs">
-      <DependentUpon>202011020414024_AddNotification.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011021950174_AddedUserManagerClass.cs" />
-    <Compile Include="Migrations\202011021950174_AddedUserManagerClass.Designer.cs">
-      <DependentUpon>202011021950174_AddedUserManagerClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011030130237_FixProTaskName.cs" />
-    <Compile Include="Migrations\202011030130237_FixProTaskName.Designer.cs">
-      <DependentUpon>202011030130237_FixProTaskName.cs</DependentUpon>
+    <Compile Include="Migrations\202011030206418_InitialTheClsses.cs" />
+    <Compile Include="Migrations\202011030206418_InitialTheClsses.Designer.cs">
+      <DependentUpon>202011030206418_InitialTheClsses.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202011030157415_FixProTaskNameNote.cs" />
     <Compile Include="Migrations\202011030157415_FixProTaskNameNote.Designer.cs">
@@ -288,23 +268,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011020230518_initial.resx">
-      <DependentUpon>202011020230518_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011020344169_AddProjectTaskClass.resx">
-      <DependentUpon>202011020344169_AddProjectTaskClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011020408331_AddNote.resx">
-      <DependentUpon>202011020408331_AddNote.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011020414024_AddNotification.resx">
-      <DependentUpon>202011020414024_AddNotification.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011021950174_AddedUserManagerClass.resx">
-      <DependentUpon>202011021950174_AddedUserManagerClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011030130237_FixProTaskName.resx">
-      <DependentUpon>202011030130237_FixProTaskName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011030206418_InitialTheClsses.resx">
+      <DependentUpon>202011030206418_InitialTheClsses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011030157415_FixProTaskNameNote.resx">
       <DependentUpon>202011030157415_FixProTaskNameNote.cs</DependentUpon>
