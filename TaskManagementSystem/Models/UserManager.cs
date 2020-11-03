@@ -22,6 +22,11 @@ namespace TaskManagementSystem.Models
             return roleManager.RoleExists(roleName);
         }
 
+        public bool UserInRole(string userId, string roleName)
+        {
+            return userManager.IsInRole(userId, roleName);
+        }
+
         public bool CreateRole(string roleName)
         {
             roleName = roleName.ToLower();
