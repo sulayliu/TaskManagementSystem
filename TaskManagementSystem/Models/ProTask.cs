@@ -8,15 +8,22 @@ namespace TaskManagementSystem.Models
 {
     public class ProTask
     {
+
         public int Id { get; set; }
-        public int ProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        public string TaskName { get; set; }
+
+        [Display (Name ="Description")]
         public string TaskContent { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [Display(Name = "Created Time")]
         public DateTime Time { get; set; }
         [Range(0, 100)]
         public double CompletedPercentage { get; set; }
+        public int ProjectId { get; set; }
+        public virtual Project Project { get; set; }
         public string UserId { get; set; }
+      
         public string UserName { get; set; }
         public ApplicationUser User { get; set; }
         public virtual ICollection<Note> Notes { get; set; }

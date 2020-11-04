@@ -183,17 +183,9 @@
     <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.cs" />
-    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.Designer.cs">
-      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.cs" />
-    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.Designer.cs">
-      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.cs" />
-    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.Designer.cs">
-      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
+    <Compile Include="Migrations\202011042132054_AddedTaskNameInProTaskClass.cs" />
+    <Compile Include="Migrations\202011042132054_AddedTaskNameInProTaskClass.Designer.cs">
+      <DependentUpon>202011042132054_AddedTaskNameInProTaskClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -206,6 +198,7 @@
     <Compile Include="Models\ProTask.cs" />
     <Compile Include="Models\TaskHelper.cs" />
     <Compile Include="Models\UserManager.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -302,14 +295,8 @@
     <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040429127_AddNameFieldToProjectClass.resx">
-      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040501132_FixingUserRelationOnProject.resx">
-      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040519437_FixingProTaskUserID.resx">
-      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011042132054_AddedTaskNameInProTaskClass.resx">
+      <DependentUpon>202011042132054_AddedTaskNameInProTaskClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
