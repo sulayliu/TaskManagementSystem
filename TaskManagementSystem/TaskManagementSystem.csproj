@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ProTasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,10 +198,13 @@
     <Compile Include="Models\ProTask.cs" />
     <Compile Include="Models\TaskHelper.cs" />
     <Compile Include="Models\UserManager.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\TaskManagementSystem.dll" />
+    <Content Include="bin\TaskManagementSystem.pdb" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -209,8 +213,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="obj\Debug\TaskManagementSystem.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\TaskManagementSystem.dll" />
+    <Content Include="obj\Debug\TaskManagementSystem.pdb" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\TaskManagementSystem.csproj.CopyComplete" />
+    <Content Include="obj\Debug\TaskManagementSystem.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\TaskManagementSystem.csproj.GenerateResource.cache" />
+    <Content Include="obj\Debug\TaskManagementSystem.csprojAssemblyReference.cache" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -261,9 +273,14 @@
     <Content Include="Views\ProTasks\Details.cshtml" />
     <Content Include="Views\ProTasks\Edit.cshtml" />
     <Content Include="Views\ProTasks\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -288,6 +305,9 @@
     <EmbeddedResource Include="Migrations\202011040645418_UpdateTaskCon.resx">
       <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\TaskManagementSystem.Migrations.ChangetheMethodNameInUserManagerClass.resources" />
+    <EmbeddedResource Include="obj\Debug\TaskManagementSystem.Migrations.InitialTheClsses.resources" />
+    <EmbeddedResource Include="obj\Debug\TaskManagementSystem.Migrations.UpdateTaskCon.resources" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
