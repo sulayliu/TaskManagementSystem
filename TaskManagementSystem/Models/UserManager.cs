@@ -17,9 +17,19 @@ namespace TaskManagementSystem.Models
             roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
         }
 
+        public List<string>ShowAllRoles(string userId)
+        {
+            return userManager.GetRoles(userId).ToList();
+        }
+
         public bool IsRoleExist(string roleName)
         {
             return roleManager.RoleExists(roleName);
+        }
+
+        public bool UserInRole(string userId, string roleName)
+        {
+            return userManager.IsInRole(userId, roleName);
         }
 
         public bool CreateRole(string roleName)
