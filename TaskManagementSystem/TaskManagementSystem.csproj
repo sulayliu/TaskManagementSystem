@@ -266,10 +266,14 @@
     <Content Include="Views\Projects\Delete.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\ProTasks\Create.cshtml" />
+    <Content Include="Views\ProTasks\Delete.cshtml" />
+    <Content Include="Views\ProTasks\Details.cshtml" />
+    <Content Include="Views\ProTasks\Edit.cshtml" />
+    <Content Include="Views\ProTasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ProTasks\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
