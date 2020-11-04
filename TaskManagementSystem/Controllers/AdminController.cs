@@ -8,6 +8,7 @@ using TaskManagementSystem.Models;
 namespace TaskManagementSystem.Controllers
 {
     [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
