@@ -13,8 +13,8 @@ namespace TaskManagementSystem.Models
         private protected RoleManager<IdentityRole> roleManager;
         public UserManager()
         {
-            userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
-            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+            userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
         }
 
         public List<string>ShowAllRoles(string userId)
