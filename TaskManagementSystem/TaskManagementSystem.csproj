@@ -183,6 +183,18 @@
     <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.cs" />
+    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.Designer.cs">
+      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.cs" />
+    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.Designer.cs">
+      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.cs" />
+    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.Designer.cs">
+      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202011040645418_UpdateTaskCon.cs" />
     <Compile Include="Migrations\202011040645418_UpdateTaskCon.Designer.cs">
       <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
@@ -223,6 +235,8 @@
     <Content Include="obj\Debug\TaskManagementSystem.csproj.CoreCompileInputs.cache" />
     <Content Include="obj\Debug\TaskManagementSystem.csproj.GenerateResource.cache" />
     <Content Include="obj\Debug\TaskManagementSystem.csprojAssemblyReference.cache" />
+    <Content Include="Properties\serviceDependencies.json" />
+    <Content Include="Properties\serviceDependencies.local.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -301,6 +315,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011040429127_AddNameFieldToProjectClass.resx">
+      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011040501132_FixingUserRelationOnProject.resx">
+      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011040519437_FixingProTaskUserID.resx">
+      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011040645418_UpdateTaskCon.resx">
       <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
