@@ -17,7 +17,11 @@ namespace TaskManagementSystem.Models
         {
             return db.Users.Select(u => u.UserName).ToList();
         }
-        public static List<string> ShowAllRoles(string userId)
+        public static List<string> ShowAllRoles()
+        {
+            return db.Roles.Select(r => r.Name).ToList();
+        }
+        public static List<string> ShowAllRolesForAUser(string userId)
         {
             return userManager.GetRoles(userId).ToList();
         }

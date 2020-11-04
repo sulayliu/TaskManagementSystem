@@ -1,12 +1,13 @@
 ﻿@model IEnumerable<string>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "ShowAllRoles";
 }
 
-<h2>Index</h2>
+<h2>ShowAllRoles</h2>
+
 
 <p>
-    @Html.ActionLink("AllRoles", "ShowAllRoles")
+    @Html.ActionLink("Create Role", "CreateRole")
 </p>
 
 <table class="table">
@@ -25,7 +26,7 @@
                 @Html.DisplayFor(modelItem => item)
             </td>
             <td>
-                @Html.ActionLink("Assign Role", "AddUserToRole") |
+                @Html.ActionLink("Delete", "DeleteRole") |
             </td>
         </tr>
     }
