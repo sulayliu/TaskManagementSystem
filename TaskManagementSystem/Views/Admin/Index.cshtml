@@ -1,0 +1,33 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("AllRoles", "ShowAllRoles")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            UserName
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item)
+            </td>
+            <td>
+                @Html.ActionLink("Add Role", "AddRole") |
+            </td>
+        </tr>
+    }
+
+</table>

@@ -7,32 +7,32 @@ using System.Web;
 
 namespace TaskManagementSystem.Models
 {
-    public class UserManager
+    public static class UserManager
     {
-        private protected UserManager<IdentityUser> userManager;
-        private protected RoleManager<IdentityRole> roleManager;
-        public UserManager()
-        {
-            userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
-            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-        }
+        static ApplicationDbContext db = new ApplicationDbContext();
+        static UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(db));
+        static RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
-        public List<string>ShowAllRoles(string userId)
+        public static List<string> ShowAllUsers()
+        {
+            return db.Users.Select(u => u.UserName).ToList();
+        }
+        public static List<string> ShowAllRoles(string userId)
         {
             return userManager.GetRoles(userId).ToList();
         }
 
-        public bool IsRoleExist(string roleName)
+        public static bool IsRoleExist(string roleName)
         {
             return roleManager.RoleExists(roleName);
         }
 
-        public bool UserInRole(string userId, string roleName)
+        public static bool UserInRole(string userId, string roleName)
         {
             return userManager.IsInRole(userId, roleName);
         }
 
-        public bool CreateRole(string roleName)
+        public static bool CreateRole(string roleName)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -48,7 +48,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool DeleteRole(string roleName)
+        public static bool DeleteRole(string roleName)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -64,7 +64,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool AddUserToRole(string roleName, string userId)
+        public static bool AddUserToRole(string roleName, string userId)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -79,7 +79,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool DeleteUserFromRole(string roleName, string userId)
+        public static bool DeleteUserFromRole(string roleName, string userId)
         {
             roleName = roleName.ToLower();
             bool result = false;
