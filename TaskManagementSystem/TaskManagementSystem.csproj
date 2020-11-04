@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ProTasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,9 +183,17 @@
     <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011040645418_UpdateTaskCon.cs" />
-    <Compile Include="Migrations\202011040645418_UpdateTaskCon.Designer.cs">
-      <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
+    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.cs" />
+    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.Designer.cs">
+      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.cs" />
+    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.Designer.cs">
+      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.cs" />
+    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.Designer.cs">
+      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -201,6 +210,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\TaskManagementSystem.dll" />
+    <Content Include="bin\TaskManagementSystem.pdb" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -211,6 +222,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Properties\serviceDependencies.json" />
+    <Content Include="Properties\serviceDependencies.local.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -261,6 +274,10 @@
     <Content Include="Views\ProTasks\Details.cshtml" />
     <Content Include="Views\ProTasks\Edit.cshtml" />
     <Content Include="Views\ProTasks\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,8 +302,14 @@
     <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040645418_UpdateTaskCon.resx">
-      <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011040429127_AddNameFieldToProjectClass.resx">
+      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011040501132_FixingUserRelationOnProject.resx">
+      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011040519437_FixingProTaskUserID.resx">
+      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
