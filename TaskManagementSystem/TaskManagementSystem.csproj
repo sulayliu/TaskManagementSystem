@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
@@ -182,18 +183,6 @@
     <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.cs" />
     <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.cs" />
-    <Compile Include="Migrations\202011040429127_AddNameFieldToProjectClass.Designer.cs">
-      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.cs" />
-    <Compile Include="Migrations\202011040501132_FixingUserRelationOnProject.Designer.cs">
-      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.cs" />
-    <Compile Include="Migrations\202011040519437_FixingProTaskUserID.Designer.cs">
-      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -270,15 +259,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ProTasks\Create.cshtml" />
-    <Content Include="Views\ProTasks\Delete.cshtml" />
-    <Content Include="Views\ProTasks\Details.cshtml" />
-    <Content Include="Views\ProTasks\Edit.cshtml" />
-    <Content Include="Views\ProTasks\Index.cshtml" />
-    <Content Include="Views\Projects\Create.cshtml" />
-    <Content Include="Views\Projects\Delete.cshtml" />
-    <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Projects\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -302,15 +282,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040429127_AddNameFieldToProjectClass.resx">
-      <DependentUpon>202011040429127_AddNameFieldToProjectClass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040501132_FixingUserRelationOnProject.resx">
-      <DependentUpon>202011040501132_FixingUserRelationOnProject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011040519437_FixingProTaskUserID.resx">
-      <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
