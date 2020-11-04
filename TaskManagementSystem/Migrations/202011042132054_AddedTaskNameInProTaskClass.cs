@@ -3,16 +3,16 @@ namespace TaskManagementSystem.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddNameFieldToProjectClass : DbMigration
+    public partial class AddedTaskNameInProTaskClass : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Projects", "Name", c => c.String());
+            AddColumn("dbo.ProTasks", "TaskName", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Projects", "Name");
+            DropColumn("dbo.ProTasks", "TaskName");
         }
     }
 }
