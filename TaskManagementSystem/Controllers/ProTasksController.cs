@@ -12,7 +12,13 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProTasksController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        private TaskHelper taskHelper;
+        public ProTasksController()
+        {
+            db = new ApplicationDbContext();
+            taskHelper = new TaskHelper();
+        }
 
         // GET: ProTasks
         public ActionResult Index()
