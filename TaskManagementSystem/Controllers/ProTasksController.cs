@@ -40,7 +40,7 @@ namespace TaskManagementSystem.Controllers
         public ActionResult Create()
         {
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace TaskManagementSystem.Controllers
             }
 
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", proTask.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
@@ -76,7 +76,7 @@ namespace TaskManagementSystem.Controllers
                 return HttpNotFound();
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", proTask.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
@@ -94,7 +94,7 @@ namespace TaskManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.ApplicationUsers, "Id", "Email", proTask.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
