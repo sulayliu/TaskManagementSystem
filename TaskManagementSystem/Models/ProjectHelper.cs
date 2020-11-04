@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Linq;
-using System.Web;
 
 namespace TaskManagementSystem.Models
 {
@@ -28,32 +28,47 @@ namespace TaskManagementSystem.Models
             return project;
         }
 
-        public void Create(int Id, string Content, bool IsCompleted, string ManagerId)
+        public int GetNewId()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            if (GetProject(Id) == null)
+
+            if(db.Projects.ToList().Count > 0)
             {
-                Project project = new Project
-                {
-                    Id = Id,
-                    Content = Content,
-                    Time = DateTime.Now,
-                    IsCompleted = IsCompleted,
-                    ManagerId = ManagerId
-                };
-                db.Projects.Add(project);
-                db.SaveChanges();
-                db.Dispose();
+                Project project = db.Projects.ToList().Last();
+                return project.Id + 1;
+            }
+            else
+            {
+                return 1;
             }
         }
 
-        public void Edit(int Id, string Content, bool IsCompleted, string ManagerId)
+        public void Create(string UserId, string UserName, string Name, string Content)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            int Id = GetNewId();
+            Project project = new Project
+            {
+                Id = Id,
+                Name = Name,
+                Content = Content,
+                Time = DateTime.Now,
+                IsCompleted = false,
+                UserId = UserId,
+                UserName = UserName
+            };
+                db.Projects.Add(project);
+                db.SaveChanges();
+                db.Dispose();
+        }
+
+        public void Edit(int Id, string Name, string Content, bool IsCompleted)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
+            project.Name = Name;
             project.Content = Content;
             project.IsCompleted = IsCompleted;
-            project.ManagerId = ManagerId;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();

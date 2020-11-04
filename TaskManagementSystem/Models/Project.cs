@@ -9,12 +9,14 @@ namespace TaskManagementSystem.Models
     public class Project
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Content { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime Time { get; set; }
         public bool IsCompleted { get; set; }
-        public string ManagerId { get; set; }
-        public virtual ApplicationUser ProjectManager { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public ApplicationUser User { get; set; }
         public virtual ICollection<ProTask> ProTasks { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public Project()

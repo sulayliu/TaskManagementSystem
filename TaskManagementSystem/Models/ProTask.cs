@@ -16,8 +16,9 @@ namespace TaskManagementSystem.Models
         public DateTime Time { get; set; }
         [Range(0, 100)]
         public double CompletedPercentage { get; set; }
-        public string DeveloperId { get; set; }
-        public virtual ApplicationUser Developer { get; set; }
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public ApplicationUser User { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public ProTask()
