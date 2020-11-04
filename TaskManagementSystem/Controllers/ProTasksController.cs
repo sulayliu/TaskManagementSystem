@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -13,13 +12,7 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProTasksController : Controller
     {
-        private ApplicationDbContext db;
-        private TaskHelper taskHelper;
-        public ProTasksController()
-        {
-            db = new ApplicationDbContext();
-            taskHelper = new TaskHelper();
-        }
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ProTasks
         public ActionResult Index()
@@ -42,35 +35,6 @@ namespace TaskManagementSystem.Controllers
             }
             return View(proTask);
         }
-        public ActionResult Create1(int? projectId)
-        {
-            if(projectId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ViewBag.ProjectName = db.Projects.Find(Convert.ToInt32(projectId)).Name;
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Create1(int? projectId, [Bind(Include = "Id,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
-        {
-            if(projectId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if (ModelState.IsValid)
-            {
-                proTask.ProjectId = Convert.ToInt32(projectId);
-                proTask.Project = db.Projects.Find(Convert.ToInt32(projectId));
-                db.ProTasks.Add(proTask);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ProjectName = db.Projects.Find(Convert.ToInt32(projectId)).Name;
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
-            return View(proTask);
-        }
 
         // GET: ProTasks/Create
         public ActionResult Create()
@@ -85,7 +49,7 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
+        public ActionResult Create([Bind(Include = "Id,TaskName,TaskContent,Time,CompletedPercentage,ProjectId,UserId,UserName")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
@@ -121,7 +85,7 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,TaskName,TaskContent,Time,CompletedPercentage,ProjectId,UserId,UserName")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
