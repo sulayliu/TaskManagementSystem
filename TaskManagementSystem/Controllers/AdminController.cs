@@ -22,6 +22,11 @@ namespace TaskManagementSystem.Controllers
             var roles = UserManager.ShowAllRoles();
             return View(roles);
         }
+        public ActionResult ShowAllRolesOfTheUser(string userId)
+        {
+            var roles = UserManager.ShowAllRolesForAUser(userId);
+            return View(roles);
+        }
         public ActionResult CreateRole()
         {
             return View();
@@ -30,11 +35,24 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateRole(string roleName)
         {
-
+            UserManager.CreateRole(roleName);
+            db.SaveChanges();
+            db.Dispose();
+            return RedirectToAction("ShowAllRoles");
         }
+
         public ActionResult AddUserToRole()
         {
-            ViewBag.UserId = 
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddUserToRole(string roleName, string userId)
+        {
+            UserManager.AddUserToRole(roleName, userId);
+            db.SaveChanges();
+            db.Dispose();
+            return RedirectToAction("Index");
         }
         public ActionResult DeleteRole(string roleName)
         {
