@@ -58,7 +58,7 @@ namespace TaskManagementSystem.Models
             ProTask proTask = GetTask(id);
             if(proTask != null)
             {
-                proTask.DeveloperId = DeveloperId;
+                proTask.UserId = DeveloperId;
                 db.SaveChanges();
                 db.Dispose();
             }

@@ -12,19 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Developer.Email)
+            @Html.DisplayNameFor(model => model.Project.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Developer.Email)
+            @Html.DisplayFor(model => model.Project.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Project.Content)
+            @Html.DisplayNameFor(model => model.User.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Project.Content)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
 
         <dt>
@@ -49,6 +49,14 @@
 
         <dd>
             @Html.DisplayFor(model => model.CompletedPercentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
         </dd>
 
     </dl>

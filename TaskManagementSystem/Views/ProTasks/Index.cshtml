@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Developer.Email)
+            @Html.DisplayNameFor(model => model.Project.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project.Content)
+            @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TaskContent)
@@ -26,16 +26,19 @@
         <th>
             @Html.DisplayNameFor(model => model.CompletedPercentage)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Developer.Email)
+            @Html.DisplayFor(modelItem => item.Project.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Project.Content)
+            @Html.DisplayFor(modelItem => item.User.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TaskContent)
@@ -45,6 +48,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CompletedPercentage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

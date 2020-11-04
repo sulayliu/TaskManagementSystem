@@ -12,12 +12,18 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProTasksController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        private TaskHelper taskHelper;
+        public ProTasksController()
+        {
+            db = new ApplicationDbContext();
+            taskHelper = new TaskHelper();
+        }
 
         // GET: ProTasks
         public ActionResult Index()
         {
-            var proTasks = db.ProTasks.Include(p => p.Developer).Include(p => p.Project);
+            var proTasks = db.ProTasks.Include(p => p.Project).Include(p => p.User);
             return View(proTasks.ToList());
         }
 
@@ -39,8 +45,8 @@ namespace TaskManagementSystem.Controllers
         // GET: ProTasks/Create
         public ActionResult Create()
         {
-            ViewBag.DeveloperId = new SelectList(db.Users, "Id", "Email");
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Content");
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -49,7 +55,7 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,DeveloperId")] ProTask proTask)
+        public ActionResult Create([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +64,8 @@ namespace TaskManagementSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DeveloperId = new SelectList(db.Users, "Id", "Email", proTask.DeveloperId);
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Content", proTask.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
@@ -75,8 +81,8 @@ namespace TaskManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DeveloperId = new SelectList(db.Users, "Id", "Email", proTask.DeveloperId);
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Content", proTask.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
@@ -85,7 +91,7 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,DeveloperId")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +99,8 @@ namespace TaskManagementSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.DeveloperId = new SelectList(db.Users, "Id", "Email", proTask.DeveloperId);
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Content", proTask.ProjectId);
+            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 

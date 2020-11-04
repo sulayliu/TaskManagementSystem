@@ -182,6 +182,10 @@
     <Compile Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.Designer.cs">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011040645418_UpdateTaskCon.cs" />
+    <Compile Include="Migrations\202011040645418_UpdateTaskCon.Designer.cs">
+      <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -280,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011030247138_ChangetheMethodNameInUserManagerClass.resx">
       <DependentUpon>202011030247138_ChangetheMethodNameInUserManagerClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011040645418_UpdateTaskCon.resx">
+      <DependentUpon>202011040645418_UpdateTaskCon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
