@@ -31,7 +31,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
-                @Html.ActionLink("Create Task", "Create", "ProTasks", new { id = project.Id }, null)
+                @Html.ActionLink("Create Task", "Create", "ProTasks", new { projectId = project.Id }, null)
             </td>
         </tr>
         <tbody>
@@ -59,7 +59,7 @@
                         @Html.DisplayFor(modelItem => task.UserName)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id }, null) |
+                        @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id, projectId = project.Id }, null) |
                         @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null)
                     </td>
                 </tr>

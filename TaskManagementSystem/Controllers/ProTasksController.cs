@@ -12,7 +12,13 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProTasksController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        private TaskHelper taskHelper;
+        public ProTasksController()
+        {
+            db = new ApplicationDbContext();
+            taskHelper = new TaskHelper();
+        }
 
         // GET: ProTasks
         public ActionResult Index()
@@ -49,18 +55,17 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TaskName,TaskContent,Time,CompletedPercentage,ProjectId,UserId,UserName")] ProTask proTask)
+        public ActionResult Create(int ProjectId, string TaskName, string TaskContent, string UserId)
+
         {
             if (ModelState.IsValid)
             {
-                db.ProTasks.Add(proTask);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                taskHelper.CreateTask(ProjectId, TaskName, TaskContent, UserId);
+                return RedirectToAction("Index", "Projects");
             }
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
-            return View(proTask);
+            return View();
         }
 
         // GET: ProTasks/Edit/5

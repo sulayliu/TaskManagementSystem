@@ -8,6 +8,7 @@ namespace TaskManagementSystem.Models
     public class TaskHelper
     {
         static ApplicationDbContext db = new ApplicationDbContext();
+
         public List<ProTask> GetTasks()
         {
             var tasks = db.ProTasks.ToList();
@@ -25,14 +26,32 @@ namespace TaskManagementSystem.Models
             }
             return proTask;
         }
-        public void Create(string content)
+        //public void Create(string content)
+        //{
+        //    ProTask proTask = new ProTask();
+        //    proTask.TaskContent = content;
+        //    db.ProTasks.Add(proTask);
+        //    db.SaveChanges();
+        //    db.Dispose();
+        //}
+        public void CreateTask(int projectId, string TaskName, string TaskContent, string UserId)
         {
-            ProTask proTask = new ProTask();
-            proTask.TaskContent = content;
+            ApplicationDbContext db = new ApplicationDbContext();
+            var user = db.Users.Find(UserId);
+            ProTask proTask = new ProTask
+            {
+                TaskName = TaskName,
+                TaskContent = TaskContent,
+                UserName = user.UserName,
+                ProjectId = projectId,
+                UserId = UserId,
+                Time = DateTime.Now
+            };
             db.ProTasks.Add(proTask);
             db.SaveChanges();
             db.Dispose();
         }
+
         public void Delete(int id)
         {
             var proTask = db.ProTasks.Find(id);
