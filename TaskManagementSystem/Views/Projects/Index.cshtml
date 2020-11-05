@@ -59,7 +59,7 @@
                         @Html.DisplayFor(modelItem => task.UserName)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id, projectId = project.Id }, null) |
+                        @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id }, null) |
                         @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null)
                     </td>
                 </tr>
