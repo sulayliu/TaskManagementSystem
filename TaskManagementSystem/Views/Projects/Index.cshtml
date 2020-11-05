@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("New Project", "Create")
 </p>
 <table class="table">
     <tr>
@@ -30,7 +30,6 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = project.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
                 @Html.ActionLink("Create Task", "Create", "ProTasks", new { id = project.Id }, null)
             </td>
@@ -44,12 +43,12 @@
                     @Html.Raw("% Completed")
                 </th>
                 <th>
-                    @Html.Raw("User Assigned")
+                    @Html.Raw("Assigned Developer")
                 </th>
             </tr>
             @foreach (var task in project.ProTasks)
             {
-                <tr>
+                <tr style="color:yellowgreen">
                     <td>
                         @Html.DisplayFor(modelItem => task.TaskName)
                     </td>
