@@ -7,7 +7,13 @@ namespace TaskManagementSystem.Models
 {
     public class TaskHelper
     {
-        static ApplicationDbContext db = new ApplicationDbContext();
+        //static ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        public TaskHelper()
+        {
+            db = new ApplicationDbContext();
+        }
+
         public List<ProTask> GetTasks()
         {
             var tasks = db.ProTasks.ToList();
@@ -17,22 +23,33 @@ namespace TaskManagementSystem.Models
 
         public ProTask GetTask(int Id)
         {
+
             ProTask proTask = db.ProTasks.Find(Id);
-            db.Dispose();
+            // db.Dispose();
             if (proTask == null)
             {
                 return null;
             }
             return proTask;
         }
-        public void Create(string content)
+
+        public void CreateTask(int projectId, string taskName, string taskContent, string userId)
         {
-            ProTask proTask = new ProTask();
-            proTask.TaskContent = content;
+            var user = db.Users.Find(userId);
+            ProTask proTask = new ProTask
+            {
+                TaskName = taskName,
+                TaskContent = taskContent,
+                UserName = user.UserName,
+                ProjectId = projectId,
+                UserId = userId,
+                Time = DateTime.Now
+            };
             db.ProTasks.Add(proTask);
             db.SaveChanges();
             db.Dispose();
         }
+
         public void Delete(int id)
         {
             var proTask = db.ProTasks.Find(id);
@@ -43,12 +60,17 @@ namespace TaskManagementSystem.Models
                 db.Dispose();
             }
         }
-        public void Edit(int id, string content)
+
+        public void Edit(int id, string taskName, string taskContent, string userId)
         {
             var proTask = GetTask(id);
-            if(proTask != null)
+            var user = db.Users.Find(userId);
+            if (proTask != null)
             {
-                proTask.TaskContent = content;
+                proTask.UserName = user.UserName;
+                proTask.TaskName = taskName;
+                proTask.TaskContent = taskContent;
+                proTask.UserId = userId;
                 db.SaveChanges();
                 db.Dispose();
             }
@@ -56,7 +78,7 @@ namespace TaskManagementSystem.Models
         public void Assign(int id, string DeveloperId)
         {
             ProTask proTask = GetTask(id);
-            if(proTask != null)
+            if (proTask != null)
             {
                 proTask.UserId = DeveloperId;
                 db.SaveChanges();

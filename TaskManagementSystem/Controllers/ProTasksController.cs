@@ -12,7 +12,13 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProTasksController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        private TaskHelper taskHelper;
+        public ProTasksController()
+        {
+            db = new ApplicationDbContext();
+            taskHelper = new TaskHelper();
+        }
 
         // GET: ProTasks
         public ActionResult Index()
@@ -49,18 +55,17 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TaskName,TaskContent,Time,CompletedPercentage,ProjectId,UserId,UserName")] ProTask proTask)
+        public ActionResult Create(int projectId, string taskName, string taskContent, string userId)
+
         {
             if (ModelState.IsValid)
             {
-                db.ProTasks.Add(proTask);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                taskHelper.CreateTask(projectId, taskName, taskContent, userId);
+                return RedirectToAction("Index", "Projects");
             }
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
-            return View(proTask);
+            return View();
         }
 
         // GET: ProTasks/Edit/5
@@ -75,7 +80,6 @@ namespace TaskManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
@@ -85,17 +89,16 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,TaskName,TaskContent,Time,CompletedPercentage,ProjectId,UserId,UserName")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,TaskName,TaskContent,UserId")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(proTask).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                taskHelper.Edit(proTask.Id, proTask.TaskName, proTask.TaskContent, proTask.UserId);
+                return RedirectToAction("Index","Projects");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
-            return View(proTask);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
+            return View();
         }
 
         // GET: ProTasks/Delete/5
@@ -121,7 +124,7 @@ namespace TaskManagementSystem.Controllers
             ProTask proTask = db.ProTasks.Find(id);
             db.ProTasks.Remove(proTask);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Projects");
         }
 
         protected override void Dispose(bool disposing)

@@ -198,7 +198,6 @@
     <Compile Include="Models\ProTask.cs" />
     <Compile Include="Models\TaskHelper.cs" />
     <Compile Include="Models\UserManager.cs" />
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
