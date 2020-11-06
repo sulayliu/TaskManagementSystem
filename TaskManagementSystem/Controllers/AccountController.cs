@@ -21,6 +21,8 @@ namespace TaskManagementSystem.Controllers
 
         public AccountController()
         {
+            ApplicationDbContext db = new ApplicationDbContext();
+            _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(db));
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

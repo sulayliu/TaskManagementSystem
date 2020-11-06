@@ -4,13 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace TaskManagementSystem.Models
 {
     public static class UserManager
     {
         static ApplicationDbContext db = new ApplicationDbContext();
-        static UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(db));
+        static UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
         static RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
         public static List<ApplicationUser> ShowAllUsers()
@@ -23,7 +24,8 @@ namespace TaskManagementSystem.Models
         }
         public static List<string> ShowAllRolesForAUser(string userId)
         {
-            return userManager.GetRoles(userId).ToList();
+            var roles = userManager.GetRoles(userId).ToList();
+            return roles;
         }
 
         public static bool IsRoleExist(string roleName)
@@ -67,21 +69,34 @@ namespace TaskManagementSystem.Models
             }
             return result;
         }
-
-        public static bool AddUserToRole(string roleName, string userId)
+        public static IdentityResult AddUserToRole(string userId, string roleName)
         {
-            roleName = roleName.ToLower();
-            bool result = false;
-            if (roleManager.RoleExists(roleName) && userManager.FindById(userId) != null)
-            {
-                result = userManager.IsInRole(userId, roleName);
-                if (!result)
-                {
-                    result = userManager.AddToRole(userId, roleName).Succeeded;
-                }
-            }
-            return result;
+            return userManager.AddToRole(userId, roleName);
         }
+        //public static bool AddUserToRole(string roleName, string userId)
+        //{
+        //    var userName = db.Users.Find(userId).UserName;
+        //    //if (!CheckUserInRole(userName, roleName))
+        //    //{
+        //    return userManager.AddToRole(userId, roleName).Succeeded;
+        //    //}
+        //    //else
+        //    //{
+        //    //    return false;
+        //    //}
+
+        //    roleName = roleName.ToLower();
+        //    bool result = false;
+        //    if (roleManager.RoleExists(roleName) && userManager.FindById(userId) != null)
+        //    {
+        //        result = userManager.IsInRole(userId, roleName);
+        //        if (!result)
+        //        {
+        //            result = userManager.AddToRole(userId, roleName).Succeeded;
+        //        }
+        //    }
+        //    return result;
+        //}
 
         public static bool DeleteUserFromRole(string roleName, string userId)
         {

@@ -59,20 +59,23 @@ namespace TaskManagementSystem.Controllers
         public ActionResult AddUserToRole(string userId)
         {
             ViewBag.UserName = db.Users.Find(userId).UserName;
-            ViewBag.roleName = new SelectList(db.Roles, "Id", "Name");
+            ViewBag.roleName = new SelectList(db.Roles, "Name","Name");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddUserToRole(string roleName, string userId)
         {
-            UserManager.AddUserToRole(roleName, userId);
-            db.SaveChanges();
+            var r = UserManager.AddUserToRole(userId,roleName);
+            if (r.Succeeded)
+            {
+                db.SaveChanges();
+            }
             
             ViewBag.UserName = db.Users.Find(userId).UserName;
-            ViewBag.roleName = new SelectList(db.Roles, "Id", "Name");
+            ViewBag.roleName = new SelectList(db.Roles, "Name","Name");
             db.Dispose();
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowAllRolesOfTheUser", new {userId});
         }
         public ActionResult DeleteRole(string roleName)
         {
