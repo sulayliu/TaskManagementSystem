@@ -12,7 +12,7 @@
             @Html.Label("Project name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TaskName)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TaskContent)
@@ -35,7 +35,7 @@
         @Html.DisplayFor(modelItem => item.Project.Name)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.TaskName)
+        @Html.DisplayFor(modelItem => item.Name)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.TaskContent)

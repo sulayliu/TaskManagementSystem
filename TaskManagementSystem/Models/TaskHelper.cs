@@ -38,7 +38,7 @@ namespace TaskManagementSystem.Models
             var user = db.Users.Find(userId);
             ProTask proTask = new ProTask
             {
-                TaskName = taskName,
+                Name = taskName,
                 TaskContent = taskContent,
                 UserName = user.UserName,
                 ProjectId = projectId,
@@ -68,7 +68,7 @@ namespace TaskManagementSystem.Models
             if (proTask != null)
             {
                 proTask.UserName = user.UserName;
-                proTask.TaskName = taskName;
+                proTask.Name = taskName;
                 proTask.TaskContent = taskContent;
                 proTask.UserId = userId;
                 db.SaveChanges();
