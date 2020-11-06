@@ -64,12 +64,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int projectId, string taskName, string taskContent, string userId)
+        public ActionResult Create(int projectId, string Name, string Content, string userId)
 
         {
             if (ModelState.IsValid)
             {
-                taskHelper.CreateTask(projectId, taskName, taskContent, userId);
+                taskHelper.CreateTask(projectId, Name, Content, userId);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
