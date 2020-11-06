@@ -13,7 +13,7 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View(projectHelper.GetProjects());
+            return View(projectHelper.GetProjectsWithTaskOrderByPercent());
         }
 
         // GET: Projects/Create
