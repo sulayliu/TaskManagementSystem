@@ -4,35 +4,41 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace TaskManagementSystem.Models
 {
-    public class UserManager
+    public static class UserManager
     {
-        private protected UserManager<IdentityUser> userManager;
-        private protected RoleManager<IdentityRole> roleManager;
-        public UserManager()
+        static ApplicationDbContext db = new ApplicationDbContext();
+        static UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+        static RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+
+        public static List<ApplicationUser> ShowAllUsers()
         {
-            userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
-            roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+            return db.Users.ToList();
+        }
+        public static List<string> ShowAllRoles()
+        {
+            return db.Roles.Select(r => r.Name).ToList();
+        }
+        public static List<string> ShowAllRolesForAUser(string userId)
+        {
+            var roles = userManager.GetRoles(userId).ToList();
+            return roles;
         }
 
-        public List<string>ShowAllRoles(string userId)
-        {
-            return userManager.GetRoles(userId).ToList();
-        }
-
-        public bool IsRoleExist(string roleName)
+        public static bool IsRoleExist(string roleName)
         {
             return roleManager.RoleExists(roleName);
         }
 
-        public bool UserInRole(string userId, string roleName)
+        public static bool UserInRole(string userId, string roleName)
         {
             return userManager.IsInRole(userId, roleName);
         }
 
-        public bool CreateRole(string roleName)
+        public static bool CreateRole(string roleName)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -48,7 +54,7 @@ namespace TaskManagementSystem.Models
             return result;
         }
 
-        public bool DeleteRole(string roleName)
+        public static bool DeleteRole(string roleName)
         {
             roleName = roleName.ToLower();
             bool result = false;
@@ -63,23 +69,36 @@ namespace TaskManagementSystem.Models
             }
             return result;
         }
-
-        public bool AddUserToRole(string roleName, string userId)
+        public static IdentityResult AddUserToRole(string userId, string roleName)
         {
-            roleName = roleName.ToLower();
-            bool result = false;
-            if (roleManager.RoleExists(roleName) && userManager.FindById(userId) != null)
-            {
-                result = userManager.IsInRole(userId, roleName);
-                if (!result)
-                {
-                    result = userManager.AddToRole(userId, roleName).Succeeded;
-                }
-            }
-            return result;
+            return userManager.AddToRole(userId, roleName);
         }
+        //public static bool AddUserToRole(string roleName, string userId)
+        //{
+        //    var userName = db.Users.Find(userId).UserName;
+        //    //if (!CheckUserInRole(userName, roleName))
+        //    //{
+        //    return userManager.AddToRole(userId, roleName).Succeeded;
+        //    //}
+        //    //else
+        //    //{
+        //    //    return false;
+        //    //}
 
-        public bool DeleteUserFromRole(string roleName, string userId)
+        //    roleName = roleName.ToLower();
+        //    bool result = false;
+        //    if (roleManager.RoleExists(roleName) && userManager.FindById(userId) != null)
+        //    {
+        //        result = userManager.IsInRole(userId, roleName);
+        //        if (!result)
+        //        {
+        //            result = userManager.AddToRole(userId, roleName).Succeeded;
+        //        }
+        //    }
+        //    return result;
+        //}
+
+        public static bool DeleteUserFromRole(string roleName, string userId)
         {
             roleName = roleName.ToLower();
             bool result = false;

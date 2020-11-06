@@ -41,5 +41,9 @@ namespace TaskManagementSystem.Models
         {
             return new ApplicationDbContext();
         }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationDbContext>());
+        //}
     }
 }
