@@ -43,7 +43,7 @@ namespace TaskManagementSystem.Models
                 UserName = user.UserName,
                 ProjectId = projectId,
                 UserId = userId,
-                Time = DateTime.Now
+                CreatedTime = DateTime.Now
             };
             db.ProTasks.Add(proTask);
             db.SaveChanges();

@@ -12,12 +12,14 @@ namespace TaskManagementSystem.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [Display (Name ="Description")]
+        [Display(Name = "Description")]
         public string Content { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
-        [Display(Name = "Created Time")]
-        public DateTime Time { get; set; }
+        [Display(Name = "Created CreatedTime")]
+        public DateTime CreatedTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime Deadline { get; set; }
         [Range(0, 100)]
         public double CompletedPercentage { get; set; }
         public int ProjectId { get; set; }
@@ -30,7 +32,7 @@ namespace TaskManagementSystem.Models
         public virtual ICollection<Notification> Notifications { get; set; }
         public ProTask()
         {
-            Time = System.DateTime.Now;
+            CreatedTime = System.DateTime.Now;
             Notes = new HashSet<Note>();
             Notifications = new HashSet<Notification>();
         }
