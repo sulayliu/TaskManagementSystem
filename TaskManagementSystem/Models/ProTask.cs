@@ -13,7 +13,7 @@ namespace TaskManagementSystem.Models
         public string Name { get; set; }
 
         [Display (Name ="Description")]
-        public string TaskContent { get; set; }
+        public string Content { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [Display(Name = "Created Time")]
