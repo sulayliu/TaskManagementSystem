@@ -62,7 +62,7 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Content,Time,IsCompleted,ManagerId")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,Name,Content,CreatedTime,IsCompleted,ManagerId")] Project project)
         {
             if (ModelState.IsValid)
             {

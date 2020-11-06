@@ -52,7 +52,7 @@ namespace TaskManagementSystem.Models
                 Id = Id,
                 Name = Name,
                 Content = Content,
-                Time = DateTime.Now,
+                CreatedTime = DateTime.Now,
                 IsCompleted = false,
                 UserId = UserId,
                 UserName = UserName

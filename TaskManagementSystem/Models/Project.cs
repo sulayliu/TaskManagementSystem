@@ -12,18 +12,19 @@ namespace TaskManagementSystem.Models
         public string Name { get; set; }
         public string Content { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
-        public DateTime Time { get; set; }
+        public DateTime CreatedTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        public DateTime Deadline { get; set; }
         public bool IsCompleted { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
         public ApplicationUser User { get; set; }
         public virtual ICollection<ProTask> ProTasks { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
-
         public Priority Priority { get; set; }
         public Project()
         {
-            Time = System.DateTime.Now;
+            CreatedTime = System.DateTime.Now;
             ProTasks = new HashSet<ProTask>();
             Notifications = new HashSet<Notification>();
         }
