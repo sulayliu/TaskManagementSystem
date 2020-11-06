@@ -86,11 +86,6 @@ namespace TaskManagementSystem
             }
             return manager;
         }
-
-        public static implicit operator ApplicationUserManager(UserManager<IdentityUser> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     // Configure the application sign-in manager which is used in this application.

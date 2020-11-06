@@ -103,7 +103,7 @@ namespace TaskManagementSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.TaskContent, proTask.UserId);
+                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId);
                 return RedirectToAction("Index","Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");

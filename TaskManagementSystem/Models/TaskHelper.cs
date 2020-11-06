@@ -39,7 +39,7 @@ namespace TaskManagementSystem.Models
             ProTask proTask = new ProTask
             {
                 Name = taskName,
-                TaskContent = taskContent,
+                Content = taskContent,
                 UserName = user.UserName,
                 ProjectId = projectId,
                 UserId = userId,
@@ -69,7 +69,7 @@ namespace TaskManagementSystem.Models
             {
                 proTask.UserName = user.UserName;
                 proTask.Name = taskName;
-                proTask.TaskContent = taskContent;
+                proTask.Content = taskContent;
                 proTask.UserId = userId;
                 db.SaveChanges();
                 db.Dispose();
