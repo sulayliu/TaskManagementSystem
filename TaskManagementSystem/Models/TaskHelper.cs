@@ -33,13 +33,13 @@ namespace TaskManagementSystem.Models
             return proTask;
         }
 
-        public void CreateTask(int projectId, string taskName, string taskContent, string userId)
+        public void CreateTask(int projectId, string Name, string Content, string userId)
         {
             var user = db.Users.Find(userId);
             ProTask proTask = new ProTask
             {
-                Name = taskName,
-                Content = taskContent,
+                Name = Name,
+                Content = Content,
                 UserName = user.UserName,
                 ProjectId = projectId,
                 UserId = userId,
