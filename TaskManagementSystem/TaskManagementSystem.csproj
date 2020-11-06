@@ -270,6 +270,8 @@
     <Content Include="Views\ProTasks\Details.cshtml" />
     <Content Include="Views\ProTasks\Edit.cshtml" />
     <Content Include="Views\ProTasks\Index.cshtml" />
+    <Content Include="Views\ProTasks\EditDeveloperTask.cshtml" />
+    <Content Include="Views\ProTasks\DeleteDeveloperTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

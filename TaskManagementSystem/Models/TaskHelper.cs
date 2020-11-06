@@ -85,5 +85,30 @@ namespace TaskManagementSystem.Models
                 db.Dispose();
             }
         }
+
+        //Developer side:
+        public List<ProTask> GetDeveloperTasks(string userId)
+        {
+            List<ProTask> developerTasks = db.ProTasks.Where(t => t.UserId == userId).ToList();
+            return developerTasks;
+        }
+
+        public void EditDeveloperTask(int id, double completedPercentage)
+        {
+            var proTask = GetTask(id);
+            if (proTask != null)
+            {
+                proTask.CompletedPercentage = completedPercentage;                
+                db.SaveChanges();
+                db.Dispose();
+            }
+        }
+
+        //P.Manager side:
+        public List<ProTask> GetManagerProjectsAndTasks(string userId)
+        {
+            List<ProTask> managerProjectsAndTasks = db.ProTasks.Where(t => t.UserId == userId).ToList();
+            return managerProjectsAndTasks;
+        }
     }
 }
