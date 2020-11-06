@@ -10,7 +10,7 @@ namespace TaskManagementSystem.Models
     {
 
         public int Id { get; set; }
-        public string TaskName { get; set; }
+        public string Name { get; set; }
 
         [Display (Name ="Description")]
         public string TaskContent { get; set; }
@@ -23,9 +23,9 @@ namespace TaskManagementSystem.Models
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
         public string UserId { get; set; }
-    
-        public string UserName { get; set; }
         public ApplicationUser User { get; set; }
+        public string UserName { get; set; }
+
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public ProTask()

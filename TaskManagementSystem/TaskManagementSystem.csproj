@@ -204,6 +204,14 @@
     <Compile Include="Migrations\202011042141526_SeedUser.Designer.cs">
       <DependentUpon>202011042141526_SeedUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011061759350_Fixmigration.cs" />
+    <Compile Include="Migrations\202011061759350_Fixmigration.Designer.cs">
+      <DependentUpon>202011061759350_Fixmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011061811073_FixNameOnTask.cs" />
+    <Compile Include="Migrations\202011061811073_FixNameOnTask.Designer.cs">
+      <DependentUpon>202011061811073_FixNameOnTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -334,6 +342,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011042141526_SeedUser.resx">
       <DependentUpon>202011042141526_SeedUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011061759350_Fixmigration.resx">
+      <DependentUpon>202011061759350_Fixmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011061811073_FixNameOnTask.resx">
+      <DependentUpon>202011061811073_FixNameOnTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
