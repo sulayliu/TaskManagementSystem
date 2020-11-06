@@ -13,7 +13,7 @@ using TaskManagementSystem.Models;
 
 namespace TaskManagementSystem.Controllers
 {
-    [Authorize]
+    [Authorize] //This is a test Haris, no problem here
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
