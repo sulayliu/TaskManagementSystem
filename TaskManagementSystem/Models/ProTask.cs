@@ -16,7 +16,6 @@ namespace TaskManagementSystem.Models
         public string Content { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
-        [Display(Name = "Created CreatedTime")]
         public DateTime CreatedTime { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime Deadline { get; set; }
@@ -32,6 +31,7 @@ namespace TaskManagementSystem.Models
         public virtual ICollection<Notification> Notifications { get; set; }
         public ProTask()
         {
+            Deadline = System.DateTime.Now;
             CreatedTime = System.DateTime.Now;
             Notes = new HashSet<Note>();
             Notifications = new HashSet<Notification>();
