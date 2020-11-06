@@ -15,8 +15,8 @@ namespace TaskManagementSystem.Controllers
     public class AdminController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
-        RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+        //UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(new ApplicationDbContext()));
+        //RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
         // GET: Admin
         public ActionResult Index()
         {
@@ -38,7 +38,8 @@ namespace TaskManagementSystem.Controllers
         {
             ViewBag.UserName = db.Users.Find(userId).UserName;
             ViewBag.UserId = userId;
-            var roles = userManager.GetRoles(userId).ToList();
+            //var roles = userManager.GetRoles(userId).ToList();
+            var roles = UserManager.ShowAllRolesForAUser(userId);
             return View(roles);
         }
         public ActionResult CreateRole()
