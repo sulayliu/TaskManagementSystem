@@ -11,7 +11,7 @@ namespace TaskManagementSystem.Models
         public List<Project> GetProjects()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var projects = db.Projects.ToList();
+            var projects = db.Projects.Include("ProTasks").ToList();
             db.Dispose();
             return projects;
         }

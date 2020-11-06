@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("New Project", "Create")
 </p>
 <table class="table">
     <tr>
@@ -19,20 +19,52 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Content)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-    </td>
-</tr>
-}
+    @foreach (var project in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => project.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => project.Content)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
+                @Html.ActionLink("Create Task", "Create", "ProTasks", new { projectId = project.Id }, null)
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <th>
+                    @Html.Raw("Task Name")
+                </th>
+                <th>
+                    @Html.Raw("% Completed")
+                </th>
+                <th>
+                    @Html.Raw("Assigned Developer")
+                </th>
+            </tr>
+            @foreach (var task in project.ProTasks)
+            {
+                <tr style="color:yellowgreen">
+                    <td>
+                        @Html.DisplayFor(modelItem => task.TaskName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => task.CompletedPercentage)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => task.UserName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id }, null) |
+                        @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
 
 </table>

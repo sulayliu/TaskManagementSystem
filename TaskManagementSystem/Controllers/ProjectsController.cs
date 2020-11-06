@@ -10,12 +10,14 @@ namespace TaskManagementSystem.Controllers
         private ProjectHelper projectHelper = new ProjectHelper();
 
         // GET: Projects
+        [Authorize]
         public ActionResult Index()
         {
             return View(projectHelper.GetProjects());
         }
 
         // GET: Projects/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -24,6 +26,7 @@ namespace TaskManagementSystem.Controllers
         // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(string Name, string Content)
@@ -38,6 +41,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -55,6 +59,7 @@ namespace TaskManagementSystem.Controllers
         // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Content,Time,IsCompleted,ManagerId")] Project project)
@@ -68,6 +73,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         // GET: Projects/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -83,6 +89,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         // POST: Projects/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -21,11 +22,19 @@ namespace TaskManagementSystem.Controllers
         }
 
         // GET: ProTasks
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var proTasks = db.ProTasks.Include(p => p.Project).Include(p => p.User);
+        //    return View(proTasks.ToList());
+        //}
+
+        public ActionResult Index(string userId)
         {
-            var proTasks = db.ProTasks.Include(p => p.Project).Include(p => p.User);
-            return View(proTasks.ToList());
+            var developerProTasks = taskHelper.GetDeveloperTasks(userId);
+            //var proTasks = db.ProTasks.Include(p => p.Project).Include(p => p.User);
+            return View(developerProTasks);
         }
+
 
         // GET: ProTasks/Details/5
         public ActionResult Details(int? id)
@@ -45,7 +54,7 @@ namespace TaskManagementSystem.Controllers
         // GET: ProTasks/Create
         public ActionResult Create()
         {
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
@@ -55,18 +64,17 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
+        public ActionResult Create(int projectId, string taskName, string taskContent, string userId)
+
         {
             if (ModelState.IsValid)
             {
-                db.ProTasks.Add(proTask);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                taskHelper.CreateTask(projectId, taskName, taskContent, userId);
+                return RedirectToAction("Index", "Projects");
             }
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
 
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
-            return View(proTask);
+            return View();
         }
 
         // GET: ProTasks/Edit/5
@@ -81,7 +89,6 @@ namespace TaskManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
@@ -91,17 +98,16 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ProjectId,TaskContent,Time,CompletedPercentage,UserId,UserName")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,TaskName,TaskContent,UserId")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(proTask).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                taskHelper.Edit(proTask.Id, proTask.TaskName, proTask.TaskContent, proTask.UserId);
+                return RedirectToAction("Index","Projects");
             }
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", proTask.ProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
-            return View(proTask);
+            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
+            return View();
         }
 
         // GET: ProTasks/Delete/5
@@ -127,7 +133,7 @@ namespace TaskManagementSystem.Controllers
             ProTask proTask = db.ProTasks.Find(id);
             db.ProTasks.Remove(proTask);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Projects");
         }
 
         protected override void Dispose(bool disposing)
@@ -137,6 +143,63 @@ namespace TaskManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: ProTasks/Edit for Developer
+        public ActionResult EditDeveloperTask(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProTask proTask = db.ProTasks.Find(id);
+            if (proTask == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
+            return View(proTask);
+        }
+
+        // POST: ProTasks/Edit for Developer        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDeveloperTask([Bind(Include = "Id,CompletedPercentage")] ProTask proTask)
+        {
+            if (ModelState.IsValid)
+            {
+                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);                
+                return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
+            }
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
+            return View();
+        }
+
+        // GET: ProTasks/Delete/5
+        public ActionResult DeleteDeveloperTask(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProTask proTask = db.ProTasks.Find(id);
+            if (proTask == null)
+            {
+                return HttpNotFound();
+            }
+            return View(proTask);
+        }
+
+        // POST: ProTasks/Delete/5
+        [HttpPost, ActionName("DeleteDeveloperTask")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteDeveloperTaskConfirmed(int id)
+        {
+            //ProTask proTask = db.ProTasks.Find(id);
+            //db.ProTasks.Remove(proTask);
+            taskHelper.Delete(id);
+            db.SaveChanges();
+            return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
         }
     }
 }
