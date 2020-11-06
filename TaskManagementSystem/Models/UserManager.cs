@@ -13,9 +13,9 @@ namespace TaskManagementSystem.Models
         static UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(db));
         static RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
 
-        public static List<string> ShowAllUsers()
+        public static List<ApplicationUser> ShowAllUsers()
         {
-            return db.Users.Select(u => u.UserName).ToList();
+            return db.Users.ToList();
         }
         public static List<string> ShowAllRoles()
         {

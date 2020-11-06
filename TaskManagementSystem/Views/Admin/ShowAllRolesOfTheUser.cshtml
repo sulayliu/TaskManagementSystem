@@ -1,21 +1,18 @@
 ﻿@model IEnumerable<string>
 @{
-    ViewBag.Title = "ShowAllRoles";
+    ViewBag.Title = "ShowAllRolesOfTheUser";
 }
 
-<h2>ShowAllRoles</h2>
-
-
-<p>
-    @Html.ActionLink("Create Role", "CreateRole")
-</p>
+<h2>ShowAllRolesOfTheUser</h2>
+<div>
+    @ViewBag.UserName
+</div>
 
 <table class="table">
     <tr>
         <th>
-            UserName
+            RoleName
         </th>
-
         <th></th>
     </tr>
 
@@ -23,16 +20,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item)
+                @Html.Display(item)
             </td>
             <td>
-                @Html.ActionLink("Delete", "DeleteRole",new { roleName = item}) 
+                @Html.ActionLink("Remove role", "RemoveRole", new { userId = @ViewBag.UserId }) 
             </td>
         </tr>
     }
 
 </table>
-
 <p>
     @Html.ActionLink("Back to Management Page", "Index")
 </p>

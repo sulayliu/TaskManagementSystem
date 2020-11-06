@@ -1,34 +1,22 @@
-﻿@model IEnumerable<string>
+﻿@model IEnumerable<TaskManagementSystem.Models.ApplicationUser>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("AllRoles", "ShowAllRoles")
-</p>
-
 <table class="table">
     <tr>
         <th>
-            UserName
+            @Html.ActionLink("Manage Users", "ShowAllUsers")
         </th>
-
-        <th></th>
+        <th>
+            @Html.ActionLink("Manage Roles", "ShowAllRoles")
+        </th>
+        
     </tr>
+    <tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item)
-            </td>
-            <td>
-                @Html.ActionLink("ShowTheRoles", "ShowAllRolesOfTheUser") |
-                @Html.ActionLink("Assign Role", "AddUserToRole") |
-            </td>
-        </tr>
-    }
+    </tr>
 
 </table>
