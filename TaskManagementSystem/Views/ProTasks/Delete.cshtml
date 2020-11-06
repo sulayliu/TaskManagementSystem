@@ -1,4 +1,7 @@
 ﻿@model TaskManagementSystem.Models.ProTask
+@using Microsoft.AspNet.Identity;
+@using TaskManagementSystem.Models;
+@using Microsoft.AspNet.Identity.EntityFramework;
 
 @{
     ViewBag.Title = "Delete";
@@ -62,12 +65,22 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index","Projects")
+            @*@{
+                UserManager user = new UserManager();
+             }
+
+               if (user.UserInRole(User.Identity.GetUserId(), "Developer")
+                {
+                    @Html.ActionLink("Back to List", "Index", "Projects")
+                }*@
+             
+            @Html.ActionLink("Back to List", "Index", "Projects")
         </div>
     }
 </div>
