@@ -3,12 +3,17 @@
     ViewBag.Title = "ShowAllRolesOfTheUser";
 }
 
-<h2>ShowAllRolesOfTheUser</h2>
-<div>
-    @ViewBag.UserName
-</div>
+<h3>All roles of the user:</h3>
 
 <table class="table">
+    <tr>
+        <th>
+            @ViewBag.UserName
+        </th>
+    </tr>
+</table>
+
+<table class="table" >
     <tr>
         <th>
             RoleName
@@ -23,7 +28,11 @@
                 @item
             </td>
             <td>
-                @Html.ActionLink("Remove role", "RemoveRole", new { userId = @ViewBag.UserId }) 
+                @if (item != "Admin")
+                {
+                    @Html.ActionLink("Remove role", "RemoveRole", new { userId = @ViewBag.UserId, roleName = item })
+                }
+
             </td>
         </tr>
     }

@@ -7,35 +7,44 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("New Project", "Create")
+    @Html.ActionLink("New Project", "Create") |
+    @Html.ActionLink("Order Task by Creation Date", "Index", new { id = 0 }) |
+    @Html.ActionLink("Order Task by Percentaje", "Index", new { id = 1 }) |
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th style="padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px; width: 10px">
+            <i class="fa fa-plus icon" id="Icon"></i>
+        </th>
+        <th style="width: 230px">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        <th style="width: 230px">
             @Html.DisplayNameFor(model => model.Content)
         </th>
     </tr>
-
     @foreach (var project in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => project.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => project.Content)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
-                @Html.ActionLink("Create Task", "Create", "ProTasks", new { projectId = project.Id }, null)
-            </td>
-        </tr>
+    <tr>
+    <td>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => project.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => project.Content)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
+        @Html.ActionLink("Create Task", "Create", "ProTasks", new { projectId = project.Id }, null)
+    </td>
+</tr>
+        if(project.ProTasks.Count > 0) { 
         <tbody>
             <tr>
+                <th>
+                </th>
                 <th>
                     @Html.Raw("Task Name")
                 </th>
@@ -43,28 +52,48 @@
                     @Html.Raw("% Completed")
                 </th>
                 <th>
+                    @Html.Raw("Priority")
+                </th>
+                <th>
+                    @Html.Raw("Deadline")
+                </th>
+                <th>
                     @Html.Raw("Assigned Developer")
                 </th>
             </tr>
             @foreach (var task in project.ProTasks)
             {
-                <tr style="color:yellowgreen">
-                    <td>
-                        @Html.DisplayFor(modelItem => task.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => task.CompletedPercentage)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => task.UserName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id }, null) |
-                        @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null)
-                    </td>
-                </tr>
+        <tr style="color:yellowgreen">
+            <td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => task.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => task.CompletedPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => task.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => task.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => task.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null) |
+                @Html.ActionLink("Comments", "Comments", "ProTasks", new { id = task.Id }, null)
+            </td>
+        </tr>
             }
         </tbody>
+        }
     }
 
 </table>
+
+@section Scripts {
+    <script src="~/Scripts/App.js"></script>
+}

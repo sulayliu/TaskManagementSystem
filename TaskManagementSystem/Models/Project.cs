@@ -24,6 +24,7 @@ namespace TaskManagementSystem.Models
         public Priority Priority { get; set; }
         public Project()
         {
+            Deadline = System.DateTime.Now;
             CreatedTime = System.DateTime.Now;
             ProTasks = new HashSet<ProTask>();
             Notifications = new HashSet<Notification>();

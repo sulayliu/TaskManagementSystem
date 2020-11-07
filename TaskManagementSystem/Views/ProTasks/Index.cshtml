@@ -18,10 +18,16 @@
             @Html.DisplayNameFor(model => model.Content)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time)
+            @Html.DisplayNameFor(model => model.CreatedTime)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CompletedPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model =>model.Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Priority)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -41,10 +47,16 @@
         @Html.DisplayFor(modelItem => item.Content)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.Time)
+        @Html.DisplayFor(modelItem => item.CreatedTime)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.CompletedPercentage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem=>item.Deadline)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem=>item.Priority)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.UserName)
