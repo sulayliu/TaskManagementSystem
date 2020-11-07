@@ -11,9 +11,16 @@ namespace TaskManagementSystem.Controllers
 
         // GET: Projects
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(projectHelper.GetProjectsWithTaskOrderByPercent());
+            if (id == 1)
+            {
+                return View(projectHelper.GetProjectsWithTaskOrderByPercent());
+            }
+            else
+            {
+                return View(projectHelper.GetProjects());
+            }
         }
 
         // GET: Projects/Create
