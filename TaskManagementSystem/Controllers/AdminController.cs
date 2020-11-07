@@ -77,6 +77,28 @@ namespace TaskManagementSystem.Controllers
             db.Dispose();
             return RedirectToAction("ShowAllRolesOfTheUser", new {userId});
         }
+
+        public ActionResult RemoveRole(string roleName, string userId)
+        {
+            ViewBag.RoleName = roleName;
+            ViewBag.UserId = userId;
+            ViewBag.UserName = db.Users.Find(userId).UserName;
+            return View();
+        }
+        [HttpPost, ActionName("RemoveRole")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveRoleConfirmed(string roleName, string userId)
+        {
+            ViewBag.RoleName = roleName;
+            ViewBag.UserId = userId;
+            ViewBag.UserName = db.Users.Find(userId).UserName;
+            if (UserManager.DeleteUserFromRole(roleName, userId))
+            {
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ShowAllRolesOfTheUser", new { userId });
+        }
         public ActionResult DeleteRole(string roleName)
         {
             if (!UserManager.IsRoleExist(roleName))
