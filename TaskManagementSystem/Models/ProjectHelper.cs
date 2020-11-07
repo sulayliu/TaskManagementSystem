@@ -31,6 +31,20 @@ namespace TaskManagementSystem.Models
             return projects;
         }
 
+        public List<Project> GetProjectsWithTaskOrderByPriority()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var projects = db.Projects.Include("ProTasks").ToList();
+
+            projects.ForEach(p => {
+                p.ProTasks = p.ProTasks.OrderByDescending(t => t.Priority).ToList();
+            });
+
+            db.Dispose();
+            return projects;
+        }
+
         public Project GetProject(int Id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
