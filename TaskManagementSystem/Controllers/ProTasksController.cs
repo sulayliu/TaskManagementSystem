@@ -173,6 +173,16 @@ namespace TaskManagementSystem.Controllers
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
             return View();
+        }     
+        public ActionResult EditCommentDeveloper([Bind(Include = "Id,CompletedPercentage")] ProTask proTask)
+        {
+            if (ModelState.IsValid)
+            {
+                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);                
+                return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
+            }
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
+            return View();
         }
 
         // GET: ProTasks/Delete/5
