@@ -24,7 +24,7 @@ namespace TaskManagementSystem.Models
             var projects = db.Projects.Include("ProTasks").ToList();
 
             projects.ForEach(p => {
-                p.ProTasks = p.ProTasks.OrderBy(t => t.CompletedPercentage).ToList();
+                p.ProTasks = p.ProTasks.OrderByDescending(t => t.CompletedPercentage).ToList();
             });
 
             db.Dispose();
