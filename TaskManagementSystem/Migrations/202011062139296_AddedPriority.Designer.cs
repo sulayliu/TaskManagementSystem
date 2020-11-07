@@ -7,13 +7,13 @@ namespace TaskManagementSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedTaskNameInProTaskClass : IMigrationMetadata
+    public sealed partial class AddedPriority : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedTaskNameInProTaskClass));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedPriority));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011042132054_AddedTaskNameInProTaskClass"; }
+            get { return "202011062139296_AddedPriority"; }
         }
         
         string IMigrationMetadata.Source

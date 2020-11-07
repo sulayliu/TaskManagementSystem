@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using System.Linq;
+using Microsoft.Ajax.Utilities;
 
 namespace TaskManagementSystem.Models
 {
@@ -12,6 +13,20 @@ namespace TaskManagementSystem.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var projects = db.Projects.Include("ProTasks").ToList();
+            db.Dispose();
+            return projects;
+        }
+
+        public List<Project> GetProjectsWithTaskOrderByPercent()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var projects = db.Projects.Include("ProTasks").ToList();
+
+            projects.ForEach(p => {
+                p.ProTasks = p.ProTasks.OrderBy(t => t.CompletedPercentage).ToList();
+            });
+
             db.Dispose();
             return projects;
         }
@@ -52,7 +67,7 @@ namespace TaskManagementSystem.Models
                 Id = Id,
                 Name = Name,
                 Content = Content,
-                Time = DateTime.Now,
+                CreatedTime = DateTime.Now,
                 IsCompleted = false,
                 UserId = UserId,
                 UserName = UserName

@@ -11,9 +11,16 @@ namespace TaskManagementSystem.Controllers
 
         // GET: Projects
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(projectHelper.GetProjects());
+            if (id == 1)
+            {
+                return View(projectHelper.GetProjectsWithTaskOrderByPercent());
+            }
+            else
+            {
+                return View(projectHelper.GetProjects());
+            }
         }
 
         // GET: Projects/Create
@@ -62,7 +69,7 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Content,Time,IsCompleted,ManagerId")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,Name,Content,CreatedTime,IsCompleted,ManagerId")] Project project)
         {
             if (ModelState.IsValid)
             {

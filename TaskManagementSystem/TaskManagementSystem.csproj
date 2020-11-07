@@ -102,6 +102,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -164,6 +167,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -196,10 +200,6 @@
     <Compile Include="Migrations\202011040519437_FixingProTaskUserID.Designer.cs">
       <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011042132054_AddedTaskNameInProTaskClass.cs" />
-    <Compile Include="Migrations\202011042132054_AddedTaskNameInProTaskClass.Designer.cs">
-      <DependentUpon>202011042132054_AddedTaskNameInProTaskClass.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202011042141526_SeedUser.cs" />
     <Compile Include="Migrations\202011042141526_SeedUser.Designer.cs">
       <DependentUpon>202011042141526_SeedUser.cs</DependentUpon>
@@ -207,6 +207,22 @@
     <Compile Include="Migrations\202011061759350_Fixmigration.cs" />
     <Compile Include="Migrations\202011061759350_Fixmigration.Designer.cs">
       <DependentUpon>202011061759350_Fixmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011061811073_FixNameOnTask.cs" />
+    <Compile Include="Migrations\202011061811073_FixNameOnTask.Designer.cs">
+      <DependentUpon>202011061811073_FixNameOnTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011061932020_FixContentOnProTask.cs" />
+    <Compile Include="Migrations\202011061932020_FixContentOnProTask.Designer.cs">
+      <DependentUpon>202011061932020_FixContentOnProTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011062139296_AddedPriority.cs" />
+    <Compile Include="Migrations\202011062139296_AddedPriority.Designer.cs">
+      <DependentUpon>202011062139296_AddedPriority.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.cs" />
+    <Compile Include="Migrations\202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.Designer.cs">
+      <DependentUpon>202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -229,14 +245,22 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\fontawesome\font-awesome.css" />
+    <Content Include="Content\fontawesome\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\App.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Properties\serviceDependencies.json" />
     <Content Include="Properties\serviceDependencies.local.json" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -333,14 +357,23 @@
     <EmbeddedResource Include="Migrations\202011040519437_FixingProTaskUserID.resx">
       <DependentUpon>202011040519437_FixingProTaskUserID.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011042132054_AddedTaskNameInProTaskClass.resx">
-      <DependentUpon>202011042132054_AddedTaskNameInProTaskClass.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011042141526_SeedUser.resx">
       <DependentUpon>202011042141526_SeedUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011061759350_Fixmigration.resx">
       <DependentUpon>202011061759350_Fixmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011061811073_FixNameOnTask.resx">
+      <DependentUpon>202011061811073_FixNameOnTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011061932020_FixContentOnProTask.resx">
+      <DependentUpon>202011061932020_FixContentOnProTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011062139296_AddedPriority.resx">
+      <DependentUpon>202011062139296_AddedPriority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.resx">
+      <DependentUpon>202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

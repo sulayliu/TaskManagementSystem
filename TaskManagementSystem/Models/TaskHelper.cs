@@ -33,17 +33,17 @@ namespace TaskManagementSystem.Models
             return proTask;
         }
 
-        public void CreateTask(int projectId, string taskName, string taskContent, string userId)
+        public void CreateTask(int projectId, string Name, string Content, string userId)
         {
             var user = db.Users.Find(userId);
             ProTask proTask = new ProTask
             {
-                TaskName = taskName,
-                TaskContent = taskContent,
+                Name = Name,
+                Content = Content,
                 UserName = user.UserName,
                 ProjectId = projectId,
                 UserId = userId,
-                Time = DateTime.Now
+                CreatedTime = DateTime.Now
             };
             db.ProTasks.Add(proTask);
             db.SaveChanges();
@@ -68,8 +68,8 @@ namespace TaskManagementSystem.Models
             if (proTask != null)
             {
                 proTask.UserName = user.UserName;
-                proTask.TaskName = taskName;
-                proTask.TaskContent = taskContent;
+                proTask.Name = taskName;
+                proTask.Content = taskContent;
                 proTask.UserId = userId;
                 db.SaveChanges();
                 db.Dispose();
