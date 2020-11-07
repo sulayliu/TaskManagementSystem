@@ -13,14 +13,44 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         public ActionResult Index(int? id)
         {
-            if (id == 1)
-            {
-                return View(projectHelper.GetProjectsWithTaskOrderByPercent());
-            }
-            else
-            {
+
+            FilterViewModel filterModel = new FilterViewModel();
+            ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
+            //if (id == 1)
+            //{
+            //    return View(projectHelper.GetProjectsWithTaskOrderByPercent());
+            //}
+            //else if (id == 2)
+            //{
+            //    return View(projectHelper.GetProjectsWithTaskOrderByPriority());
+            //}
+            //else
+            //{
                 return View(projectHelper.GetProjects());
+            //}
+        }
+
+        [HttpPost]
+        public ActionResult Index(string SelectFilter)
+        {
+            FilterViewModel filterModel = new FilterViewModel();
+            ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
+            var projects = projectHelper.GetProjects();
+
+            if (SelectFilter == "Creation Date")
+            {
+                projects = projectHelper.GetProjects();
             }
+            else if (SelectFilter == "Completion Percentage")
+            {
+                projects = projectHelper.GetProjectsWithTaskOrderByPercent();
+            }
+            else if (SelectFilter == "Priority")
+            {
+                projects = projectHelper.GetProjectsWithTaskOrderByPriority();
+            }
+                        
+            return View(projects);
         }
 
         // GET: Projects/Create

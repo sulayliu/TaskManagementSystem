@@ -224,8 +224,13 @@
     <Compile Include="Migrations\202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.Designer.cs">
       <DependentUpon>202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011071906395_AddCommentToProTask.cs" />
+    <Compile Include="Migrations\202011071906395_AddCommentToProTask.Designer.cs">
+      <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FilterViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Note.cs" />
@@ -418,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.resx">
       <DependentUpon>202011062151226_AddedDeadlinePropertyInProjectAndProTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011071906395_AddCommentToProTask.resx">
+      <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
