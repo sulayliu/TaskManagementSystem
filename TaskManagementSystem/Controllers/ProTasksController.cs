@@ -64,12 +64,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int projectId, string Name, string Content, string userId)
+        public ActionResult Create(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority)
 
         {
             if (ModelState.IsValid)
             {
-                taskHelper.CreateTask(projectId, Name, Content, userId);
+                taskHelper.CreateTask(projectId, Name, Content, userId,deadline,priority);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -98,12 +98,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId);
+                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority);
                 return RedirectToAction("Index","Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");

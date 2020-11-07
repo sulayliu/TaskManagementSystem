@@ -24,6 +24,12 @@
             @Html.DisplayNameFor(model => model.CompletedPercentage)
         </th>
         <th>
+            @Html.DisplayNameFor(model =>model.Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Priority)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th></th>        
@@ -45,6 +51,12 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.CompletedPercentage)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem=>item.Deadline)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem=>item.Priority)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.UserName)
