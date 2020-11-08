@@ -24,7 +24,21 @@ namespace TaskManagementSystem.Models
             var projects = db.Projects.Include("ProTasks").ToList();
 
             projects.ForEach(p => {
-                p.ProTasks = p.ProTasks.OrderBy(t => t.CompletedPercentage).ToList();
+                p.ProTasks = p.ProTasks.OrderByDescending(t => t.CompletedPercentage).ToList();
+            });
+
+            db.Dispose();
+            return projects;
+        }
+
+        public List<Project> GetProjectsWithTaskOrderByPriority()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            var projects = db.Projects.Include("ProTasks").ToList();
+
+            projects.ForEach(p => {
+                p.ProTasks = p.ProTasks.OrderByDescending(t => t.Priority).ToList();
             });
 
             db.Dispose();

@@ -64,12 +64,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int projectId, string Name, string Content, string userId)
+        public ActionResult Create(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority)
 
         {
             if (ModelState.IsValid)
             {
-                taskHelper.CreateTask(projectId, Name, Content, userId);
+                taskHelper.CreateTask(projectId, Name, Content, userId,deadline,priority);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -98,12 +98,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId);
+                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority);
                 return RedirectToAction("Index","Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -165,6 +165,16 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditDeveloperTask([Bind(Include = "Id,CompletedPercentage")] ProTask proTask)
+        {
+            if (ModelState.IsValid)
+            {
+                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);                
+                return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
+            }
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
+            return View();
+        }     
+        public ActionResult EditCommentDeveloper([Bind(Include = "Id,CompletedPercentage")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
