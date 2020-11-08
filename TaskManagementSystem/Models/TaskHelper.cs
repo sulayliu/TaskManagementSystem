@@ -31,7 +31,7 @@ namespace TaskManagementSystem.Models
             return proTask;
         }
 
-        public void CreateTask(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority)
+        public void CreateTask(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority, string Comment)
         {
             var user = db.Users.Find(userId);
             ProTask proTask = new ProTask
@@ -43,7 +43,8 @@ namespace TaskManagementSystem.Models
                 UserId = userId,
                 CreatedTime = DateTime.Now,
                 Deadline = deadline,
-                Priority = priority
+                Priority = priority,
+                Comment = Comment
             };
             db.ProTasks.Add(proTask);
             db.SaveChanges();
