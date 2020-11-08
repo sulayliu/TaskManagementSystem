@@ -63,7 +63,7 @@ namespace TaskManagementSystem.Models
             }
         }
 
-        public void Edit(int id, string taskName, string taskContent, string userId, DateTime deadline, Priority priority)
+        public void Edit(int id, string taskName, string taskContent, string userId, DateTime deadline, Priority priority, double completedPercentage)
         {
             var proTask = GetTask(id);
             var user = db.Users.Find(userId);
@@ -75,6 +75,7 @@ namespace TaskManagementSystem.Models
                 proTask.UserId = userId;
                 proTask.Deadline = deadline;
                 proTask.Priority = priority;
+                proTask.CompletedPercentage = completedPercentage;
                 db.SaveChanges();
                 db.Dispose();
             }

@@ -98,12 +98,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority,CompletedPercentage")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority);
+                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority,proTask.CompletedPercentage);
                 return RedirectToAction("Index","Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
