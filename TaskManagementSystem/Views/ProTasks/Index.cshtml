@@ -69,7 +69,7 @@
         @if (item.CompletedPercentage == 100)
         {
             <td class="btn btn-warning">
-                @Html.ActionLink("Comment", "Create", "Notes", new { id = item.Id }, null)
+                @Html.ActionLink("Comment", "Comments", "ProTasks", new { id = item.Id }, null)
             </td>
         }    
 </tr>

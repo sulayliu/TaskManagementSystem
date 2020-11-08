@@ -173,12 +173,31 @@ namespace TaskManagementSystem.Controllers
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
             return View();
-        }     
-        public ActionResult EditCommentDeveloper([Bind(Include = "Id,CompletedPercentage")] ProTask proTask)
+        }
+        //Get/protask/Comment for developers
+        public ActionResult Comments(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProTask proTask = db.ProTasks.Find(id);
+            if (proTask == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
+            return View(proTask);
+        }
+        
+        //Comments for developer
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Comments([Bind(Include = "Id, Comment")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
-                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);                
+                taskHelper.EditComment(proTask.Id, proTask.Comment);                
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
