@@ -175,6 +175,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\ProTasksController.cs" />
     <Compile Include="Global.asax.cs">
@@ -231,6 +232,10 @@
     <Compile Include="Migrations\202011091757353_AddNotes.cs" />
     <Compile Include="Migrations\202011091757353_AddNotes.Designer.cs">
       <DependentUpon>202011091757353_AddNotes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011091953267_AddUserRelationNotes.cs" />
+    <Compile Include="Migrations\202011091953267_AddUserRelationNotes.Designer.cs">
+      <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -378,11 +383,11 @@
     <Content Include="Views\Admin\ShowAllUsers.cshtml" />
     <Content Include="Views\Admin\RemoveRole.cshtml" />
     <Content Include="Views\ProTasks\Comments.cshtml" />
-    <Content Include="Views\Projects\CreateNote.cshtml" />
-    <Content Include="Views\Projects\DeleteNote.cshtml" />
-    <Content Include="Views\Projects\NotesDetails.cshtml" />
-    <Content Include="Views\Projects\EditNote.cshtml" />
-    <Content Include="Views\Projects\ListOfNotes.cshtml" />
+    <Content Include="Views\Notes\Create.cshtml" />
+    <Content Include="Views\Notes\Delete.cshtml" />
+    <Content Include="Views\Notes\Details.cshtml" />
+    <Content Include="Views\Notes\Edit.cshtml" />
+    <Content Include="Views\Notes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -439,6 +444,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011091757353_AddNotes.resx">
       <DependentUpon>202011091757353_AddNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011091953267_AddUserRelationNotes.resx">
+      <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
