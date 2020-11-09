@@ -14,29 +14,30 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Content)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CreatedTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CompletedPercentage)
+            @Html.Raw("Completed%")
         </th>
         <th>
-            @Html.DisplayNameFor(model =>model.Deadline)
+            @Html.DisplayNameFor(model => model.Deadline)
         </th>
         <th>
-            @Html.DisplayNameFor(model=>model.Priority)
+            @Html.DisplayNameFor(model => model.Priority)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
-        <th>@Html.DisplayNameFor(model=>model.Comment)</th>
-        <th></th>        
+        @*<th>@Html.DisplayNameFor(model=>model.Comment)</th>*@
+        <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
 <tr>
     <td>
         @Html.DisplayFor(modelItem => item.Project.Name)
@@ -44,9 +45,9 @@
     <td>
         @Html.DisplayFor(modelItem => item.Name)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Content)
-    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>*@
     <td>
         @Html.DisplayFor(modelItem => item.CreatedTime)
     </td>
@@ -54,30 +55,34 @@
         @Html.DisplayFor(modelItem => item.CompletedPercentage)
     </td>
     <td>
-        @Html.DisplayFor(modelItem=>item.Deadline)
+        @Html.DisplayFor(modelItem => item.Deadline)
     </td>
     <td>
-        @Html.DisplayFor(modelItem=>item.Priority)
+        @Html.DisplayFor(modelItem => item.Priority)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.UserName)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem=>item.Comment)
-    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem=>item.Comment)
+        </td>*@
     <td>
         @Html.ActionLink("Edit", "EditDeveloperTask", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "DeleteDeveloperTask", new { id = item.Id })
-    </td>    
-        @if (item.CompletedPercentage == 100)
-        {
-            <td class="btn btn-warning">
-                @Html.ActionLink("Comment", "Comments", "ProTasks", new { id = item.Id }, null)
-            </td>
-        }    
+        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+        @Html.ActionLink("Delete", "DeleteDeveloperTask", new { id = item.Id })  
+    </td>
+    <td class="btn btn-success" style="margin-right:5px">       
+        @Html.ActionLink("Ugrent note", "Comments", "ProTasks", new { id = item.Id }, null)
+
+    </td>
+    @if (item.CompletedPercentage == 100)
+    {
+        <td class="btn btn-warning">
+            @Html.ActionLink("Comment", "Comments", "ProTasks", new { id = item.Id }, null)
+        </td>
+    }
 </tr>
-}
+    }
 
 </table>
 
