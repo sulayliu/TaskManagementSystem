@@ -64,12 +64,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority)
+        public ActionResult Create(int ProjectId, string Name, string Content, string UserId, DateTime Deadline, Priority Priority,string Comment)
 
         {
             if (ModelState.IsValid)
             {
-                taskHelper.CreateTask(projectId, Name, Content, userId,deadline,priority);
+                taskHelper.CreateTask(ProjectId, Name, Content, UserId,Deadline,Priority,Comment);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -98,12 +98,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority,CompletedPercentage")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority);
+                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority,proTask.CompletedPercentage);
                 return RedirectToAction("Index","Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -173,13 +173,32 @@ namespace TaskManagementSystem.Controllers
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
             return View();
-        }     
-        public ActionResult EditCommentDeveloper([Bind(Include = "Id,CompletedPercentage")] ProTask proTask)
+        }
+        //Get/protask/Comment for developers
+        public ActionResult Comments(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ProTask proTask = db.ProTasks.Find(id);
+            if (proTask == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
+            return View(proTask);
+        }
+        
+        //Comments for developer
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Comments([Bind(Include = "Id, Comment")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
-                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);                
-                return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
+                taskHelper.EditComment(proTask.Id, proTask.Comment);                
+                return RedirectToAction("Index", "Projects", new { userId = User.Identity.GetUserId() });
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
             return View();

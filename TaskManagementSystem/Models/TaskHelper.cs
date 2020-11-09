@@ -7,7 +7,6 @@ namespace TaskManagementSystem.Models
 {
     public class TaskHelper
     {
-        //static ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationDbContext db;
         public TaskHelper()
         {
@@ -23,7 +22,6 @@ namespace TaskManagementSystem.Models
 
         public ProTask GetTask(int Id)
         {
-
             ProTask proTask = db.ProTasks.Find(Id);
             // db.Dispose();
             if (proTask == null)
@@ -33,7 +31,7 @@ namespace TaskManagementSystem.Models
             return proTask;
         }
 
-        public void CreateTask(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority)
+        public void CreateTask(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority, string Comment)
         {
             var user = db.Users.Find(userId);
             ProTask proTask = new ProTask
@@ -44,8 +42,9 @@ namespace TaskManagementSystem.Models
                 ProjectId = projectId,
                 UserId = userId,
                 CreatedTime = DateTime.Now,
-                Deadline=deadline,
-                Priority=priority
+                Deadline = deadline,
+                Priority = priority,
+                Comment = Comment
             };
             db.ProTasks.Add(proTask);
             db.SaveChanges();
@@ -63,7 +62,7 @@ namespace TaskManagementSystem.Models
             }
         }
 
-        public void Edit(int id, string taskName, string taskContent, string userId, DateTime deadline, Priority priority)
+        public void Edit(int id, string taskName, string taskContent, string userId, DateTime deadline, Priority priority, double completedPercentage)
         {
             var proTask = GetTask(id);
             var user = db.Users.Find(userId);
@@ -75,6 +74,7 @@ namespace TaskManagementSystem.Models
                 proTask.UserId = userId;
                 proTask.Deadline = deadline;
                 proTask.Priority = priority;
+                proTask.CompletedPercentage = completedPercentage;
                 db.SaveChanges();
                 db.Dispose();
             }
@@ -102,7 +102,17 @@ namespace TaskManagementSystem.Models
             var proTask = GetTask(id);
             if (proTask != null)
             {
-                proTask.CompletedPercentage = completedPercentage;                
+                proTask.CompletedPercentage = completedPercentage;
+                db.SaveChanges();
+                db.Dispose();
+            }
+        }
+        public void EditComment(int id, string Comment)
+        {
+            var proTask = GetTask(id);
+            if (proTask != null)
+            {
+                proTask.Comment = Comment;
                 db.SaveChanges();
                 db.Dispose();
             }
