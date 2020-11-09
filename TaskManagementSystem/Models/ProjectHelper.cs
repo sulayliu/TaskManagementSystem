@@ -23,7 +23,8 @@ namespace TaskManagementSystem.Models
 
             var projects = db.Projects.Include("ProTasks").ToList();
 
-            projects.ForEach(p => {
+            projects.ForEach(p =>
+            {
                 p.ProTasks = p.ProTasks.OrderByDescending(t => t.CompletedPercentage).ToList();
             });
 
@@ -37,7 +38,8 @@ namespace TaskManagementSystem.Models
 
             var projects = db.Projects.Include("ProTasks").ToList();
 
-            projects.ForEach(p => {
+            projects.ForEach(p =>
+            {
                 p.ProTasks = p.ProTasks.OrderByDescending(t => t.Priority).ToList();
             });
 
@@ -61,7 +63,7 @@ namespace TaskManagementSystem.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
-            if(db.Projects.ToList().Count > 0)
+            if (db.Projects.ToList().Count > 0)
             {
                 Project project = db.Projects.ToList().Last();
                 return project.Id + 1;
@@ -86,9 +88,9 @@ namespace TaskManagementSystem.Models
                 UserId = UserId,
                 UserName = UserName
             };
-                db.Projects.Add(project);
-                db.SaveChanges();
-                db.Dispose();
+            db.Projects.Add(project);
+            db.SaveChanges();
+            db.Dispose();
         }
 
         public void Edit(int Id, string Name, string Content, bool IsCompleted)
@@ -107,7 +109,78 @@ namespace TaskManagementSystem.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = db.Projects.Find(Id);
-            if(project != null)
+            if (project != null)
+            {
+                db.Projects.Remove(project);
+                db.SaveChanges();
+                db.Dispose();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //Notes Methods
+
+        public List<Note> ListOfNotes()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var notes = db.Notes.Include(n => n.Project);
+            return notes.ToList();
+        }
+        public Note GetNoteDetails(int Id)
+        {
+            {
+                ApplicationDbContext db = new ApplicationDbContext();
+                Note note = db.Notes.Find(Id);
+                db.Dispose();
+                if (note == null)
+                {
+                    return null;
+                }
+                return note;
+            }
+        }
+
+        public void CreateNote(int Id, string UserId, int ProjectId, int ProTaskId, bool Priority, string Comment)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+             Note note = new Note
+            {
+            Id=Id,
+            UserId=UserId,
+            ProjectId=ProjectId,
+            ProTaskId=ProTaskId,
+            Priority=Priority,
+            Comment=Comment
+            };
+            db.Notes.Add(note);
+            db.SaveChanges();
+            db.Dispose();
+        }
+
+        public void EditNote(int Id, string UserId, int ProjectId, int ProTaskId, bool Priority, string Comment)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+           Note note = GetNoteDetails(Id);
+            note.Id = Id;
+            note.UserId = UserId;
+            note.ProjectId = ProjectId;
+            note.ProTaskId = ProTaskId;
+            note.Priority = Priority;
+            note.Comment = Comment;
+            db.Entry(note).State = EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose();
+        }
+
+        public bool DeleteNote(int Id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            Project project = db.Projects.Find(Id);
+            if (project != null)
             {
                 db.Projects.Remove(project);
                 db.SaveChanges();

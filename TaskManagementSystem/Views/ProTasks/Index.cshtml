@@ -73,13 +73,13 @@
         @Html.ActionLink("Delete", "DeleteDeveloperTask", new { id = item.Id })  
     </td>
     <td class="btn btn-success" style="margin-right:5px">       
-        @Html.ActionLink("Ugrent note", "Comments", "ProTasks", new { id = item.Id }, null)
+        @Html.ActionLink("Ugrent note", "Comments", "Notes", new { id = item.Id }, null)
 
     </td>
     @if (item.CompletedPercentage == 100)
     {
         <td class="btn btn-warning">
-            @Html.ActionLink("Comment", "Comments", "ProTasks", new { id = item.Id }, null)
+            @Html.ActionLink("Comment", "Comments", "Notes", new { id = item.Id }, null)
         </td>
     }
 </tr>

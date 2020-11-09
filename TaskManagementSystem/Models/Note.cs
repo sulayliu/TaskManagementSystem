@@ -9,12 +9,12 @@ namespace TaskManagementSystem.Models
     public class Note
     {
         public int Id { get; set; }
-        public string Comment{ get; set; }
-
-        [ForeignKey("ProTask")]
-        public int? ProTaskId { get; set; }
-        public virtual ProTask ProTask { get; set; }
-        public string DeveloperId { get; set; }
-        public virtual ApplicationUser Developer { get; set; }
+        public string UserId { get; set; }
+        public int ProjectId { get; set; }
+        public Project Project { get; set; }
+        public int ProTaskId { get; set; }
+        public bool Priority { get; set; }
+        public string Comment { get; set; }
     }
+
 }

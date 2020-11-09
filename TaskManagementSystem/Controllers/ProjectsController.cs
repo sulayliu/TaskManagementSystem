@@ -13,21 +13,9 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         public ActionResult Index(int? id)
         {
-
             FilterViewModel filterModel = new FilterViewModel();
             ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
-            //if (id == 1)
-            //{
-            //    return View(projectHelper.GetProjectsWithTaskOrderByPercent());
-            //}
-            //else if (id == 2)
-            //{
-            //    return View(projectHelper.GetProjectsWithTaskOrderByPriority());
-            //}
-            //else
-            //{
-                return View(projectHelper.GetProjects());
-            //}
+            return View(projectHelper.GetProjects());
         }
 
         [HttpPost]
@@ -49,7 +37,7 @@ namespace TaskManagementSystem.Controllers
             {
                 projects = projectHelper.GetProjectsWithTaskOrderByPriority();
             }
-                        
+
             return View(projects);
         }
 
@@ -133,6 +121,110 @@ namespace TaskManagementSystem.Controllers
         {
             Project project = projectHelper.GetProject((int)id);
             projectHelper.Delete(project.Id);
+            return RedirectToAction("Index");
+        }
+
+        //Notes - 
+
+        public ActionResult ListOfNotes()
+        {
+            return View(projectHelper.ListOfNotes());
+        }
+
+        // GET: NotesDetails/Details/5
+        public ActionResult NotesDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var note = projectHelper.GetNoteDetails((int)id);
+            if (note == null)
+            {
+                return HttpNotFound();
+            }
+            return View(note);
+        }
+
+        // GET: Notes/Create
+        public ActionResult CreateNote()
+        {
+            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            return View();
+        }
+
+        // POST: Notes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNote([Bind(Include = "Id,UserId,ProjectId,ProTaskId,Priority,Comment")] Note note)
+        {
+            if (ModelState.IsValid)
+            {
+                projectHelper.CreateNote(note.Id, note.UserId, note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
+                return RedirectToAction("Index");
+            }
+
+            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", note.ProjectId);
+            return View(note);
+        }
+
+        public ActionResult EditNote(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Note note = projectHelper.GetNoteDetails((int)id);
+            if (note == null)
+            {
+                return HttpNotFound();
+            }
+            // ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", note.ProjectId);
+            return View(note);
+        }
+
+        // POST: Notes/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditNote([Bind(Include = "Id,UserId,ProjectId,ProTaskId,Priority,Comment")] Note note)
+        {
+            if (ModelState.IsValid)
+            {
+                projectHelper.EditNote(note.Id, note.UserId, note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
+
+                return RedirectToAction("Index");
+            }
+            // ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", note.ProjectId);
+            return View(note);
+        }
+
+
+        // GET: Notes/Delete/5
+        public ActionResult DeleteNote(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Note note = projectHelper.GetNoteDetails((int)id);
+            if (note == null)
+            {
+                return HttpNotFound();
+            }
+            return View(note);
+        }
+
+        // POST: Notes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteNoteConfirmed(int id)
+        {
+            Note note = projectHelper.GetNoteDetails((int)id);
+            projectHelper.DeleteNote(note.Id);
             return RedirectToAction("Index");
         }
     }
