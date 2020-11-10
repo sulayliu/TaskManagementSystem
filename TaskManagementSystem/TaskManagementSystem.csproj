@@ -391,12 +391,6 @@
     <Content Include="Views\Admin\ShowAllUsers.cshtml" />
     <Content Include="Views\Admin\RemoveRole.cshtml" />
     <Content Include="Views\ProTasks\Comments.cshtml" />
-    <Content Include="Views\Notes\Create.cshtml" />
-    <Content Include="Views\Notes\Delete.cshtml" />
-    <Content Include="Views\Notes\Details.cshtml" />
-    <Content Include="Views\Notes\Edit.cshtml" />
-    <Content Include="Views\Notes\Index.cshtml" />
-    <Content Include="Views\Admin\SetSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -450,18 +444,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011071906395_AddCommentToProTask.resx">
       <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011091757353_AddNotes.resx">
-      <DependentUpon>202011091757353_AddNotes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011091953267_AddUserRelationNotes.resx">
-      <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011101533009_AddedBudgetFieldToProjectTable.resx">
-      <DependentUpon>202011101533009_AddedBudgetFieldToProjectTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011100115035_AddSalaryToUser.resx">
-      <DependentUpon>202011100115035_AddSalaryToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
