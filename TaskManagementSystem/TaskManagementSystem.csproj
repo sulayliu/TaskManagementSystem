@@ -237,6 +237,10 @@
     <Compile Include="Migrations\202011091953267_AddUserRelationNotes.Designer.cs">
       <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011101533009_AddedBudgetFieldToProjectTable.cs" />
+    <Compile Include="Migrations\202011101533009_AddedBudgetFieldToProjectTable.Designer.cs">
+      <DependentUpon>202011101533009_AddedBudgetFieldToProjectTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
@@ -447,6 +451,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011091953267_AddUserRelationNotes.resx">
       <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011101533009_AddedBudgetFieldToProjectTable.resx">
+      <DependentUpon>202011101533009_AddedBudgetFieldToProjectTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

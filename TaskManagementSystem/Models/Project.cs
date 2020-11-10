@@ -18,11 +18,12 @@ namespace TaskManagementSystem.Models
         public bool IsCompleted { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
+        public double Budget { get; set; }        
         public ApplicationUser User { get; set; }
         public virtual ICollection<ProTask> ProTasks { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
-        public Priority Priority { get; set; }
+        public Priority Priority { get; set; }        
         public Project()
         {
             Deadline = System.DateTime.Now;
