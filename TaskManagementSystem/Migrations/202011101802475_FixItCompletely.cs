@@ -3,7 +3,7 @@ namespace TaskManagementSystem.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddOverdueTaskField : DbMigration
+    public partial class FixItCompletely : DbMigration
     {
         public override void Up()
         {

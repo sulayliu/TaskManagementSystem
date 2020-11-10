@@ -233,9 +233,9 @@
     <Compile Include="Migrations\202011101729374_FixTheBrokenProject.Designer.cs">
       <DependentUpon>202011101729374_FixTheBrokenProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011101626504_AddOverdueTaskField.cs" />
-    <Compile Include="Migrations\202011101626504_AddOverdueTaskField.Designer.cs">
-      <DependentUpon>202011101626504_AddOverdueTaskField.cs</DependentUpon>
+    <Compile Include="Migrations\202011101802475_FixItCompletely.cs" />
+    <Compile Include="Migrations\202011101802475_FixItCompletely.Designer.cs">
+      <DependentUpon>202011101802475_FixItCompletely.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -447,8 +447,8 @@
     <EmbeddedResource Include="Migrations\202011101729374_FixTheBrokenProject.resx">
       <DependentUpon>202011101729374_FixTheBrokenProject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011101626504_AddOverdueTaskField.resx">
-      <DependentUpon>202011101626504_AddOverdueTaskField.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011101802475_FixItCompletely.resx">
+      <DependentUpon>202011101802475_FixItCompletely.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,13 +7,13 @@ namespace TaskManagementSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddOverdueTaskField : IMigrationMetadata
+    public sealed partial class FixItCompletely : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddOverdueTaskField));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixItCompletely));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011101626504_AddOverdueTaskField"; }
+            get { return "202011101802475_FixItCompletely"; }
         }
         
         string IMigrationMetadata.Source
