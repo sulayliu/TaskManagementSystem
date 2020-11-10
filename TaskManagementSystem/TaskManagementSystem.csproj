@@ -228,6 +228,10 @@
     <Compile Include="Migrations\202011071906395_AddCommentToProTask.Designer.cs">
       <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011100115035_AddSalaryToUser.cs" />
+    <Compile Include="Migrations\202011100115035_AddSalaryToUser.Designer.cs">
+      <DependentUpon>202011100115035_AddSalaryToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
@@ -374,6 +378,7 @@
     <Content Include="Views\Admin\ShowAllUsers.cshtml" />
     <Content Include="Views\Admin\RemoveRole.cshtml" />
     <Content Include="Views\ProTasks\Comments.cshtml" />
+    <Content Include="Views\Admin\SetSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -427,6 +432,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011071906395_AddCommentToProTask.resx">
       <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011100115035_AddSalaryToUser.resx">
+      <DependentUpon>202011100115035_AddSalaryToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
