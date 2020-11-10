@@ -97,6 +97,14 @@ namespace TaskManagementSystem.Models
         //    }
         //    return result;
         //}
+        //public static void SetSalary(string userId, double salary)
+        //{
+        //    var user = db.Users.Find(userId);
+        //    if(user != null)
+        //    {
+        //        user.Salary = salary;
+        //    }
+        //}
 
         public static bool DeleteUserFromRole(string roleName, string userId)
         {

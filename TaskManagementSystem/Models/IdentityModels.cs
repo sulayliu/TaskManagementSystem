@@ -14,7 +14,9 @@ namespace TaskManagementSystem.Models
         {
             Projects = new HashSet<Project>();
             Tasks = new HashSet<ProTask>();
+            //Salary = 0;
         }
+        //public double Salary { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
         public virtual ICollection<ProTask> Tasks { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

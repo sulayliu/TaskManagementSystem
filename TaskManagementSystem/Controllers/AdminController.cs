@@ -20,7 +20,6 @@ namespace TaskManagementSystem.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            //var users = UserManager.ShowAllUsers();
             return View();
         }
 
@@ -38,7 +37,6 @@ namespace TaskManagementSystem.Controllers
         {
             ViewBag.UserName = db.Users.Find(userId).UserName;
             ViewBag.UserId = userId;
-            //var roles = userManager.GetRoles(userId).ToList();
             var roles = UserManager.ShowAllRolesForAUser(userId);
             return View(roles);
         }
@@ -98,6 +96,23 @@ namespace TaskManagementSystem.Controllers
             }
 
             return RedirectToAction("ShowAllRolesOfTheUser", new { userId });
+        }
+        public ActionResult SetSalary(string userId)
+        {
+            ViewBag.UserId = userId;
+            ViewBag.UserName = db.Users.Find(userId).UserName;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetSalary(string userId, double salary)
+        {
+            ViewBag.UserId = userId;
+            ViewBag.UserName = db.Users.Find(userId).UserName;
+            //UserManager.SetSalary(userId,salary);
+            db.SaveChanges();
+            db.Dispose();
+            return RedirectToAction("ShowAllUsers");
         }
         public ActionResult DeleteRole(string roleName)
         {

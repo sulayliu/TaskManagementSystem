@@ -229,13 +229,9 @@
     <Compile Include="Migrations\202011071906395_AddCommentToProTask.Designer.cs">
       <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011091757353_AddNotes.cs" />
-    <Compile Include="Migrations\202011091757353_AddNotes.Designer.cs">
-      <DependentUpon>202011091757353_AddNotes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011091953267_AddUserRelationNotes.cs" />
-    <Compile Include="Migrations\202011091953267_AddUserRelationNotes.Designer.cs">
-      <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
+    <Compile Include="Migrations\202011101729374_FixTheBrokenProject.cs" />
+    <Compile Include="Migrations\202011101729374_FixTheBrokenProject.Designer.cs">
+      <DependentUpon>202011101729374_FixTheBrokenProject.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\202011101626504_AddOverdueTaskField.cs" />
     <Compile Include="Migrations\202011101626504_AddOverdueTaskField.Designer.cs">
@@ -311,6 +307,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Properties\serviceDependencies.local.json.user" />
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -387,6 +384,7 @@
     <Content Include="Views\Admin\ShowAllUsers.cshtml" />
     <Content Include="Views\Admin\RemoveRole.cshtml" />
     <Content Include="Views\ProTasks\Comments.cshtml" />
+    <Content Include="Views\Admin\SetSalary.cshtml" />
     <Content Include="Views\Notes\Create.cshtml" />
     <Content Include="Views\Notes\Delete.cshtml" />
     <Content Include="Views\Notes\Details.cshtml" />
@@ -446,11 +444,8 @@
     <EmbeddedResource Include="Migrations\202011071906395_AddCommentToProTask.resx">
       <DependentUpon>202011071906395_AddCommentToProTask.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011091757353_AddNotes.resx">
-      <DependentUpon>202011091757353_AddNotes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011091953267_AddUserRelationNotes.resx">
-      <DependentUpon>202011091953267_AddUserRelationNotes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011101729374_FixTheBrokenProject.resx">
+      <DependentUpon>202011101729374_FixTheBrokenProject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011101626504_AddOverdueTaskField.resx">
       <DependentUpon>202011101626504_AddOverdueTaskField.cs</DependentUpon>
