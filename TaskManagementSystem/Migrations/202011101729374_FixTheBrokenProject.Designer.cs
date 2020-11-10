@@ -7,13 +7,13 @@ namespace TaskManagementSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddUserRelationNotes : IMigrationMetadata
+    public sealed partial class FixTheBrokenProject : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddUserRelationNotes));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FixTheBrokenProject));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011091953267_AddUserRelationNotes"; }
+            get { return "202011101729374_FixTheBrokenProject"; }
         }
         
         string IMigrationMetadata.Source
