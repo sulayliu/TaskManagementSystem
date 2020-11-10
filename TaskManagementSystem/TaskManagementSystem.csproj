@@ -241,6 +241,10 @@
     <Compile Include="Migrations\202011101533009_AddedBudgetFieldToProjectTable.Designer.cs">
       <DependentUpon>202011101533009_AddedBudgetFieldToProjectTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011100115035_AddSalaryToUser.cs" />
+    <Compile Include="Migrations\202011100115035_AddSalaryToUser.Designer.cs">
+      <DependentUpon>202011100115035_AddSalaryToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
@@ -392,6 +396,7 @@
     <Content Include="Views\Notes\Details.cshtml" />
     <Content Include="Views\Notes\Edit.cshtml" />
     <Content Include="Views\Notes\Index.cshtml" />
+    <Content Include="Views\Admin\SetSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -454,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011101533009_AddedBudgetFieldToProjectTable.resx">
       <DependentUpon>202011101533009_AddedBudgetFieldToProjectTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011100115035_AddSalaryToUser.resx">
+      <DependentUpon>202011100115035_AddSalaryToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

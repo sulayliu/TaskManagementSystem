@@ -3,13 +3,14 @@
     ViewBag.Title = "ShowAllUsers";
 }
 
-<h2>ShowAllUsers</h2>
+<h2>Show All Users</h2>
 
 <table class="table">
     <tr>
         <th>
             UserName
         </th>
+        <th>Salary</th>
         <th></th>
     </tr>
 
@@ -19,9 +20,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
+            <td>@Html.DisplayFor(modelItem => item.Salary)</td>
             <td>
                 @Html.ActionLink("ShowTheRoles", "ShowAllRolesOfTheUser", new { userId = item.Id }) |
                 @Html.ActionLink("Assign Role", "AddUserToRole", new { userId = item.Id }) |
+                @Html.ActionLink("Set Salary", "SetSalary", new { userId = item.Id })
             </td>
         </tr>
     }
