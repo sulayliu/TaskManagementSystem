@@ -1,16 +1,22 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using System.EnterpriseServices;
+using Microsoft.Ajax.Utilities;
 
 namespace TaskManagementSystem.Models
 {
     public class TaskHelper
     {
         private ApplicationDbContext db;
+        private ProjectHelper projectHelper;
         public TaskHelper()
         {
             db = new ApplicationDbContext();
+            projectHelper = new ProjectHelper();
         }
 
         public List<ProTask> GetTasks()
@@ -123,6 +129,39 @@ namespace TaskManagementSystem.Models
         {
             List<ProTask> managerProjectsAndTasks = db.ProTasks.Where(t => t.UserId == userId).ToList();
             return managerProjectsAndTasks;
+        }
+        //developer side
+        //Notification of all user
+        public List<Note>GetAllNotification(ApplicationUser user)
+        {
+            var notification = db.Notes.Where(n => n.User.Id == user.Id).ToList();
+            return notification;
+        }
+        public void SetNotificationToPassDeadLine(string userId)
+        {
+            bool wasExecuted = false;
+            Queue<ProTask> notifedTask = new Queue<ProTask>();
+            var date = DateTime.Now.AddDays(1);
+            var taskForNotify = db.ProTasks
+                .Where(p => DateTime.Compare( p.Deadline, date) <= 0 && DateTime.Compare(p.Deadline, DateTime.Now) >= 0 && p.UserId == userId)
+                .ToList();
+
+            taskForNotify.ForEach(task =>
+            {
+                if (!task.IsItOverdue)
+                {
+                    task.IsItOverdue = true;
+                    notifedTask.Enqueue(task);
+                }
+            });
+
+            while(notifedTask.Count>0 && !wasExecuted)
+            {
+                var res = notifedTask.Dequeue();
+                projectHelper.CreateNote(res.UserId, res.ProjectId, res.Id, true, "This task has only one day left");
+            }
+            db.SaveChanges();
+            db.Dispose();
         }
     }
 }

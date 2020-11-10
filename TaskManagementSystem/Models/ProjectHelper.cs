@@ -129,6 +129,12 @@ namespace TaskManagementSystem.Models
             ApplicationDbContext db = new ApplicationDbContext();
             var notes = db.Notes.Include(n => n.Project);
             return notes.ToList();
+        }  
+        public List<Note> NotificationOfUser(string userId)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var notes = db.Notes.Include(n => n.Project).Include(n =>n.ProTask).Where(n => n.UserId == userId);
+            return notes.ToList();
         }
         public Note GetNoteDetails(int Id)
         {
@@ -144,12 +150,11 @@ namespace TaskManagementSystem.Models
             }
         }
 
-        public void CreateNote(int Id, string UserId, int ProjectId, int ProTaskId, bool Priority, string Comment)
+        public void CreateNote(string UserId, int ProjectId, int ProTaskId, bool Priority, string Comment)
         {
             ApplicationDbContext db = new ApplicationDbContext();
              Note note = new Note
             {
-            Id=Id,
             UserId=UserId,
             ProjectId=ProjectId,
             ProTaskId=ProTaskId,

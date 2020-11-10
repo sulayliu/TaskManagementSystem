@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,8 +10,14 @@ namespace TaskManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
+        private TaskHelper taskHelper;
+        public HomeController()
+        {
+            taskHelper = new TaskHelper();
+        }
         public ActionResult Index()
         {
+            taskHelper.SetNotificationToPassDeadLine(User.Identity.GetUserId());
             return View();
         }
 

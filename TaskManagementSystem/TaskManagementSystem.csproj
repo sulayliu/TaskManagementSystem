@@ -233,6 +233,10 @@
     <Compile Include="Migrations\202011101729374_FixTheBrokenProject.Designer.cs">
       <DependentUpon>202011101729374_FixTheBrokenProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011101802475_FixItCompletely.cs" />
+    <Compile Include="Migrations\202011101802475_FixItCompletely.Designer.cs">
+      <DependentUpon>202011101802475_FixItCompletely.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011101729374_FixTheBrokenProject.resx">
       <DependentUpon>202011101729374_FixTheBrokenProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011101802475_FixItCompletely.resx">
+      <DependentUpon>202011101802475_FixItCompletely.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -18,6 +18,10 @@ namespace TaskManagementSystem.Controllers
         {
             return View(projectHelper.ListOfNotes());
         }
+        public ActionResult Index(string userId)
+        {
+            return View(projectHelper.NotificationOfUser(userId));
+        }
 
         // GET: NotesDetails/Details/5
         public ActionResult Details(int? id)
@@ -47,11 +51,11 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,ProjectId,ProTaskId,Priority,Comment")] Note note)
+        public ActionResult Create([Bind(Include = "UserId,ProjectId,ProTaskId,Priority,Comment")] Note note)
         {
             if (ModelState.IsValid)
             {
-                projectHelper.CreateNote(note.Id, User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
+                projectHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
            
