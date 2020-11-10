@@ -56,12 +56,12 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int ProjectId, string Name, string Content, string UserId, DateTime Deadline, Priority Priority,string Comment)
+        public ActionResult Create(int ProjectId, string Name, string Content, string UserId, DateTime Deadline, Priority Priority, string Comment)
 
         {
             if (ModelState.IsValid)
             {
-                taskHelper.CreateTask(ProjectId, Name, Content, UserId,Deadline,Priority,Comment);
+                taskHelper.CreateTask(ProjectId, Name, Content, UserId, Deadline, Priority, Comment);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -95,8 +95,8 @@ namespace TaskManagementSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId,proTask.Deadline,proTask.Priority,proTask.CompletedPercentage);
-                return RedirectToAction("Index","Projects");
+                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId, proTask.Deadline, proTask.Priority, proTask.CompletedPercentage);
+                return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
             return View();
@@ -122,10 +122,9 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ProTask proTask = db.ProTasks.Find(id);
-            db.ProTasks.Remove(proTask);
+            taskHelper.Delete(id);
             db.SaveChanges();
-            return RedirectToAction("Index","Projects");
+            return RedirectToAction("Index", "Projects");
         }
 
         protected override void Dispose(bool disposing)
@@ -160,7 +159,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);                
+                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
@@ -181,7 +180,7 @@ namespace TaskManagementSystem.Controllers
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
-        
+
         //Comments for developer
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -189,7 +188,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                taskHelper.EditComment(proTask.Id, proTask.Comment);                
+                taskHelper.EditComment(proTask.Id, proTask.Comment);
                 return RedirectToAction("Index", "Projects", new { userId = User.Identity.GetUserId() });
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
@@ -216,8 +215,6 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteDeveloperTaskConfirmed(int id)
         {
-            //ProTask proTask = db.ProTasks.Find(id);
-            //db.ProTasks.Remove(proTask);
             taskHelper.Delete(id);
             db.SaveChanges();
             return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });

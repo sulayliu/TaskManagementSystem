@@ -20,7 +20,7 @@
     <div class="col-md-4">
         <h2>NOTIFICATIONS</h2>
         <p>Check your notifications</p>
-        <p><a class="btn btn-success" href="https://go.microsoft.com/fwlink/?LinkId=301866">Go to notifications &raquo;</a></p>
+        <p><a class="btn btn-success" href="@Url.Action("Index", "Notes", new { userId = User.Identity.GetUserId() })">Go to notification &raquo;</a></p>
     </div>
     @*<div class="col-md-4">
         <h2>Web Hosting</h2>

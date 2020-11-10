@@ -14,6 +14,7 @@ namespace TaskManagementSystem.Models
         public int ProjectId { get; set; }
         public Project Project { get; set; }
         public int ProTaskId { get; set; }
+        public virtual ProTask ProTask { get; set; }
         public bool Priority { get; set; }
         public string Comment { get; set; }
     }

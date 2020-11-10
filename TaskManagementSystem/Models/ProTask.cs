@@ -19,6 +19,7 @@ namespace TaskManagementSystem.Models
         public DateTime CreatedTime { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime Deadline { get; set; }
+        public bool IsItOverdue { get; set; }
         [Range(0, 100)]
         public double CompletedPercentage { get; set; }
         public int ProjectId { get; set; }
