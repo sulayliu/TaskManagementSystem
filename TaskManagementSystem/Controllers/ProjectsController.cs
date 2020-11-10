@@ -13,21 +13,9 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         public ActionResult Index(int? id)
         {
-
             FilterViewModel filterModel = new FilterViewModel();
             ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
-            //if (id == 1)
-            //{
-            //    return View(projectHelper.GetProjectsWithTaskOrderByPercent());
-            //}
-            //else if (id == 2)
-            //{
-            //    return View(projectHelper.GetProjectsWithTaskOrderByPriority());
-            //}
-            //else
-            //{
-                return View(projectHelper.GetProjects());
-            //}
+            return View(projectHelper.GetProjects());
         }
 
         [HttpPost]
@@ -49,7 +37,7 @@ namespace TaskManagementSystem.Controllers
             {
                 projects = projectHelper.GetProjectsWithTaskOrderByPriority();
             }
-                        
+
             return View(projects);
         }
 
@@ -135,5 +123,6 @@ namespace TaskManagementSystem.Controllers
             projectHelper.Delete(project.Id);
             return RedirectToAction("Index");
         }
+
     }
 }

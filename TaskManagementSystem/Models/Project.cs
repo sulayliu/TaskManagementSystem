@@ -21,6 +21,7 @@ namespace TaskManagementSystem.Models
         public ApplicationUser User { get; set; }
         public virtual ICollection<ProTask> ProTasks { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Note> Notes { get; set; }
         public Priority Priority { get; set; }
         public Project()
         {

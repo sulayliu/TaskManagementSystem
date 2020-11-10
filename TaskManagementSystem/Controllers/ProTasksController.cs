@@ -21,17 +21,9 @@ namespace TaskManagementSystem.Controllers
             taskHelper = new TaskHelper();
         }
 
-        // GET: ProTasks
-        //public ActionResult Index()
-        //{
-        //    var proTasks = db.ProTasks.Include(p => p.Project).Include(p => p.User);
-        //    return View(proTasks.ToList());
-        //}
-
         public ActionResult Index(string userId)
         {
             var developerProTasks = taskHelper.GetDeveloperTasks(userId);
-            //var proTasks = db.ProTasks.Include(p => p.Project).Include(p => p.User);
             return View(developerProTasks);
         }
 
