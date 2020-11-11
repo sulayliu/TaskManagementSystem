@@ -132,19 +132,45 @@ namespace TaskManagementSystem.Models
         }
         //developer side
         //Notification of all user
-        public List<Note>GetAllNotification(ApplicationUser user)
+        public List<Note> GetAllNotification(ApplicationUser user)
         {
             var notification = db.Notes.Where(n => n.User.Id == user.Id).ToList();
             return notification;
         }
+
+        public string GetNotificationCount(string user)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var notification = db.Notes.Where(n => n.User.Id == user).ToList();
+            db.Dispose();
+            return notification.Count().ToString();
+        }
+
+        public string GetNotificationCountToManager(string userId)
+        {
+            ProjectHelper projectHelper = new ProjectHelper();
+
+            return projectHelper.GetNotificationToManager(userId).Count().ToString();
+        }
+
         public void SetNotificationToPassDeadLine(string userId)
         {
             bool wasExecuted = false;
+
             Queue<ProTask> notifedTask = new Queue<ProTask>();
-            var date = DateTime.Now.AddDays(1);
-            var taskForNotify = db.ProTasks
-                .Where(p => DateTime.Compare( p.Deadline, date) <= 0 && DateTime.Compare(p.Deadline, DateTime.Now) >= 0 && p.UserId == userId)
-                .ToList();
+
+            var today = DateTime.Now;
+
+            List<ProTask> taskForNotify = new List<ProTask>();
+
+            foreach (var test in db.ProTasks)
+            {
+                if ((test.Deadline - today).TotalHours <= 24)
+                {
+                    taskForNotify.Add(test);
+                }
+            }
+
 
             taskForNotify.ForEach(task =>
             {
@@ -153,9 +179,10 @@ namespace TaskManagementSystem.Models
                     task.IsItOverdue = true;
                     notifedTask.Enqueue(task);
                 }
+
             });
 
-            while(notifedTask.Count>0 && !wasExecuted)
+            while (notifedTask.Count > 0 && !wasExecuted)
             {
                 var res = notifedTask.Dequeue();
                 projectHelper.CreateNote(res.UserId, res.ProjectId, res.Id, true, "This task has only one day left");
@@ -163,5 +190,6 @@ namespace TaskManagementSystem.Models
             db.SaveChanges();
             db.Dispose();
         }
+
     }
 }

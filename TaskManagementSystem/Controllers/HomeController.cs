@@ -18,6 +18,8 @@ namespace TaskManagementSystem.Controllers
         public ActionResult Index()
         {
             taskHelper.SetNotificationToPassDeadLine(User.Identity.GetUserId());
+            ViewBag.Notification = taskHelper.GetNotificationCount(User.Identity.GetUserId());
+            ViewBag.NotificationToManager = taskHelper.GetNotificationCountToManager(User.Identity.GetUserId());
             return View();
         }
 
