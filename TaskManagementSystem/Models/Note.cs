@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Management;
 
 namespace TaskManagementSystem.Models
 {
@@ -17,6 +18,13 @@ namespace TaskManagementSystem.Models
         public virtual ProTask ProTask { get; set; }
         public bool Priority { get; set; }
         public string Comment { get; set; }
+        public bool IsOpened { get; set; }
+        public EventNotificationType NotificationType { get; set; }
+    }
+    public enum NotificationType
+    {
+        Completed,
+        Incompleted,
     }
 
 }
