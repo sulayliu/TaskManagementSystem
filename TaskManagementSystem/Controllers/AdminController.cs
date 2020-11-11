@@ -109,7 +109,7 @@ namespace TaskManagementSystem.Controllers
         {
             ViewBag.UserId = userId;
             ViewBag.UserName = db.Users.Find(userId).UserName;
-            //UserManager.SetSalary(userId,salary);
+            UserManager.SetSalary(userId,salary);
             db.SaveChanges();
             db.Dispose();
             return RedirectToAction("ShowAllUsers");
