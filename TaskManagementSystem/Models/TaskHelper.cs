@@ -60,6 +60,15 @@ namespace TaskManagementSystem.Models
         public void Delete(int id)
         {
             var proTask = db.ProTasks.Find(id);
+
+            foreach (Note note in db.Notes)
+            {
+                if (note.ProTaskId == proTask.Id)
+                {
+                    db.Notes.Remove(note);
+                }
+            }
+
             if (proTask != null)
             {
                 db.ProTasks.Remove(proTask);
@@ -153,43 +162,32 @@ namespace TaskManagementSystem.Models
             return projectHelper.GetNotificationToManager(userId).Count().ToString();
         }
 
-        public void SetNotificationToPassDeadLine(string userId)
+        //List of notification to be marked as read or opened
+        public void MarkNotificationRead(List<Note> notes)
         {
-            bool wasExecuted = false;
-
-            Queue<ProTask> notifedTask = new Queue<ProTask>();
-
-            var today = DateTime.Now;
-
-            List<ProTask> taskForNotify = new List<ProTask>();
-
-            foreach (var test in db.ProTasks)
+            foreach (var notification in notes)
             {
-                if ((test.Deadline - today).TotalHours <= 24)
-                {
-                    taskForNotify.Add(test);
-                }
+                notification.IsOpened = true;
+                db.SaveChanges();
+                db.Dispose();
             }
-
-
-            taskForNotify.ForEach(task =>
-            {
-                if (!task.IsItOverdue)
-                {
-                    task.IsItOverdue = true;
-                    notifedTask.Enqueue(task);
-                }
-
-            });
-
-            while (notifedTask.Count > 0 && !wasExecuted)
-            {
-                var res = notifedTask.Dequeue();
-                projectHelper.CreateNote(res.UserId, res.ProjectId, res.Id, true, "This task has only one day left");
-            }
-            db.SaveChanges();
-            db.Dispose();
+        }
+        //list of all unopened notification of the user
+        public List<Note> GetNotificationUser(string userId)
+        {
+            var notification = db.Notes.Where(u => u.User.Id == userId && !u.IsOpened).ToList();
+            return notification;
         }
 
+        //Get all opened notification of the users
+        public List<Note> GetAllNotification(string userId)
+        {
+            var notifications = db.Notes.Where(t => t.User.Id == userId).ToList();
+            if (notifications.Count > 0)
+            {
+                MarkNotificationRead(notifications);
+            }
+            return notifications;
+        }
     }
 }

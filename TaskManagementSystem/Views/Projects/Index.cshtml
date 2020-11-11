@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TaskManagementSystem.Models.Project>
+@using TaskManagementSystem.Models
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2>Index     @Html.ActionLink("Notification", "Create")</h2>
 
 <p>
-    @Html.ActionLink("New Project", "Create") 
+    @Html.ActionLink("New Project", "Create")
 </p>
 
 @using (Html.BeginForm())
@@ -79,7 +80,10 @@
                             @Html.DisplayFor(modelItem => task.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => task.CompletedPercentage)
+                            @*@Html.DisplayFor(modelItem => task.CompletedPercentage)*@
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped @(ProgressHelper.ClassSelector(task.CompletedPercentage))" role="progressbar" style="width: @task.CompletedPercentage%" aria-valuenow="@task.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@task.CompletedPercentage</div>
+                            </div>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => task.Priority)

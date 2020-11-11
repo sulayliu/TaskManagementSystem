@@ -19,13 +19,13 @@
     </div>
     <div class="col-md-4">
         <h2>NOTIFICATIONS</h2>
-        <p>Check your notifications</p>
+        <p>Developer notifications</p>
         <p><a class="btn btn-success" href="@Url.Action("Index", "Notes", new { userId = User.Identity.GetUserId() })"> @ViewBag.Notification Notifications &raquo;</a></p>
     </div>
 
     <div class="col-md-4">
         <h2>NOTIFICATIONS</h2>
-        <p>Check your notifications</p>
+        <p>Manager notifications</p>
         <p><a class="btn btn-success" href="@Url.Action("IndexManager", "Notes", new { userId = User.Identity.GetUserId() })"> @ViewBag.NotificationToManager Notifications &raquo;</a></p>
     </div>
 

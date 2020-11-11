@@ -14,14 +14,14 @@
         <th>
             @Html.Label("Project Name")
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </th>*@
         <th>
             @Html.Label("Task Name")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th>
+            @Html.Label("Type")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Comment)
@@ -35,14 +35,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Project.Name)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.ProTask.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NotificationType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comment)

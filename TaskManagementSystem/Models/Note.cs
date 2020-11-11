@@ -14,17 +14,19 @@ namespace TaskManagementSystem.Models
         public ApplicationUser User { get; set; }
         public int ProjectId { get; set; }
         public Project Project { get; set; }
-        public int ProTaskId { get; set; }
+        public int? ProTaskId { get; set; }
         public virtual ProTask ProTask { get; set; }
         public bool Priority { get; set; }
         public string Comment { get; set; }
         public bool IsOpened { get; set; }
-        public EventNotificationType NotificationType { get; set; }
+        public NotificationType NotificationType { get; set; }
     }
     public enum NotificationType
     {
+        Normal,
+        Urgent,
+        Overdue,
+        NextToExpire,
         Completed,
-        Incompleted,
     }
-
 }

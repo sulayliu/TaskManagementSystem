@@ -205,10 +205,6 @@
     <Compile Include="Migrations\202011042141526_SeedUser.Designer.cs">
       <DependentUpon>202011042141526_SeedUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011061759350_Fixmigration.cs" />
-    <Compile Include="Migrations\202011061759350_Fixmigration.Designer.cs">
-      <DependentUpon>202011061759350_Fixmigration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202011061811073_FixNameOnTask.cs" />
     <Compile Include="Migrations\202011061811073_FixNameOnTask.Designer.cs">
       <DependentUpon>202011061811073_FixNameOnTask.cs</DependentUpon>
@@ -245,6 +241,10 @@
     <Compile Include="Migrations\202011110239150_AddOpenedPropertyInNoteTable.Designer.cs">
       <DependentUpon>202011110239150_AddOpenedPropertyInNoteTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011110459176_EditProTaskIdOptional.cs" />
+    <Compile Include="Migrations\202011110459176_EditProTaskIdOptional.Designer.cs">
+      <DependentUpon>202011110459176_EditProTaskIdOptional.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
@@ -252,6 +252,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\ProgressHelper.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\ProjectHelper.cs" />
     <Compile Include="Models\ProTask.cs" />
@@ -435,9 +436,6 @@
     <EmbeddedResource Include="Migrations\202011042141526_SeedUser.resx">
       <DependentUpon>202011042141526_SeedUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011061759350_Fixmigration.resx">
-      <DependentUpon>202011061759350_Fixmigration.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011061811073_FixNameOnTask.resx">
       <DependentUpon>202011061811073_FixNameOnTask.cs</DependentUpon>
     </EmbeddedResource>
@@ -464,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011110239150_AddOpenedPropertyInNoteTable.resx">
       <DependentUpon>202011110239150_AddOpenedPropertyInNoteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011110459176_EditProTaskIdOptional.resx">
+      <DependentUpon>202011110459176_EditProTaskIdOptional.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

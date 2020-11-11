@@ -16,7 +16,7 @@ namespace TaskManagementSystem.Controllers
         private ProjectHelper projectHelper = new ProjectHelper();
         public ActionResult ListOfNotes()
         {
-            return View(projectHelper.ListOfNotes());
+            return View(projectHelper.ListOfNotes(User.Identity.GetUserId()));
         }
         public ActionResult Index(string userId)
         {
@@ -61,7 +61,7 @@ namespace TaskManagementSystem.Controllers
             note.Priority = true;
             if (ModelState.IsValid)
             {
-                projectHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
+                projectHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, NotificationType.Urgent, note.Comment);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
            
@@ -123,7 +123,7 @@ namespace TaskManagementSystem.Controllers
         {
             Note note = projectHelper.GetNoteDetails((int)id);
             projectHelper.DeleteNote(note.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Notes", new { userId = User.Identity.GetUserId() });
         }
     }
 }
