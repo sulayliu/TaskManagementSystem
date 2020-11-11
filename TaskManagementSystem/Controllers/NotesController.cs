@@ -23,6 +23,11 @@ namespace TaskManagementSystem.Controllers
             return View(projectHelper.NotificationOfUser(userId));
         }
 
+        public ActionResult IndexManager(string userId)
+        {
+            return View(projectHelper.GetNotificationToManager(userId));
+        }
+
         // GET: NotesDetails/Details/5
         public ActionResult Details(int? id)
         {
@@ -53,6 +58,7 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "UserId,ProjectId,ProTaskId,Priority,Comment")] Note note)
         {
+            note.Priority = true;
             if (ModelState.IsValid)
             {
                 projectHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);

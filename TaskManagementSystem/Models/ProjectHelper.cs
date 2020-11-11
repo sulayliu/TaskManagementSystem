@@ -136,6 +136,27 @@ namespace TaskManagementSystem.Models
             var notes = db.Notes.Include(n => n.Project).Include(n =>n.ProTask).Where(n => n.UserId == userId);
             return notes.ToList();
         }
+
+        public List<Note> GetNotificationToManager(string userId)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+
+            List<Note> notes = new List<Note>();
+            var projects = db.Projects.Where(u => u.UserId == userId).ToList();
+
+            foreach (var note in db.Notes)
+            {
+                foreach (var project in projects)
+                {
+                    if (note.ProjectId == project.Id)
+                    {
+                        notes.Add(note);
+                    }
+                }
+            }
+            return notes;
+        }
+
         public Note GetNoteDetails(int Id)
         {
             {
