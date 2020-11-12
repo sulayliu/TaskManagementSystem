@@ -406,6 +406,7 @@
     <Content Include="Views\Notes\Index.cshtml" />
     <Content Include="Views\Notes\IndexManager.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\GetExceededDeadliness.cshtml" />
     <Content Include="Views\Projects\GetExceededDeadlines.cshtml" />
   </ItemGroup>
   <ItemGroup>

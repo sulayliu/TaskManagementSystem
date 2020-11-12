@@ -148,12 +148,12 @@ namespace TaskManagementSystem.Models
         }
 
         //method for projects that are exceeded budget
-        public static List<Project> GetExceededDeadlines()
+        public static List<ProTask> GetExceededDeadlines()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var projects = db.Projects.Where(p => p.Deadline < System.DateTime.Now && p.IsCompleted == false).Include("ProTasks").ToList();
-            db.Dispose();
-            return projects;
+            var tasks = db.Projects.SelectMany(p => p.ProTasks.Where(t => t.Deadline < System.DateTime.Now && p.IsCompleted == false)).ToList();           
+
+            return tasks;
         }
 
         //method for projects that are overdue

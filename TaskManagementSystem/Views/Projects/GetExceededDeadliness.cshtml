@@ -1,19 +1,14 @@
-﻿@model IEnumerable<TaskManagementSystem.Models.ProTask>
+﻿@model IEnumerable<TaskManagementSystem.Models.Project>
 
 @{
     ViewBag.Title = "GetExceededDeadlines";
 }
 
-<h2>GetExceededDeadlines</h2>
+<h2>Exceeded Projects</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Project.Name)
-        </th>        
+    <tr>        
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -27,28 +22,28 @@
             @Html.DisplayNameFor(model => model.Deadline)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsItOverdue)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletedPercentage)
+            @Html.DisplayNameFor(model => model.IsCompleted)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Priority)
+            @Html.DisplayNameFor(model => model.Budget)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Comment)
+            @Html.DisplayNameFor(model => model.FinishedTime)
         </th>
-       
+        <th>
+            @Html.DisplayNameFor(model => model.TotalCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.Name)
-        </td>        
+    <tr>       
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -62,26 +57,27 @@
             @Html.DisplayFor(modelItem => item.Deadline)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsItOverdue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompletedPercentage)
+            @Html.DisplayFor(modelItem => item.IsCompleted)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Priority)
+            @Html.DisplayFor(modelItem => item.Budget)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Comment)
+            @Html.DisplayFor(modelItem => item.FinishedTime)
         </td>
-       
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalCost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority)
+        </td>       
     </tr>
 }
 
 </table>
-
-<div>
-    @Html.ActionLink("Back to List", "Index", "Projects")
-</div>
+<p>   
+    @Html.ActionLink("Back to List", "Index")
+</p>
