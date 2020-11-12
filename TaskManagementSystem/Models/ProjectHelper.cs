@@ -119,6 +119,15 @@ namespace TaskManagementSystem.Models
             db.SaveChanges();
             db.Dispose();
         }
+        public static void Edit(int Id, bool IsCompleted)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            Project project = GetProject(Id);
+            project.IsCompleted = IsCompleted;
+            db.Entry(project).State = EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose();
+        }
 
         public static bool Delete(int Id)
         {
@@ -148,12 +157,12 @@ namespace TaskManagementSystem.Models
         }
 
         //method for projects that are exceeded budget
-        public static List<Project> GetExceededDeadlines()
+        public static List<ProTask> GetExceededDeadlines()
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var projects = db.Projects.Where(p => p.Deadline < System.DateTime.Now && p.IsCompleted == false).Include("ProTasks").ToList();
-            db.Dispose();
-            return projects;
+            var tasks = db.Projects.SelectMany(p => p.ProTasks.Where(t => t.Deadline < System.DateTime.Now && p.IsCompleted == false)).ToList();
+
+            return tasks;
         }
 
         //method for projects that are overdue
@@ -163,6 +172,25 @@ namespace TaskManagementSystem.Models
             var projects = db.Projects.Where(p => p.Budget < p.TotalCost).Include("ProTasks").ToList();
             db.Dispose();
             return projects;
+        }
+
+        // Check if the project are completed
+        public static void SetProjectCompleted()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var today = DateTime.Now;
+            List<Project> projects = db.Projects.ToList();
+            bool projectIsCompleted;
+            foreach (var project in projects)
+            {
+                projectIsCompleted = true;
+                foreach (var task in project.ProTasks)
+                {
+                    if (task.CompletedPercentage != 100) projectIsCompleted = false;
+                }
+                if (projectIsCompleted) Edit(project.Id, true);
+            }
+            db.Dispose();
         }
     }
 }
