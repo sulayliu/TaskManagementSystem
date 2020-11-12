@@ -48,8 +48,12 @@ namespace TaskManagementSystem.Models
                     // Set Overdue Notification for task
                     if ((task.Deadline - today).TotalHours <= 24 && (task.Deadline - today).TotalHours > 0 && !task.IsItOverdue)
                     {
-                        task.IsItOverdue = true;
-                        Create(task.UserId, task.ProjectId, task.Id, true, NotificationType.NextToExpire, "This task has only one day left");
+                        internalNoteKey = (project.UserId + project.Id + task.Id + true + NotificationType.NextToExpire + "This task has only one day left").Trim();
+                        if (!NotesKey.Contains(internalNoteKey))
+                        {
+                            task.IsItOverdue = true;
+                            Create(task.UserId, task.ProjectId, task.Id, true, NotificationType.NextToExpire, "This task has only one day left");
+                        }
                     }
                 }
 
