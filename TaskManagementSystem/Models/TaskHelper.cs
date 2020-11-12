@@ -9,27 +9,19 @@ using Microsoft.Ajax.Utilities;
 
 namespace TaskManagementSystem.Models
 {
-    public class TaskHelper
+    public static class TaskHelper
     {
-        private ApplicationDbContext db;
-        private ProjectHelper projectHelper;
-        public TaskHelper()
+        public static List<ProTask> GetTasks()
         {
-            db = new ApplicationDbContext();
-            projectHelper = new ProjectHelper();
-        }
-
-        public List<ProTask> GetTasks()
-        {
+            ApplicationDbContext db = new ApplicationDbContext();
             var tasks = db.ProTasks.ToList();
             db.Dispose();
             return tasks;
         }
-
-        public ProTask GetTask(int Id)
+        public static ProTask GetTask(int Id)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             ProTask proTask = db.ProTasks.Find(Id);
-            // db.Dispose();
             if (proTask == null)
             {
                 return null;
@@ -37,8 +29,9 @@ namespace TaskManagementSystem.Models
             return proTask;
         }
 
-        public void CreateTask(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority, string Comment)
+        public static void CreateTask(int projectId, string Name, string Content, string userId, DateTime deadline, Priority priority, string Comment)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var user = db.Users.Find(userId);
             ProTask proTask = new ProTask
             {
@@ -57,10 +50,10 @@ namespace TaskManagementSystem.Models
             db.Dispose();
         }
 
-        public void Delete(int id)
+        public static void Delete(int id)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var proTask = db.ProTasks.Find(id);
-
             foreach (Note note in db.Notes)
             {
                 if (note.ProTaskId == proTask.Id)
@@ -76,9 +69,9 @@ namespace TaskManagementSystem.Models
                 db.Dispose();
             }
         }
-
-        public void Edit(int id, string taskName, string taskContent, string userId, DateTime deadline, Priority priority, double completedPercentage)
+        public static void Edit(int id, string taskName, string taskContent, string userId, DateTime deadline, Priority priority, double completedPercentage)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var proTask = GetTask(id);
             var user = db.Users.Find(userId);
             if (proTask != null)
@@ -94,8 +87,9 @@ namespace TaskManagementSystem.Models
                 db.Dispose();
             }
         }
-        public void Assign(int id, string DeveloperId)
+        public static void Assign(int id, string DeveloperId)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             ProTask proTask = GetTask(id);
             if (proTask != null)
             {
@@ -106,14 +100,16 @@ namespace TaskManagementSystem.Models
         }
 
         //Developer side:
-        public List<ProTask> GetDeveloperTasks(string userId)
+        public static List<ProTask> GetDeveloperTasks(string userId)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             List<ProTask> developerTasks = db.ProTasks.Where(t => t.UserId == userId).ToList();
             return developerTasks;
         }
 
-        public void EditDeveloperTask(int id, double completedPercentage)
+        public static void EditDeveloperTask(int id, double completedPercentage)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var proTask = GetTask(id);
             if (proTask != null)
             {
@@ -122,8 +118,9 @@ namespace TaskManagementSystem.Models
                 db.Dispose();
             }
         }
-        public void EditComment(int id, string Comment)
+        public static void EditComment(int id, string Comment)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var proTask = GetTask(id);
             if (proTask != null)
             {
@@ -134,37 +131,25 @@ namespace TaskManagementSystem.Models
         }
 
         //P.Manager side:
-        public List<ProTask> GetManagerProjectsAndTasks(string userId)
+        public static List<ProTask> GetManagerProjectsAndTasks(string userId)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             List<ProTask> managerProjectsAndTasks = db.ProTasks.Where(t => t.UserId == userId).ToList();
             return managerProjectsAndTasks;
         }
         //developer side
         //Notification of all user
-        public List<Note> GetAllNotification(ApplicationUser user)
+        public static List<Note> GetAllNotification(ApplicationUser user)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var notification = db.Notes.Where(n => n.User.Id == user.Id).ToList();
             return notification;
         }
 
-        public string GetNotificationCount(string user)
+        //List of notification to be marked as read or opened
+        public static void MarkNotificationRead(List<Note> notes)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-            var notification = db.Notes.Where(n => n.User.Id == user).ToList();
-            db.Dispose();
-            return notification.Count().ToString();
-        }
-
-        public string GetNotificationCountToManager(string userId)
-        {
-            ProjectHelper projectHelper = new ProjectHelper();
-
-            return projectHelper.GetNotificationToManager(userId).Count().ToString();
-        }
-
-        //List of notification to be marked as read or opened
-        public void MarkNotificationRead(List<Note> notes)
-        {
             foreach (var notification in notes)
             {
                 notification.IsOpened = true;
@@ -173,15 +158,17 @@ namespace TaskManagementSystem.Models
             }
         }
         //list of all unopened notification of the user
-        public List<Note> GetNotificationUser(string userId)
+        public static List<Note> GetNotificationUser(string userId)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var notification = db.Notes.Where(u => u.User.Id == userId && !u.IsOpened).ToList();
             return notification;
         }
 
         //Get all opened notification of the users
-        public List<Note> GetAllOpenNotification(string userId)
+        public static List<Note> GetAllOpenNotification(string userId)
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             var notifications = db.Notes.Where(t => t.User.Id == userId).ToList();
             if (notifications.Count > 0)
             {

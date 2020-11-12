@@ -13,20 +13,12 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProTasksController : Controller
     {
-        private ApplicationDbContext db;
-        private TaskHelper taskHelper;
-        public ProTasksController()
-        {
-            db = new ApplicationDbContext();
-            taskHelper = new TaskHelper();
-        }
-
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index(string userId)
         {
-            var developerProTasks = taskHelper.GetDeveloperTasks(userId);
+            var developerProTasks = TaskHelper.GetDeveloperTasks(userId);
             return View(developerProTasks);
         }
-
 
         // GET: ProTasks/Details/5
         public ActionResult Details(int? id)
@@ -61,7 +53,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                taskHelper.CreateTask(ProjectId, Name, Content, UserId, Deadline, Priority, Comment);
+                TaskHelper.CreateTask(ProjectId, Name, Content, UserId, Deadline, Priority, Comment);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -95,7 +87,7 @@ namespace TaskManagementSystem.Controllers
             if (ModelState.IsValid)
             {
 
-                taskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId, proTask.Deadline, proTask.Priority, proTask.CompletedPercentage);
+                TaskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId, proTask.Deadline, proTask.Priority, proTask.CompletedPercentage);
                 return RedirectToAction("Index", "Projects");
             }
             ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
@@ -122,7 +114,7 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            taskHelper.Delete(id);
+            TaskHelper.Delete(id);
             db.SaveChanges();
             return RedirectToAction("Index", "Projects");
         }
@@ -159,7 +151,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                taskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);
+                TaskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
@@ -188,7 +180,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                taskHelper.EditComment(proTask.Id, proTask.Comment);
+                TaskHelper.EditComment(proTask.Id, proTask.Comment);
                 return RedirectToAction("Index", "Projects", new { userId = User.Identity.GetUserId() });
             }
             //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
@@ -215,7 +207,7 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteDeveloperTaskConfirmed(int id)
         {
-            taskHelper.Delete(id);
+            TaskHelper.Delete(id);
             db.SaveChanges();
             return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
         }

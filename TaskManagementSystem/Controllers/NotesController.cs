@@ -13,19 +13,15 @@ namespace TaskManagementSystem.Controllers
 {
     public class NotesController : Controller
     {
-        private ProjectHelper projectHelper = new ProjectHelper();
-        public ActionResult ListOfNotes()
+
+        public ActionResult Index()
         {
-            return View(projectHelper.ListOfNotes(User.Identity.GetUserId()));
-        }
-        public ActionResult Index(string userId)
-        {
-            return View(projectHelper.NotificationOfUser(userId));
+            return View(NotificationHelper.GetNotificationOfUser(User.Identity.GetUserId()));
         }
 
-        public ActionResult IndexManager(string userId)
+        public ActionResult IndexManager()
         {
-            return View(projectHelper.GetNotificationToManager(userId));
+            return View(NotificationHelper.GetNotificationToManager(User.Identity.GetUserId()));
         }
 
         // GET: NotesDetails/Details/5
@@ -35,7 +31,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var note = projectHelper.GetNoteDetails((int)id);
+            var note = NotificationHelper.GetNoteDetails((int)id);
             if (note == null)
             {
                 return HttpNotFound();
@@ -44,7 +40,7 @@ namespace TaskManagementSystem.Controllers
         }
 
         // GET: Notes/Create
-        public ActionResult Create(int ProjectId , int ProTaskId, string ProjectName, string TaskName)
+        public ActionResult Create(int ProjectId , int ProTaskId)
         {
             ViewBag.ProjectId = ProjectId;
             ViewBag.ProTaskId = ProTaskId;
@@ -61,7 +57,7 @@ namespace TaskManagementSystem.Controllers
             note.Priority = true;
             if (ModelState.IsValid)
             {
-                projectHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, NotificationType.Urgent, note.Comment);
+                NotificationHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, NotificationType.Urgent, note.Comment);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
            
@@ -74,12 +70,12 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = projectHelper.GetNoteDetails((int)id);
+            Note note = NotificationHelper.GetNoteDetails((int)id);
             if (note == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProjectId = new SelectList(projectHelper.GetProjects(), "Id", "Name", note.ProjectId);
+            //ViewBag.ProjectId = new SelectList(NotificationHelper.GetProjects(), "Id", "Name", note.ProjectId);
             return View(note);
         }
 
@@ -92,11 +88,11 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                projectHelper.EditNote(note.Id, User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
+                NotificationHelper.EditNote(note.Id, User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
 
                 return RedirectToAction("Index");
             }
-            ViewBag.ProjectId = new SelectList(projectHelper.GetProjects(), "Id", "Name", note.ProjectId);
+            //ViewBag.ProjectId = new SelectList(NotificationHelper.GetProjects(), "Id", "Name", note.ProjectId);
             return View(note);
         }
 
@@ -108,7 +104,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = projectHelper.GetNoteDetails((int)id);
+            Note note = NotificationHelper.GetNoteDetails((int)id);
             if (note == null)
             {
                 return HttpNotFound();
@@ -121,8 +117,8 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Note note = projectHelper.GetNoteDetails((int)id);
-            projectHelper.DeleteNote(note.Id);
+            Note note = NotificationHelper.GetNoteDetails((int)id);
+            NotificationHelper.DeleteNote(note.Id);
             return RedirectToAction("Index", "Notes", new { userId = User.Identity.GetUserId() });
         }
     }
