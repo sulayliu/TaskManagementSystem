@@ -99,15 +99,12 @@ namespace TaskManagementSystem.Models
             ).ToList();
         }
 
-        public static string GetNotificationCount(string user)
+        public static string CountUserNotifications(string userId)
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            var notification = db.Notes.Where(n => n.User.Id == user).ToList();
-            db.Dispose();
-            return notification.Count().ToString();
+            return GetNotificationOfUser(userId).Count().ToString();
         }
 
-        public static string GetNotificationCountToManager(string userId)
+        public static string CountManagerNotifications(string userId)
         {
             return GetNotificationToManager(userId).Count().ToString();
         }
@@ -133,7 +130,6 @@ namespace TaskManagementSystem.Models
                 return note;
             }
         }
-
         public static void CreateNote(string UserId, int ProjectId, int? ProTaskId, bool Priority, NotificationType NotificationType, string Comment)
         {
             ApplicationDbContext db = new ApplicationDbContext();

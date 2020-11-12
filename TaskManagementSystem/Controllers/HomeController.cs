@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TaskManagementSystem.Models;
 
@@ -18,8 +14,8 @@ namespace TaskManagementSystem.Controllers
         //[Authorize(Roles ="ProjectManager","Developer")]
         public ActionResult Index()
         {
-            ViewBag.Notification = NotificationHelper.GetNotificationCount(User.Identity.GetUserId());
-            ViewBag.NotificationToManager = NotificationHelper.GetNotificationCountToManager(User.Identity.GetUserId());
+            ViewBag.Notification = NotificationHelper.CountUserNotifications(User.Identity.GetUserId());
+            ViewBag.NotificationToManager = NotificationHelper.CountManagerNotifications(User.Identity.GetUserId());
 
             NotificationHelper.SetNotificationsByType();
             return View();
