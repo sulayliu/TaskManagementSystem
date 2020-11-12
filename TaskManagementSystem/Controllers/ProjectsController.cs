@@ -122,5 +122,17 @@ namespace TaskManagementSystem.Controllers
             return RedirectToAction("Index");
         }
 
+        //*****************************************
+        // GET: Projects/Details/5
+        public ActionResult Details(int id)
+        {
+            Project project = ProjectHelper.GetProject(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
     }
 }
