@@ -137,7 +137,7 @@ namespace TaskManagementSystem.Controllers
             {
                 TaskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
-            }          
+            }
             return View();
         }
         //Get/protask/Comment for developers
@@ -164,7 +164,7 @@ namespace TaskManagementSystem.Controllers
             {
                 TaskHelper.EditComment(proTask.Id, proTask.Comment);
                 return RedirectToAction("Index", "Projects", new { userId = User.Identity.GetUserId() });
-            }          
+            }
             return View();
         }
 

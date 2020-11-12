@@ -13,16 +13,18 @@ namespace TaskManagementSystem.Controllers
 {
     public class NotesController : Controller
     {
+        //[Authorize(Roles = "Developer")]
         public ActionResult Index()
         {
             return View(NotificationHelper.GetNotificationOfUser(User.Identity.GetUserId()));
         }
-
+        //[Authorize(Roles = "ProjectManger")]
         public ActionResult IndexManager()
         {
             return View(NotificationHelper.GetNotificationOfManager(User.Identity.GetUserId()));
         }
 
+        //[Authorize(Roles = "ProjectManager, Developer")]
         // GET: NotesDetails/OpenNote/5
         public ActionResult OpenNote(int? id)
         {
@@ -40,14 +42,16 @@ namespace TaskManagementSystem.Controllers
             return View(note);
         }
 
+        //[Authorize(Roles = "Developer")]
         // GET: Notes/Create
-        public ActionResult Create(int ProjectId , int ProTaskId)
+        public ActionResult Create(int ProjectId, int ProTaskId)
         {
             ViewBag.ProjectId = ProjectId;
             ViewBag.ProTaskId = ProTaskId;
             return View();
         }
 
+        //[Authorize(Roles = "Developer")]
         // POST: Notes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -61,10 +65,10 @@ namespace TaskManagementSystem.Controllers
                 NotificationHelper.Create(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, NotificationType.Urgent, note.Comment);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
-           
+
             return View(note);
         }
-
+        //[Authorize(Roles = "ProjectManager, Developer")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,7 +82,7 @@ namespace TaskManagementSystem.Controllers
             }
             return View(note);
         }
-
+        //[Authorize(Roles = "ProjectManager, Developer")]
         // POST: Notes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -95,6 +99,7 @@ namespace TaskManagementSystem.Controllers
             return View(note);
         }
 
+        //[Authorize(Roles = "ProjectManager, Developer")]
         // GET: Notes/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,7 +114,7 @@ namespace TaskManagementSystem.Controllers
             }
             return View(note);
         }
-
+        //[Authorize(Roles = "ProjectManager, Developer")]
         // POST: Notes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

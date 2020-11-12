@@ -9,9 +9,9 @@ namespace TaskManagementSystem.Controllers
         // if (User.Identity.IsAuthenticated) { }
         //var name = User.Identity.Name;
         //var newUser = db.Users.FirstOrDefault(u => u.UserName == name);
-        // [Authorize(Roles ="ProjectManger")]
+        //[Authorize(Roles ="ProjectManger")]
         //[Authorize(Roles ="Developer")]
-        //[Authorize(Roles ="ProjectManager","Developer")]
+        //[Authorize(Roles = "ProjectManager, Developer")]
         public ActionResult Index()
         {
             ViewBag.Notification = NotificationHelper.CountUserNotifications(User.Identity.GetUserId());

@@ -13,7 +13,6 @@ namespace TaskManagementSystem.Models
         static ApplicationDbContext db = new ApplicationDbContext();
         static UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
         static RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-
         public static List<ApplicationUser> ShowAllUsers()
         {
             return db.Users.ToList();
