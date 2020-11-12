@@ -74,7 +74,7 @@ namespace TaskManagementSystem.Models
             }
         }
 
-        public static void Create(string UserId, string UserName, string Name, string Content)
+        public static void Create(string UserId, string UserName, string Name, string Content, double Budget, DateTime Deadline)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             int Id = GetNewId();
@@ -86,20 +86,25 @@ namespace TaskManagementSystem.Models
                 CreatedTime = DateTime.Now,
                 IsCompleted = false,
                 UserId = UserId,
-                UserName = UserName
+                UserName = UserName,
+                Budget = Budget,
+                Deadline = Deadline,
+                FinishedTime = DateTime.Now
             };
             db.Projects.Add(project);
             db.SaveChanges();
             db.Dispose();
         }
 
-        public static void Edit(int Id, string Name, string Content, bool IsCompleted)
+        public static void Edit(int Id, string Name, string Content, bool IsCompleted, double Budget, DateTime Deadline)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
             project.Name = Name;
             project.Content = Content;
             project.IsCompleted = IsCompleted;
+            project.Budget = Budget;
+            project.Deadline = Deadline;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
@@ -130,6 +135,24 @@ namespace TaskManagementSystem.Models
             {
                 return false;
             }
+        }
+
+        //method for projects that are exceeded budget
+        public static List<Project> GetExceededDeadlines()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var projects = db.Projects.Where(p => p.Deadline < System.DateTime.Now && p.IsCompleted == false).Include("ProTasks").ToList();
+            db.Dispose();
+            return projects;
+        }
+
+        //method for projects that are overdue
+        public static List<Project> GetExceededBudgets()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var projects = db.Projects.Where(p => p.Budget < p.TotalCost).Include("ProTasks").ToList();
+            db.Dispose();
+            return projects;
         }
     }
 }
