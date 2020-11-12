@@ -54,8 +54,7 @@
         @Html.DisplayFor(modelItem => item.IsOpened)
     </td>
     <td>
-        @Html.ActionLink("Open", "OpenNote", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        @Html.ActionLink("Open", "OpenNote", new { id = item.Id })       
     </td>
 </tr>
     }
