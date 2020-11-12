@@ -17,11 +17,19 @@ namespace TaskManagementSystem.Models
             return projects;
         }
 
-        public static List<Project> GetProjectsWithTaskOrderByPercent()
+        public static List<Project> GetProjectsByManager(string userId)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var projects = db.Projects.Where(p => p.UserId == userId).OrderByDescending(pr => pr.Priority).Include("ProTasks").ToList();
+            db.Dispose();
+            return projects;
+        }
+
+        public static List<Project> GetProjectsWithTaskOrderByPercent(string userId)
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
-            var projects = db.Projects.Include("ProTasks").ToList();
+            var projects = db.Projects.Where(p => p.UserId == userId).Include("ProTasks").ToList();
 
             projects.ForEach(p =>
             {
@@ -32,11 +40,11 @@ namespace TaskManagementSystem.Models
             return projects;
         }
 
-        public static List<Project> GetProjectsWithTaskOrderByPriority()
+        public static List<Project> GetProjectsWithTaskOrderByPriority(string userId)
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
-            var projects = db.Projects.Include("ProTasks").ToList();
+            var projects = db.Projects.Where(p => p.UserId == userId).Include("ProTasks").ToList();
 
             projects.ForEach(p =>
             {
@@ -74,7 +82,7 @@ namespace TaskManagementSystem.Models
             }
         }
 
-        public static void Create(string UserId, string UserName, string Name, string Content, double Budget, DateTime Deadline)
+        public static void Create(string UserId, string UserName, string Name, string Content, double Budget, DateTime Deadline, Priority Priority)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             int Id = GetNewId();
@@ -83,6 +91,7 @@ namespace TaskManagementSystem.Models
                 Id = Id,
                 Name = Name,
                 Content = Content,
+                Priority = Priority,
                 CreatedTime = DateTime.Now,
                 IsCompleted = false,
                 UserId = UserId,
@@ -96,7 +105,7 @@ namespace TaskManagementSystem.Models
             db.Dispose();
         }
 
-        public static void Edit(int Id, string Name, string Content, bool IsCompleted, double Budget, DateTime Deadline)
+        public static void Edit(int Id, string Name, string Content, bool IsCompleted, double Budget, DateTime Deadline, Priority Priority)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
@@ -105,6 +114,7 @@ namespace TaskManagementSystem.Models
             project.IsCompleted = IsCompleted;
             project.Budget = Budget;
             project.Deadline = Deadline;
+            project.Priority = Priority;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();

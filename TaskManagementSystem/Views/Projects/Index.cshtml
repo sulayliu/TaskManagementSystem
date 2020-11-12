@@ -18,7 +18,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        @Html.Raw("Sort By: ")
+        @Html.Raw("Sort Tasks By: ")
         @Html.DropDownList("SelectFilter", (SelectList)ViewBag.Values, new { onchange = "this.form.submit();" })
     </p>
 }
@@ -35,6 +35,9 @@
             @Html.Raw("Project Manager")
         </th>
         <th style="width: 230px">
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th style="width: 230px">
             @Html.DisplayNameFor(model => model.IsCompleted)
         </th>
         <th style="width: 230px">
@@ -46,34 +49,37 @@
     </tr>
     @foreach (var project in Model)
     {
-    <tr>
-        <td style="padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px; width: 10px">
-            <i class="fa fa-plus icon" id="Icon"></i>
-        </td>
+<tr>
+    <td style="padding-left: 0px; padding-right: 0px; margin-left: 0px; margin-right: 0px; width: 10px">
+        <i class="fa fa-plus icon" id="Icon"></i>
+    </td>
+    <td>
+        @Html.ActionLink(project.Name, "Details", new { id = project.Id })
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => project.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => project.Priority)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => project.IsCompleted)
+    </td>
+    @if (project.IsCompleted == true)
+    {
         <td>
-            @Html.ActionLink(project.Name, "Details", new { id = project.Id })
+            @Html.DisplayFor(modelItem => project.TotalCost)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => project.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => project.IsCompleted)
-        </td>
-        @if (project.IsCompleted == true)
-        {
-            <td>
-                @Html.DisplayFor(modelItem => project.TotalCost)
-            </td>
-        }        
-        @*<td>
+    }
+    @*<td>
             @Html.DisplayFor(modelItem => project.Content)
         </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
-            @Html.ActionLink("Create Task", "Create", "ProTasks", new { projectId = project.Id }, null)
-        </td>
-    </tr>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
+        @Html.ActionLink("Create Task", "Create", "ProTasks", new { projectId = project.Id }, null)
+    </td>
+</tr>
         if (project.ProTasks.Count > 0)
         {
             <tbody>
