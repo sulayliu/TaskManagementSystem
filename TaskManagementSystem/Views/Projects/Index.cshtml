@@ -28,19 +28,22 @@
         <th>
 
         </th>
-        <th style="width: 230px">
+        <th style="width: 150px">
             @Html.Raw("Project Name")
         </th>
-        <th style="width: 230px">
+        <th style="width: 150px">
             @Html.Raw("Project Manager")
         </th>
-        <th style="width: 230px">
+        <th style="width: 150px">
             @Html.DisplayNameFor(model => model.Priority)
         </th>
-        <th style="width: 230px">
+        <th style="width: 150px">
             @Html.DisplayNameFor(model => model.IsCompleted)
         </th>
-        <th style="width: 230px">
+        <th style="width: 150px">
+            @Html.Label("Budget")
+        </th>
+        <th style="width: 150px">
             @Html.Raw("Total Cost")
         </th>
         @*<th style="width: 230px">
@@ -64,6 +67,9 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => project.IsCompleted)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => project.Budget)
     </td>
     @if (project.IsCompleted == true)
     {
