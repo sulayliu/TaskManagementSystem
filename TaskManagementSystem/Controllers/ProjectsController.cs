@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Net;
 using System.Web.Mvc;
 using TaskManagementSystem.Models;
@@ -52,11 +53,11 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string Name, string Content)
+        public ActionResult Create(string Name, string Content, double Budget, DateTime Deadline)
         {
             if (ModelState.IsValid)
             {
-                ProjectHelper.Create(User.Identity.GetUserId(), User.Identity.GetUserName(), Name, Content);
+                ProjectHelper.Create(User.Identity.GetUserId(), User.Identity.GetUserName(), Name, Content, Budget, Deadline);
                 return RedirectToAction("Index");
             }
 
@@ -85,11 +86,11 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Content,CreatedTime,IsCompleted,ManagerId")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,Name,Content,CreatedTime,IsCompleted,ManagerId,Budget,Deadline")] Project project)
         {
             if (ModelState.IsValid)
             {
-                ProjectHelper.Edit(project.Id, project.Name, project.Content, project.IsCompleted);
+                ProjectHelper.Edit(project.Id, project.Name, project.Content, project.IsCompleted, project.Budget, project.Deadline);
                 return RedirectToAction("Index");
             }
             return View(project);
