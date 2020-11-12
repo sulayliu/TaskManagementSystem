@@ -180,7 +180,7 @@ namespace TaskManagementSystem.Models
         }
 
         //Get all opened notification of the users
-        public List<Note> GetAllNotification(string userId)
+        public List<Note> GetAllOpenNotification(string userId)
         {
             var notifications = db.Notes.Where(t => t.User.Id == userId).ToList();
             if (notifications.Count > 0)
