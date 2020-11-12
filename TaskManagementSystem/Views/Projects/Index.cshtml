@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index     @Html.ActionLink("Notification", "Create")</h2>
+<h2>Projects Main Page</h2>
 
 <p>
     @Html.ActionLink("New Project", "Create")
@@ -127,8 +127,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", "ProTasks", new { id = task.Id }, null) |
-                            @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null) |
-                            @Html.ActionLink("Comments", "Comments", "ProTasks", new { id = task.Id }, null)
+                            @Html.ActionLink("Delete", "Delete", "ProTasks", new { id = task.Id }, null) 
                         </td>
                     </tr>
                 }

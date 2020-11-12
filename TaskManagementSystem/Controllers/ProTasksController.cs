@@ -163,7 +163,7 @@ namespace TaskManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 TaskHelper.EditComment(proTask.Id, proTask.Comment);
-                return RedirectToAction("Index", "Projects", new { userId = User.Identity.GetUserId() });
+                return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
             return View();
         }
