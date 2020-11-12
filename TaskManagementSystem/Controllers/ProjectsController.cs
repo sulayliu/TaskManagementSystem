@@ -7,15 +7,13 @@ namespace TaskManagementSystem.Controllers
 {
     public class ProjectsController : Controller
     {
-        private ProjectHelper projectHelper = new ProjectHelper();
-
         // GET: Projects
         [Authorize]
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
             FilterViewModel filterModel = new FilterViewModel();
             ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
-            return View(projectHelper.GetProjects());
+            return View(ProjectHelper.GetProjects());
         }
 
         [HttpPost]
@@ -23,19 +21,19 @@ namespace TaskManagementSystem.Controllers
         {
             FilterViewModel filterModel = new FilterViewModel();
             ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
-            var projects = projectHelper.GetProjects();
+            var projects = ProjectHelper.GetProjects();
 
             if (SelectFilter == "Creation Date")
             {
-                projects = projectHelper.GetProjects();
+                projects = ProjectHelper.GetProjects();
             }
             else if (SelectFilter == "Completion Percentage")
             {
-                projects = projectHelper.GetProjectsWithTaskOrderByPercent();
+                projects = ProjectHelper.GetProjectsWithTaskOrderByPercent();
             }
             else if (SelectFilter == "Priority")
             {
-                projects = projectHelper.GetProjectsWithTaskOrderByPriority();
+                projects = ProjectHelper.GetProjectsWithTaskOrderByPriority();
             }
 
             return View(projects);
@@ -58,7 +56,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                projectHelper.Create(User.Identity.GetUserId(), User.Identity.GetUserName(), Name, Content);
+                ProjectHelper.Create(User.Identity.GetUserId(), User.Identity.GetUserName(), Name, Content);
                 return RedirectToAction("Index");
             }
 
@@ -73,7 +71,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = projectHelper.GetProject((int)id);
+            Project project = ProjectHelper.GetProject((int)id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -91,7 +89,7 @@ namespace TaskManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                projectHelper.Edit(project.Id, project.Name, project.Content, project.IsCompleted);
+                ProjectHelper.Edit(project.Id, project.Name, project.Content, project.IsCompleted);
                 return RedirectToAction("Index");
             }
             return View(project);
@@ -105,7 +103,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = projectHelper.GetProject((int)id);
+            Project project = ProjectHelper.GetProject((int)id);
             if (project == null)
             {
                 return HttpNotFound();
@@ -119,8 +117,8 @@ namespace TaskManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Project project = projectHelper.GetProject((int)id);
-            projectHelper.Delete(project.Id);
+            Project project = ProjectHelper.GetProject((int)id);
+            ProjectHelper.Delete(project.Id);
             return RedirectToAction("Index");
         }
 

@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TaskManagementSystem.Models;
 
@@ -10,16 +6,18 @@ namespace TaskManagementSystem.Controllers
 {
     public class HomeController : Controller
     {
-        private TaskHelper taskHelper;
-        public HomeController()
-        {
-            taskHelper = new TaskHelper();
-        }
+        // if (User.Identity.IsAuthenticated) { }
+        //var name = User.Identity.Name;
+        //var newUser = db.Users.FirstOrDefault(u => u.UserName == name);
+        // [Authorize(Roles ="ProjectManger")]
+        //[Authorize(Roles ="Developer")]
+        //[Authorize(Roles ="ProjectManager","Developer")]
         public ActionResult Index()
         {
-            taskHelper.SetNotificationToPassDeadLine(User.Identity.GetUserId());
-            ViewBag.Notification = taskHelper.GetNotificationCount(User.Identity.GetUserId());
-            ViewBag.NotificationToManager = taskHelper.GetNotificationCountToManager(User.Identity.GetUserId());
+            ViewBag.Notification = NotificationHelper.CountUserNotifications(User.Identity.GetUserId());
+            ViewBag.NotificationToManager = NotificationHelper.CountManagerNotifications(User.Identity.GetUserId());
+
+            NotificationHelper.SetNotificationsByType();
             return View();
         }
 

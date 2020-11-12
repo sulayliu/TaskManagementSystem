@@ -7,13 +7,13 @@ namespace TaskManagementSystem.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Fixmigration : IMigrationMetadata
+    public sealed partial class AddOpenedPropertyInNoteTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Fixmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddOpenedPropertyInNoteTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011061759350_Fixmigration"; }
+            get { return "202011110239150_AddOpenedPropertyInNoteTable"; }
         }
         
         string IMigrationMetadata.Source

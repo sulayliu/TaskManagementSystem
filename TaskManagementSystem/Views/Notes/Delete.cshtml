@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Delete";
 }
+@using Microsoft.AspNet.Identity;
 
 <h2>Delete</h2>
 
@@ -53,12 +54,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back to List", "Index","Notes", new { userId = User.Identity.GetUserId() }, null)
         </div>
     }
 </div>

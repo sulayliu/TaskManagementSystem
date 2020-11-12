@@ -7,9 +7,9 @@ using Microsoft.Ajax.Utilities;
 
 namespace TaskManagementSystem.Models
 {
-    public class ProjectHelper
+    public static class ProjectHelper
     {
-        public List<Project> GetProjects()
+        public static List<Project> GetProjects()
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var projects = db.Projects.Include("ProTasks").ToList();
@@ -17,7 +17,7 @@ namespace TaskManagementSystem.Models
             return projects;
         }
 
-        public List<Project> GetProjectsWithTaskOrderByPercent()
+        public static List<Project> GetProjectsWithTaskOrderByPercent()
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
@@ -32,7 +32,7 @@ namespace TaskManagementSystem.Models
             return projects;
         }
 
-        public List<Project> GetProjectsWithTaskOrderByPriority()
+        public static List<Project> GetProjectsWithTaskOrderByPriority()
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
@@ -47,7 +47,7 @@ namespace TaskManagementSystem.Models
             return projects;
         }
 
-        public Project GetProject(int Id)
+        public static Project GetProject(int Id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = db.Projects.Find(Id);
@@ -59,7 +59,7 @@ namespace TaskManagementSystem.Models
             return project;
         }
 
-        public int GetNewId()
+        public static int GetNewId()
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
@@ -74,7 +74,7 @@ namespace TaskManagementSystem.Models
             }
         }
 
-        public void Create(string UserId, string UserName, string Name, string Content)
+        public static void Create(string UserId, string UserName, string Name, string Content)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             int Id = GetNewId();
@@ -93,7 +93,7 @@ namespace TaskManagementSystem.Models
             db.Dispose();
         }
 
-        public void Edit(int Id, string Name, string Content, bool IsCompleted)
+        public static void Edit(int Id, string Name, string Content, bool IsCompleted)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
@@ -105,109 +105,22 @@ namespace TaskManagementSystem.Models
             db.Dispose();
         }
 
-        public bool Delete(int Id)
+        public static bool Delete(int Id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = db.Projects.Find(Id);
-            if (project != null)
+
+            foreach (Note note in db.Notes)
             {
-                db.Projects.Remove(project);
-                db.SaveChanges();
-                db.Dispose();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        //Notes Methods
-
-        public List<Note> ListOfNotes()
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            var notes = db.Notes.Include(n => n.Project);
-            return notes.ToList();
-        }  
-        public List<Note> NotificationOfUser(string userId)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            var notes = db.Notes.Include(n => n.Project).Include(n =>n.ProTask).Where(n => n.UserId == userId);
-            return notes.ToList();
-        }
-
-        public List<Note> GetNotificationToManager(string userId)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-
-            List<Note> notes = new List<Note>();
-            var projects = db.Projects.Where(u => u.UserId == userId).ToList();
-
-            foreach (var note in db.Notes)
-            {
-                foreach (var project in projects)
+                if (note.ProjectId == project.Id)
                 {
-                    if (note.ProjectId == project.Id)
-                    {
-                        notes.Add(note);
-                    }
+                    db.Notes.Remove(note);
                 }
             }
-            return notes;
-        }
 
-        public Note GetNoteDetails(int Id)
-        {
-            {
-                ApplicationDbContext db = new ApplicationDbContext();
-                Note note = db.Notes.Find(Id);
-                db.Dispose();
-                if (note == null)
-                {
-                    return null;
-                }
-                return note;
-            }
-        }
-
-        public void CreateNote(string UserId, int ProjectId, int ProTaskId, bool Priority, string Comment)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-             Note note = new Note
-            {
-            UserId=UserId,
-            ProjectId=ProjectId,
-            ProTaskId=ProTaskId,
-            Priority=Priority,
-            Comment=Comment
-            };
-            db.Notes.Add(note);
-            db.SaveChanges();
-            db.Dispose();
-        }
-
-        public void EditNote(int Id, string UserId, int ProjectId, int ProTaskId, bool Priority, string Comment)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-           Note note = GetNoteDetails(Id);
-            note.Id = Id;
-            note.UserId = UserId;
-            note.ProjectId = ProjectId;
-            note.ProTaskId = ProTaskId;
-            note.Priority = Priority;
-            note.Comment = Comment;
-            db.Entry(note).State = EntityState.Modified;
-            db.SaveChanges();
-            db.Dispose();
-        }
-
-        public bool DeleteNote(int Id)
-        {
-            ApplicationDbContext db = new ApplicationDbContext();
-            Project project = db.Projects.Find(Id);
             if (project != null)
             {
+                project.Notes.Clear();
                 db.Projects.Remove(project);
                 db.SaveChanges();
                 db.Dispose();
