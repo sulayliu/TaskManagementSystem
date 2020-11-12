@@ -62,7 +62,7 @@ namespace TaskManagementSystem.Models
                 // Set Completed Notification for project
                 if (!NotesKey.Contains(internalNoteKey))
                 {
-                    if (projectIsCompleted) Create(project.UserId, project.Id, null, true, NotificationType.Completed, "The project is completed");
+                    if (project.IsCompleted) Create(project.UserId, project.Id, null, true, NotificationType.Completed, "The project is completed");
                 }
             }
             db.Dispose();
