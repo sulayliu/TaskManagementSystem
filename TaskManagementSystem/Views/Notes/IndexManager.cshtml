@@ -16,18 +16,12 @@
         </th>
         <th>
             @Html.Label("Task Name")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Priority)
-        </th>
+        </th>        
         <th>
             @Html.Label("Type")
-        </th>
+        </th>        
         <th>
-            @Html.DisplayNameFor(model => model.Comment)
-        </th>
-        <th>
-            @Html.Label("Read?")
+            @Html.Label("Opened?")
         </th>
         <th></th>
     </tr>
@@ -40,16 +34,10 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.ProTask.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Priority)
-    </td>
+    </td>    
     <td>
         @Html.DisplayFor(modelItem => item.NotificationType)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Comment)
-    </td>
+    </td>    
     <td>
         @Html.DisplayFor(modelItem => item.IsOpened)
     </td>
