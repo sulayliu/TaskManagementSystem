@@ -29,7 +29,7 @@ namespace TaskManagementSystem.Models
                         internalNoteKey = (project.UserId + project.Id + task.Id + true + NotificationType.Overdue + "The task is overdue").Trim();
                         if (!NotesKey.Contains(internalNoteKey))
                         {
-                            CreateNote(project.UserId, project.Id, task.Id, true, NotificationType.Overdue, "The task is overdue");
+                            Create(project.UserId, project.Id, task.Id, true, NotificationType.Overdue, "The task is overdue");
                         }
                     }
                     // Set Completed Notification for task
@@ -38,7 +38,7 @@ namespace TaskManagementSystem.Models
                         internalNoteKey = (project.UserId + project.Id + task.Id + true + NotificationType.Completed + "The task is completed").Trim();
                         if (!NotesKey.Contains(internalNoteKey))
                         {
-                            CreateNote(project.UserId, project.Id, task.Id, true, NotificationType.Completed, "The task is completed");
+                            Create(project.UserId, project.Id, task.Id, true, NotificationType.Completed, "The task is completed");
                         }
                     }
                     else
@@ -49,7 +49,7 @@ namespace TaskManagementSystem.Models
                     if ((task.Deadline - today).TotalHours <= 24 && (task.Deadline - today).TotalHours > 0 && !task.IsItOverdue)
                     {
                         task.IsItOverdue = true;
-                        CreateNote(task.UserId, task.ProjectId, task.Id, true, NotificationType.NextToExpire, "This task has only one day left");
+                        Create(task.UserId, task.ProjectId, task.Id, true, NotificationType.NextToExpire, "This task has only one day left");
                     }
                 }
 
@@ -58,7 +58,7 @@ namespace TaskManagementSystem.Models
                 // Set Completed Notification for project
                 if (!NotesKey.Contains(internalNoteKey))
                 {
-                    if (projectIsCompleted) CreateNote(project.UserId, project.Id, null, true, NotificationType.Completed, "The project is completed");
+                    if (projectIsCompleted) Create(project.UserId, project.Id, null, true, NotificationType.Completed, "The project is completed");
                 }
             }
             db.Dispose();
@@ -70,12 +70,11 @@ namespace TaskManagementSystem.Models
 
             return notes.Where(n =>
                 n.NotificationType == NotificationType.Normal ||
-                n.NotificationType == NotificationType.NextToExpire ||
-                n.NotificationType == NotificationType.Urgent
+                n.NotificationType == NotificationType.NextToExpire
             ).ToList();
         }
 
-        public static List<Note> GetNotificationToManager(string userId)
+        public static List<Note> GetNotificationOfManager(string userId)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             List<Note> notes = new List<Note>();
@@ -98,15 +97,24 @@ namespace TaskManagementSystem.Models
                 n.NotificationType == NotificationType.Urgent
             ).ToList();
         }
+        public static string CountUnopenedUserNotifications(string userId)
+        {
+            var countNote = GetNotificationOfUser(userId).Where(n => n.IsOpened == false).Count().ToString();
+            return countNote;
+        }
 
+        public static string CountUnopenedManagerNotifications(string userId)
+        {
+            var countNote = GetNotificationOfManager(userId).Where(n => n.IsOpened == false).Count().ToString();
+            return countNote;
+        }
         public static string CountUserNotifications(string userId)
         {
             return GetNotificationOfUser(userId).Count().ToString();
         }
-
         public static string CountManagerNotifications(string userId)
         {
-            return GetNotificationToManager(userId).Count().ToString();
+            return GetNotificationOfManager(userId).Count().ToString();
         }
 
         //Notes Methods
@@ -130,7 +138,7 @@ namespace TaskManagementSystem.Models
                 return note;
             }
         }
-        public static void CreateNote(string UserId, int ProjectId, int? ProTaskId, bool Priority, NotificationType NotificationType, string Comment)
+        public static void Create(string UserId, int ProjectId, int? ProTaskId, bool Priority, NotificationType NotificationType, string Comment)
         {
             ApplicationDbContext db = new ApplicationDbContext();
 
@@ -148,7 +156,7 @@ namespace TaskManagementSystem.Models
             db.Dispose();
         }
 
-        public static void EditNote(int Id, string UserId, int ProjectId, int? ProTaskId, bool Priority, string Comment)
+        public static void Edit(int Id, string UserId, int ProjectId, int? ProTaskId, bool Priority, string Comment, bool IsOpened)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Note note = GetNoteDetails(Id);
@@ -157,12 +165,13 @@ namespace TaskManagementSystem.Models
             note.ProjectId = ProjectId;
             note.ProTaskId = ProTaskId;
             note.Priority = Priority;
+            note.IsOpened = IsOpened;
             note.Comment = Comment;
             db.Entry(note).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
         }
-        public static bool DeleteNote(int Id)
+        public static bool Delete(int Id)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = db.Projects.Find(Id);

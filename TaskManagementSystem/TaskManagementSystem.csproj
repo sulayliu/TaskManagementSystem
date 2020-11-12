@@ -245,6 +245,10 @@
     <Compile Include="Migrations\202011110459176_EditProTaskIdOptional.Designer.cs">
       <DependentUpon>202011110459176_EditProTaskIdOptional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011120559291_AddedFinishedDateAndTotalCostToProject.cs" />
+    <Compile Include="Migrations\202011120559291_AddedFinishedDateAndTotalCostToProject.Designer.cs">
+      <DependentUpon>202011120559291_AddedFinishedDateAndTotalCostToProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\FilterViewModel.cs" />
@@ -397,10 +401,12 @@
     <Content Include="Views\Admin\SetSalary.cshtml" />
     <Content Include="Views\Notes\Create.cshtml" />
     <Content Include="Views\Notes\Delete.cshtml" />
-    <Content Include="Views\Notes\Details.cshtml" />
+    <Content Include="Views\Notes\OpenNote.cshtml" />
     <Content Include="Views\Notes\Edit.cshtml" />
     <Content Include="Views\Notes\Index.cshtml" />
     <Content Include="Views\Notes\IndexManager.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\GetExceededDeadlines.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -466,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011110459176_EditProTaskIdOptional.resx">
       <DependentUpon>202011110459176_EditProTaskIdOptional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011120559291_AddedFinishedDateAndTotalCostToProject.resx">
+      <DependentUpon>202011120559291_AddedFinishedDateAndTotalCostToProject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
