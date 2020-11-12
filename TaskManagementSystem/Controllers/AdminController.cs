@@ -57,23 +57,23 @@ namespace TaskManagementSystem.Controllers
         public ActionResult AddUserToRole(string userId)
         {
             ViewBag.UserName = db.Users.Find(userId).UserName;
-            ViewBag.roleName = new SelectList(db.Roles, "Name","Name");
+            ViewBag.roleName = new SelectList(db.Roles, "Name", "Name");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddUserToRole(string roleName, string userId)
         {
-            var r = UserManager.AddUserToRole(userId,roleName);
+            var r = UserManager.AddUserToRole(userId, roleName);
             if (r.Succeeded)
             {
                 db.SaveChanges();
             }
-            
+
             ViewBag.UserName = db.Users.Find(userId).UserName;
-            ViewBag.roleName = new SelectList(db.Roles, "Name","Name");
+            ViewBag.roleName = new SelectList(db.Roles, "Name", "Name");
             db.Dispose();
-            return RedirectToAction("ShowAllRolesOfTheUser", new {userId});
+            return RedirectToAction("ShowAllRolesOfTheUser", new { userId });
         }
 
         public ActionResult RemoveRole(string roleName, string userId)
@@ -109,7 +109,7 @@ namespace TaskManagementSystem.Controllers
         {
             ViewBag.UserId = userId;
             ViewBag.UserName = db.Users.Find(userId).UserName;
-            UserManager.SetSalary(userId,salary);
+            UserManager.SetSalary(userId, salary);
             db.SaveChanges();
             db.Dispose();
             return RedirectToAction("ShowAllUsers");

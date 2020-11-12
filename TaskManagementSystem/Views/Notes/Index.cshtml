@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Comment)
         </th>
+        <th>
+            @Html.Label("Read?")
+        </th>
         <th></th>
     </tr>
 
@@ -48,14 +51,15 @@
         @Html.DisplayFor(modelItem => item.Comment)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        @Html.DisplayFor(modelItem => item.IsOpened)
+    </td>
+    <td>
+        @Html.ActionLink("Open", "OpenNote", new { id = item.Id })
     </td>
 </tr>
     }
 
 </table>
 <div>
-    @Html.ActionLink("Back to List", "Index", "ProTasks", new { userId = User.Identity.GetUserId() }, null)
+    @Html.ActionLink("Back to List", "Index", "Home", new { userId = User.Identity.GetUserId() }, null)
 </div>
