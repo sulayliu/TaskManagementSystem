@@ -13,7 +13,6 @@ namespace TaskManagementSystem.Controllers
 {
     public class NotesController : Controller
     {
-
         public ActionResult Index()
         {
             return View(NotificationHelper.GetNotificationOfUser(User.Identity.GetUserId()));
@@ -21,17 +20,19 @@ namespace TaskManagementSystem.Controllers
 
         public ActionResult IndexManager()
         {
-            return View(NotificationHelper.GetNotificationToManager(User.Identity.GetUserId()));
+            return View(NotificationHelper.GetNotificationOfManager(User.Identity.GetUserId()));
         }
 
-        // GET: NotesDetails/Details/5
-        public ActionResult Details(int? id)
+        // GET: NotesDetails/OpenNote/5
+        public ActionResult OpenNote(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var note = NotificationHelper.GetNoteDetails((int)id);
+            note.IsOpened = true;
+            NotificationHelper.Edit(note.Id, User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment, note.IsOpened);
             if (note == null)
             {
                 return HttpNotFound();
@@ -57,7 +58,7 @@ namespace TaskManagementSystem.Controllers
             note.Priority = true;
             if (ModelState.IsValid)
             {
-                NotificationHelper.CreateNote(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, NotificationType.Urgent, note.Comment);
+                NotificationHelper.Create(User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, NotificationType.Urgent, note.Comment);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
             }
            
@@ -75,7 +76,6 @@ namespace TaskManagementSystem.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.ProjectId = new SelectList(NotificationHelper.GetProjects(), "Id", "Name", note.ProjectId);
             return View(note);
         }
 
@@ -84,18 +84,16 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserId,ProjectId,ProTaskId,Priority,Comment")] Note note)
+        public ActionResult Edit([Bind(Include = "Id,UserId,ProjectId,ProTaskId,Priority,Comment,IsOpened")] Note note)
         {
             if (ModelState.IsValid)
             {
-                NotificationHelper.EditNote(note.Id, User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment);
+                NotificationHelper.Edit(note.Id, User.Identity.GetUserId(), note.ProjectId, note.ProTaskId, note.Priority, note.Comment, note.IsOpened);
 
                 return RedirectToAction("Index");
             }
-            //ViewBag.ProjectId = new SelectList(NotificationHelper.GetProjects(), "Id", "Name", note.ProjectId);
             return View(note);
         }
-
 
         // GET: Notes/Delete/5
         public ActionResult Delete(int? id)
@@ -118,7 +116,7 @@ namespace TaskManagementSystem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Note note = NotificationHelper.GetNoteDetails((int)id);
-            NotificationHelper.DeleteNote(note.Id);
+            NotificationHelper.Delete(note.Id);
             return RedirectToAction("Index", "Notes", new { userId = User.Identity.GetUserId() });
         }
     }

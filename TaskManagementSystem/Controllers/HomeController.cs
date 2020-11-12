@@ -16,7 +16,8 @@ namespace TaskManagementSystem.Controllers
         {
             ViewBag.Notification = NotificationHelper.CountUserNotifications(User.Identity.GetUserId());
             ViewBag.NotificationToManager = NotificationHelper.CountManagerNotifications(User.Identity.GetUserId());
-
+            @ViewBag.Unread = NotificationHelper.CountUnopenedUserNotifications(User.Identity.GetUserId());
+            @ViewBag.UnreadManager = NotificationHelper.CountUnopenedManagerNotifications(User.Identity.GetUserId());
             NotificationHelper.SetNotificationsByType();
             return View();
         }

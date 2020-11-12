@@ -20,14 +20,14 @@ namespace TaskManagementSystem.Controllers
             return View(developerProTasks);
         }
 
-        // GET: ProTasks/Details/5
+        // GET: ProTasks/OpenNote/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProTask proTask = db.ProTasks.Find(id);
+            ProTask proTask = TaskHelper.GetTask((int)id);
             if (proTask == null)
             {
                 return HttpNotFound();
@@ -38,8 +38,7 @@ namespace TaskManagementSystem.Controllers
         // GET: ProTasks/Create
         public ActionResult Create()
         {
-            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
+            ViewBag.UserId = new SelectList(TaskHelper.GetListOfUsers(), "Id", "Email");
             return View();
         }
 
@@ -49,15 +48,13 @@ namespace TaskManagementSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(int ProjectId, string Name, string Content, string UserId, DateTime Deadline, Priority Priority, string Comment)
-
         {
             if (ModelState.IsValid)
             {
-                TaskHelper.CreateTask(ProjectId, Name, Content, UserId, Deadline, Priority, Comment);
+                TaskHelper.Create(ProjectId, Name, Content, UserId, Deadline, Priority, Comment);
                 return RedirectToAction("Index", "Projects");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
-
+            ViewBag.UserId = new SelectList(TaskHelper.GetListOfUsers(), "Id", "Email");
             return View();
         }
 
@@ -68,12 +65,12 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProTask proTask = db.ProTasks.Find(id);
+            ProTask proTask = TaskHelper.GetTask((int)id);
             if (proTask == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
+            ViewBag.UserId = new SelectList(TaskHelper.GetListOfUsers(), "Id", "Email");
             return View(proTask);
         }
 
@@ -82,15 +79,14 @@ namespace TaskManagementSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,TaskContent,UserId,Deadline,Priority,CompletedPercentage")] ProTask proTask)
+        public ActionResult Edit([Bind(Include = "Id,Name,Content,UserId,Deadline,Priority,CompletedPercentage")] ProTask proTask)
         {
             if (ModelState.IsValid)
             {
-
                 TaskHelper.Edit(proTask.Id, proTask.Name, proTask.Content, proTask.UserId, proTask.Deadline, proTask.Priority, proTask.CompletedPercentage);
                 return RedirectToAction("Index", "Projects");
             }
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email");
+            ViewBag.UserId = new SelectList(TaskHelper.GetListOfUsers(), "Id", "Email");
             return View();
         }
 
@@ -101,7 +97,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProTask proTask = db.ProTasks.Find(id);
+            ProTask proTask = TaskHelper.GetTask((int)id);
             if (proTask == null)
             {
                 return HttpNotFound();
@@ -115,19 +111,8 @@ namespace TaskManagementSystem.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             TaskHelper.Delete(id);
-            db.SaveChanges();
             return RedirectToAction("Index", "Projects");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
         // GET: ProTasks/Edit for Developer
         public ActionResult EditDeveloperTask(int? id)
         {
@@ -135,12 +120,11 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProTask proTask = db.ProTasks.Find(id);
+            ProTask proTask = TaskHelper.GetTask((int)id);
             if (proTask == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
@@ -153,8 +137,7 @@ namespace TaskManagementSystem.Controllers
             {
                 TaskHelper.EditDeveloperTask(proTask.Id, proTask.CompletedPercentage);
                 return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
-            }
-            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
+            }          
             return View();
         }
         //Get/protask/Comment for developers
@@ -164,12 +147,11 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProTask proTask = db.ProTasks.Find(id);
+            ProTask proTask = TaskHelper.GetTask((int)id);
             if (proTask == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email", proTask.UserId);
             return View(proTask);
         }
 
@@ -182,8 +164,7 @@ namespace TaskManagementSystem.Controllers
             {
                 TaskHelper.EditComment(proTask.Id, proTask.Comment);
                 return RedirectToAction("Index", "Projects", new { userId = User.Identity.GetUserId() });
-            }
-            //ViewBag.UserId = new SelectList(db.Users, "Id", "Email");            
+            }          
             return View();
         }
 
@@ -194,7 +175,7 @@ namespace TaskManagementSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProTask proTask = db.ProTasks.Find(id);
+            ProTask proTask = TaskHelper.GetTask((int)id);
             if (proTask == null)
             {
                 return HttpNotFound();
@@ -208,7 +189,6 @@ namespace TaskManagementSystem.Controllers
         public ActionResult DeleteDeveloperTaskConfirmed(int id)
         {
             TaskHelper.Delete(id);
-            db.SaveChanges();
             return RedirectToAction("Index", "ProTasks", new { userId = User.Identity.GetUserId() });
         }
     }

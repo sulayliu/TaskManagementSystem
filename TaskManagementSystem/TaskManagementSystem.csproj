@@ -397,7 +397,7 @@
     <Content Include="Views\Admin\SetSalary.cshtml" />
     <Content Include="Views\Notes\Create.cshtml" />
     <Content Include="Views\Notes\Delete.cshtml" />
-    <Content Include="Views\Notes\Details.cshtml" />
+    <Content Include="Views\Notes\OpenNote.cshtml" />
     <Content Include="Views\Notes\Edit.cshtml" />
     <Content Include="Views\Notes\Index.cshtml" />
     <Content Include="Views\Notes\IndexManager.cshtml" />

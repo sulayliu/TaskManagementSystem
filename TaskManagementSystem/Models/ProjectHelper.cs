@@ -16,7 +16,6 @@ namespace TaskManagementSystem.Models
             db.Dispose();
             return projects;
         }
-
         public static List<Project> GetProjectsWithTaskOrderByPercent()
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -73,7 +72,6 @@ namespace TaskManagementSystem.Models
                 return 1;
             }
         }
-
         public static void Create(string UserId, string UserName, string Name, string Content)
         {
             ApplicationDbContext db = new ApplicationDbContext();
