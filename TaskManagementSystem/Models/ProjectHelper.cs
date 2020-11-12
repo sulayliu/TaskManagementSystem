@@ -136,5 +136,23 @@ namespace TaskManagementSystem.Models
                 return false;
             }
         }
+
+        //method for projects that are exceeded budget
+        public static List<Project> GetExceededDeadlines()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var projects = db.Projects.Where(p => p.Deadline < System.DateTime.Now && p.IsCompleted == false).Include("ProTasks").ToList();
+            db.Dispose();
+            return projects;
+        }
+
+        //method for projects that are overdue
+        public static List<Project> GetExceededBudgets()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var projects = db.Projects.Where(p => p.Budget < p.TotalCost).Include("ProTasks").ToList();
+            db.Dispose();
+            return projects;
+        }
     }
 }
