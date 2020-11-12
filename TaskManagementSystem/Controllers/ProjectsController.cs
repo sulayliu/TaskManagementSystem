@@ -14,7 +14,7 @@ namespace TaskManagementSystem.Controllers
         {
             FilterViewModel filterModel = new FilterViewModel();
             ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
-            return View(ProjectHelper.GetProjects());
+            return View(ProjectHelper.GetProjectsByManager(User.Identity.GetUserId()));
         }
 
         [HttpPost]
@@ -22,19 +22,19 @@ namespace TaskManagementSystem.Controllers
         {
             FilterViewModel filterModel = new FilterViewModel();
             ViewBag.SelectFilter = new SelectList(filterModel.FilterOptions);
-            var projects = ProjectHelper.GetProjects();
+            var projects = ProjectHelper.GetProjectsByManager(User.Identity.GetUserId());
 
             if (SelectFilter == "Creation Date")
             {
-                projects = ProjectHelper.GetProjects();
+                projects = ProjectHelper.GetProjectsByManager(User.Identity.GetUserId());
             }
             else if (SelectFilter == "Completion Percentage")
             {
-                projects = ProjectHelper.GetProjectsWithTaskOrderByPercent();
+                projects = ProjectHelper.GetProjectsWithTaskOrderByPercent(User.Identity.GetUserId());
             }
             else if (SelectFilter == "Priority")
             {
-                projects = ProjectHelper.GetProjectsWithTaskOrderByPriority();
+                projects = ProjectHelper.GetProjectsWithTaskOrderByPriority(User.Identity.GetUserId());
             }
 
             return View(projects);
@@ -53,11 +53,11 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string Name, string Content, double Budget, DateTime Deadline)
+        public ActionResult Create(string name, string content, double budget, DateTime deadline, Priority priority)
         {
             if (ModelState.IsValid)
             {
-                ProjectHelper.Create(User.Identity.GetUserId(), User.Identity.GetUserName(), Name, Content, Budget, Deadline);
+                ProjectHelper.Create(User.Identity.GetUserId(), User.Identity.GetUserName(), name, content, budget, deadline, priority);
                 return RedirectToAction("Index");
             }
 
@@ -86,11 +86,11 @@ namespace TaskManagementSystem.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Content,CreatedTime,IsCompleted,ManagerId,Budget,Deadline")] Project project)
+        public ActionResult Edit([Bind(Include = "Id,name,content,CreatedTime,IsCompleted,ManagerId,budget,deadline,priority")] Project project)
         {
             if (ModelState.IsValid)
             {
-                ProjectHelper.Edit(project.Id, project.Name, project.Content, project.IsCompleted, project.Budget, project.Deadline);
+                ProjectHelper.Edit(project.Id, project.Name, project.Content, project.IsCompleted, project.Budget, project.Deadline, project.Priority);
                 return RedirectToAction("Index");
             }
             return View(project);
