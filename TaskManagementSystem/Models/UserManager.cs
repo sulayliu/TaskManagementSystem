@@ -72,30 +72,6 @@ namespace TaskManagementSystem.Models
         {
             return userManager.AddToRole(userId, roleName);
         }
-        //public static bool AddUserToRole(string roleName, string userId)
-        //{
-        //    var userName = db.Users.Find(userId).UserName;
-        //    //if (!CheckUserInRole(userName, roleName))
-        //    //{
-        //    return userManager.AddToRole(userId, roleName).Succeeded;
-        //    //}
-        //    //else
-        //    //{
-        //    //    return false;
-        //    //}
-
-        //    roleName = roleName.ToLower();
-        //    bool result = false;
-        //    if (roleManager.RoleExists(roleName) && userManager.FindById(userId) != null)
-        //    {
-        //        result = userManager.IsInRole(userId, roleName);
-        //        if (!result)
-        //        {
-        //            result = userManager.AddToRole(userId, roleName).Succeeded;
-        //        }
-        //    }
-        //    return result;
-        //}
         public static void SetSalary(string userId, double salary)
         {
             var user = db.Users.Find(userId);
