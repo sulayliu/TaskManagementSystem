@@ -181,7 +181,7 @@ namespace TaskManagementSystem.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var today = DateTime.Now;
-            List<Project> projects = db.Projects.ToList();
+            List<Project> projects = db.Projects.Include(p => p.ProTasks).ToList();
             bool projectIsCompleted;
             foreach (var project in projects)
             {
@@ -190,8 +190,8 @@ namespace TaskManagementSystem.Models
                 {
                     if (task.CompletedPercentage != 100) projectIsCompleted = false;
                 }
-                if (projectIsCompleted) 
-                { 
+                if (projectIsCompleted)
+                {
                     Edit(project.Id, today, projectIsCompleted, CalculateCosts(project, today));
                 }
             }
@@ -202,9 +202,20 @@ namespace TaskManagementSystem.Models
         //calculate the total cost of project after the project is completed
         public static double CalculateCosts(Project project, DateTime FinishedTime)
         {
-            var users = project.ProTasks.Select(p => p.User).Distinct().ToList();
-            var dailyCost = users.Sum(u => u.Salary) + project.User.Salary;
-            var totalCost = (FinishedTime - project.CreatedTime).TotalDays * dailyCost;
+            ApplicationDbContext db = new ApplicationDbContext();
+            var users = db.Users.ToList();
+            HashSet<ApplicationUser> usersOfTheProject = new HashSet<ApplicationUser>();
+            foreach (var task in project.ProTasks)
+            {
+                usersOfTheProject.Add(db.Users.Find(task.UserId));
+
+            }
+
+            var projectManager = db.Users.Find(project.UserId);
+            TimeSpan duration = FinishedTime.Subtract(project.CreatedTime);
+            var dailyCost = Math.Round((usersOfTheProject.Sum(u => u.Salary) + projectManager.Salary), 2);
+            var totalCost = Math.Round((duration.Days * dailyCost), 2);
+            
             return totalCost;
         }
     }
