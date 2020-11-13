@@ -219,7 +219,7 @@ namespace TaskManagementSystem.Models
             var projectManager = db.Users.Find(project.UserId);
             TimeSpan duration = FinishedTime.Subtract(project.CreatedTime);
             var dailyCost = Math.Round((usersOfTheProject.Sum(u => u.Salary) + projectManager.Salary), 2);
-            var totalCost = Math.Round((duration.Days * dailyCost), 2);
+            var totalCost = Math.Round(((duration.Days + 1) * dailyCost), 2);
 
             return totalCost;
         }
