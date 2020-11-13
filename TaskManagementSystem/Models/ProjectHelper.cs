@@ -119,21 +119,21 @@ namespace TaskManagementSystem.Models
             db.SaveChanges();
             db.Dispose();
         }
-        public static void Edit(int Id, DateTime finishTime, bool IsCompleted)
+        public static void Edit(int Id, bool IsCompleted)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
             project.IsCompleted = IsCompleted;
-            project.FinishedTime = finishTime;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
         }
-        public static void Edit(int Id, double totalCost)
+        public static void Edit(int Id, DateTime finishTime, double totalCost)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
             project.TotalCost = totalCost;
+            project.FinishedTime = finishTime;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
@@ -198,8 +198,8 @@ namespace TaskManagementSystem.Models
                 {
                     if (task.CompletedPercentage != 100) projectIsCompleted = false;
                 }
-                if (!projectIsCompleted) Edit(project.Id, CalculateCosts(project, today));
-                if (projectIsCompleted) Edit(project.Id, today, projectIsCompleted);
+                if (!projectIsCompleted) Edit(project.Id, today, CalculateCosts(project, today));
+                if (projectIsCompleted) Edit(project.Id, projectIsCompleted);
             }
 
             db.Dispose();
