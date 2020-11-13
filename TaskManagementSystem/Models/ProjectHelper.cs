@@ -119,12 +119,13 @@ namespace TaskManagementSystem.Models
             db.SaveChanges();
             db.Dispose();
         }
-        public static void Edit(int Id, DateTime finishTime, bool IsCompleted)
+        public static void Edit(int Id, DateTime finishTime, bool IsCompleted, double totalCost)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
             project.IsCompleted = IsCompleted;
             project.FinishedTime = finishTime;
+            project.TotalCost = totalCost;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
@@ -191,7 +192,7 @@ namespace TaskManagementSystem.Models
                 }
                 if (projectIsCompleted) 
                 { 
-                    Edit(project.Id, today, projectIsCompleted, );
+                    Edit(project.Id, today, projectIsCompleted, CalculateCosts(project, today));
                 }
             }
 
@@ -199,14 +200,12 @@ namespace TaskManagementSystem.Models
         }
 
         //calculate the total cost of project after the project is completed
-        public static void CalculateCosts()
+        public static double CalculateCosts(Project project, DateTime FinishedTime)
         {
-            FinishedTime = System.DateTime.Now;
-            var users = ProTasks.Select(p => p.User).Distinct().ToList();
-            var dailyCost = users.Sum(u => u.Salary) + User.Salary;
-            var totalCost = (FinishedTime - CreatedTime).TotalDays * dailyCost;
-
-            TotalCost = totalCost;
+            var users = project.ProTasks.Select(p => p.User).Distinct().ToList();
+            var dailyCost = users.Sum(u => u.Salary) + project.User.Salary;
+            var totalCost = (FinishedTime - project.CreatedTime).TotalDays * dailyCost;
+            return totalCost;
         }
     }
 }
