@@ -1,31 +1,4 @@
-﻿@*<div class="jumbotron">
-        <h1>Task Management System Dashboard:</h1>
-        <p class="lead">Check your projects and tasks</p>
-        <p><a href="@Url.Action("Index", "Projects")" class="btn btn-primary btn-lg">Go to projects &raquo;</a></p>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>DEVELOPER'S TASK</h2>
-            <p>
-                Check your tasks
-            </p>
-            <p><a class="btn btn-success" href="@Url.Action("Index", "ProTasks", new { userId = User.Identity.GetUserId() })">Go to tasks &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>NOTIFICATIONS</h2>
-            <p>Developer notifications</p>
-            <p><a class="btn btn-success" href="@Url.Action("Index", "Notes", new { userId = User.Identity.GetUserId() })"> @ViewBag.Notification Notifications &raquo; <br /> @ViewBag.Unread Unread</a></p>
-        </div>
-
-        <div class="col-md-4">
-            <h2>NOTIFICATIONS</h2>
-            <p>Manager notifications</p>
-            <p><a class="btn btn-success" href="@Url.Action("IndexManager", "Notes", new { userId = User.Identity.GetUserId() })"> @ViewBag.NotificationToManager Notifications &raquo; <br /> @ViewBag.UnreadManager Unread Unread</a></p>
-        </div>
-
-    </div>*@
-
+﻿
 @{
     ViewBag.Title = "Home Page";
 }
@@ -36,12 +9,19 @@
     if (User.IsInRole("developer") && User.IsInRole("projectmanager"))
     {
         <div class="jumbotron">
-        <h1>Task Management System Dashboard:</h1>
-        <p class="lead">Check your projects and tasks</p>
-        <p><a href="@Url.Action("Index", "Projects")" class="btn btn-primary btn-lg">Go to projects &raquo;</a></p>
+            <h1>Task Management System Dashboard:</h1>
+            <p class="lead">Check your projects and tasks</p>
+            <p><a href="@Url.Action("Index", "Projects")" class="btn btn-primary btn-lg">Go to projects &raquo;</a></p>
         </div>
 
         <div class="row">
+            <div class="col-md-4">
+                <h2>DEVELOPER'S TASK</h2>
+                <p>
+                    Check your tasks
+                </p>
+                <p><a class="btn btn-success" href="@Url.Action("Index", "ProTasks", new { userId = User.Identity.GetUserId() })">Go to tasks &raquo;</a></p>
+            </div>
             <div class="col-md-4">
                 <h2>NOTIFICATIONS</h2>
                 <p>Developer notifications</p>
@@ -53,7 +33,6 @@
                 <p>Manager notifications</p>
                 <p><a class="btn btn-success" href="@Url.Action("IndexManager", "Notes", new { userId = User.Identity.GetUserId() })"> @ViewBag.NotificationToManager Notifications &raquo; <br /> @ViewBag.UnreadManager Unread Unread</a></p>
             </div>
-
         </div>
     }
     else if (User.IsInRole("projectmanager"))

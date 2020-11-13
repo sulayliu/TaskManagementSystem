@@ -102,6 +102,7 @@ namespace TaskManagementSystem.Models
             if (user != null)
             {
                 user.Salary = salary;
+                db.SaveChanges();
             }
         }
 
