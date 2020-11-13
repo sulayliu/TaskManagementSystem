@@ -45,10 +45,7 @@
         </th>
         <th style="width: 150px">
             @Html.Raw("Total Cost")
-        </th>
-        @*<th style="width: 230px">
-            @Html.DisplayNameFor(model => model.Content)
-        </th>*@
+        </th>        
     </tr>
     @foreach (var project in Model)
     {
@@ -70,16 +67,10 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => project.Budget)
-    </td>
-    @if (project.IsCompleted == true)
-    {
-        <td>
-            @Html.DisplayFor(modelItem => project.TotalCost)
-        </td>
-    }
-    @*<td>
-            @Html.DisplayFor(modelItem => project.Content)
-        </td>*@
+    </td>    
+    <td>
+        @Html.DisplayFor(modelItem => project.TotalCost)
+    </td>        
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = project.Id }) |
         @Html.ActionLink("Delete", "Delete", new { id = project.Id }) |
@@ -116,8 +107,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => task.Name)
                         </td>
-                        <td>
-                            @*@Html.DisplayFor(modelItem => task.CompletedPercentage)*@
+                        <td>                           
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped @(ProgressHelper.ClassSelector(task.CompletedPercentage))" role="progressbar" style="width: @task.CompletedPercentage%" aria-valuenow="@task.CompletedPercentage" aria-valuemin="0" aria-valuemax="100">@task.CompletedPercentage</div>
                             </div>
