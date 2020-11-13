@@ -26,16 +26,7 @@ namespace TaskManagementSystem.Models
         public virtual ICollection<ProTask> ProTasks { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
-        public Priority Priority { get; set; }
-        public void CalculateCost()//*
-        {
-            FinishedTime = System.DateTime.Now;
-            var users = ProTasks.Select(p => p.User).Distinct().ToList();
-            var dailyCost = users.Sum(u => u.Salary) + User.Salary;
-            var totalCost = (FinishedTime - CreatedTime).TotalDays * dailyCost;
-
-            TotalCost = totalCost;
-        }
+        public Priority Priority { get; set; }        
         public Project()
         {
             Deadline = System.DateTime.Now;

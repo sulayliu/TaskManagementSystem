@@ -191,11 +191,22 @@ namespace TaskManagementSystem.Models
                 }
                 if (projectIsCompleted) 
                 { 
-                    Edit(project.Id, today, projectIsCompleted);
+                    Edit(project.Id, today, projectIsCompleted, );
                 }
             }
 
             db.Dispose();
+        }
+
+        //calculate the total cost of project after the project is completed
+        public static void CalculateCosts()
+        {
+            FinishedTime = System.DateTime.Now;
+            var users = ProTasks.Select(p => p.User).Distinct().ToList();
+            var dailyCost = users.Sum(u => u.Salary) + User.Salary;
+            var totalCost = (FinishedTime - CreatedTime).TotalDays * dailyCost;
+
+            TotalCost = totalCost;
         }
     }
 }
