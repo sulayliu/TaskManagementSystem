@@ -119,12 +119,20 @@ namespace TaskManagementSystem.Models
             db.SaveChanges();
             db.Dispose();
         }
-        public static void Edit(int Id, DateTime finishTime, bool IsCompleted, double totalCost)
+        public static void Edit(int Id, DateTime finishTime, bool IsCompleted)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
             project.IsCompleted = IsCompleted;
             project.FinishedTime = finishTime;
+            db.Entry(project).State = EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose();
+        }
+        public static void Edit(int Id, double totalCost)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            Project project = GetProject(Id);
             project.TotalCost = totalCost;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
@@ -190,10 +198,8 @@ namespace TaskManagementSystem.Models
                 {
                     if (task.CompletedPercentage != 100) projectIsCompleted = false;
                 }
-                if (projectIsCompleted)
-                {
-                    Edit(project.Id, today, projectIsCompleted, CalculateCosts(project, today));
-                }
+                if (!projectIsCompleted) Edit(project.Id, CalculateCosts(project, today));
+                if (projectIsCompleted) Edit(project.Id, today, projectIsCompleted);
             }
 
             db.Dispose();
@@ -208,14 +214,13 @@ namespace TaskManagementSystem.Models
             foreach (var task in project.ProTasks)
             {
                 usersOfTheProject.Add(db.Users.Find(task.UserId));
-
             }
 
             var projectManager = db.Users.Find(project.UserId);
             TimeSpan duration = FinishedTime.Subtract(project.CreatedTime);
             var dailyCost = Math.Round((usersOfTheProject.Sum(u => u.Salary) + projectManager.Salary), 2);
             var totalCost = Math.Round((duration.Days * dailyCost), 2);
-            
+
             return totalCost;
         }
     }
