@@ -119,11 +119,20 @@ namespace TaskManagementSystem.Models
             db.SaveChanges();
             db.Dispose();
         }
-        public static void Edit(int Id, DateTime finishTime, bool IsCompleted)
+        public static void Edit(int Id, bool IsCompleted)
         {
             ApplicationDbContext db = new ApplicationDbContext();
             Project project = GetProject(Id);
             project.IsCompleted = IsCompleted;
+            db.Entry(project).State = EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose();
+        }
+        public static void Edit(int Id, DateTime finishTime, double totalCost)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            Project project = GetProject(Id);
+            project.TotalCost = totalCost;
             project.FinishedTime = finishTime;
             db.Entry(project).State = EntityState.Modified;
             db.SaveChanges();
@@ -180,7 +189,7 @@ namespace TaskManagementSystem.Models
         {
             ApplicationDbContext db = new ApplicationDbContext();
             var today = DateTime.Now;
-            List<Project> projects = db.Projects.ToList();
+            List<Project> projects = db.Projects.Include(p => p.ProTasks).ToList();
             bool projectIsCompleted;
             foreach (var project in projects)
             {
@@ -189,13 +198,30 @@ namespace TaskManagementSystem.Models
                 {
                     if (task.CompletedPercentage != 100) projectIsCompleted = false;
                 }
-                if (projectIsCompleted) 
-                { 
-                    Edit(project.Id, today, projectIsCompleted);
-                }
+                if (!projectIsCompleted) Edit(project.Id, today, CalculateCosts(project, today));
+                if (projectIsCompleted) Edit(project.Id, projectIsCompleted);
             }
 
             db.Dispose();
+        }
+
+        //calculate the total cost of project after the project is completed
+        public static double CalculateCosts(Project project, DateTime FinishedTime)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var users = db.Users.ToList();
+            HashSet<ApplicationUser> usersOfTheProject = new HashSet<ApplicationUser>();
+            foreach (var task in project.ProTasks)
+            {
+                usersOfTheProject.Add(db.Users.Find(task.UserId));
+            }
+
+            var projectManager = db.Users.Find(project.UserId);
+            TimeSpan duration = FinishedTime.Subtract(project.CreatedTime);
+            var dailyCost = Math.Round((usersOfTheProject.Sum(u => u.Salary) + projectManager.Salary), 2);
+            var totalCost = Math.Round(((duration.Days + 1) * dailyCost), 2);
+
+            return totalCost;
         }
     }
 }

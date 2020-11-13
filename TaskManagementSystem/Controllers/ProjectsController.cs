@@ -142,7 +142,7 @@ namespace TaskManagementSystem.Controllers
         //Add an action method for projects with exceeded deadlines
         public ActionResult GetExceededBudgets()
         {
-            return View("GetExceededDeadlines", ProjectHelper.GetExceededBudgets());
+            return View(ProjectHelper.GetExceededBudgets());
         }
     }
 }
